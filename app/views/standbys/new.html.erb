@@ -1,0 +1,25 @@
+<h2><%=h @member.lastname %>, <%=h @member.firstname %> (#<%=h @member.badgeno %>)</h2>
+
+<p>Add Standby:</p>
+<% form_for([@member, @standby]) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :start_time, 'Start' %>:
+    <%= f.text_field :start_date, :size => 10, :class => 'date',
+    :value => format_date_for_standby(Date.today) %>&nbsp;
+    <%= f.time_select :start_time,
+	:minute_step => 15,
+    :default => Time.parse('7:00')%>
+  </p>
+  <p>
+    <%= f.label :end_time, 'End' %>:
+    <%= f.text_field :end_date, :size => 10, :class => 'date',
+    :value => format_date_for_standby(Date.today) %>&nbsp;
+    <%= f.time_select :end_time,
+	:minute_step => 15,
+    :default => Time.parse('7:00')%>
+  </p>
+  <p><%= f.submit :Add %></p>
+<% end %>
+
+<p><%= link_to 'Back', member_path(@member) %></p>

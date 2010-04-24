@@ -1,0 +1,12 @@
+<h2><%=h @member.lastname %>, <%=h @member.firstname %> (#<%=h @member.badgeno %>)</h2>
+
+<p>Add Sleep-In:</p>
+<% form_for([@member, @sleep_in]) do |f| %>
+  <%= f.error_messages %>
+
+  <p><%= f.label :date %>: <%= f.text_field :date, :class => 'date' %></p>
+  <p><%= f.label :unit %>: <%= f.select :unit, unit_names %></p>
+  <p><%= f.submit :Add %></p>
+<% end %>
+
+<p><%= link_to 'Back', member_path(@member) %></p>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  firstname: sanjay
+  lastname: deshmukh
+  badgeno: 503338
+  id: 1
+
+two:
+  firstname: joe
+  lastname: mcnally
+  badgeno: 501170
+  id: 2
+
+three:
+  firstname: bruce
+  lastname: campbell
+  badgeno: 503123
+  id: 3

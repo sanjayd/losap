@@ -1,0 +1,13 @@
+<p>
+  Month-to-date:
+  <%=h @member.sleep_in_points(:month => @month) %> Sleep-In Points, 
+  <%=h @member.standby_points(:month => @month) %> Standby Points,
+  <%=h @member.hours(:month => @month) %> Hours
+</p>
+
+<p>
+  Year-to-date:
+  <%=h @member.sleep_in_points(:year => @month) %> Sleep-In Points,
+  <%=h @member.standby_points(:year => @month) %> Standby Points,
+  <%=h @member.hours(:year => @month) %> Hours
+</p>

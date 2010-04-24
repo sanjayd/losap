@@ -1,0 +1,7 @@
+<% if sleep_in.deleted? -%>
+<span class="deleted"><%=h sleep_in.unit %></span> (<%= link_to 'Undelete',
+							[@member, sleep_in],
+							:class => :undelete_sleep_in %>)
+<% else -%>
+  <%=h sleep_in.unit %> (<%= link_to 'Delete', [@member, sleep_in], :class => :delete_sleep_in %>)
+<% end -%>

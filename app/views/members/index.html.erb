@@ -1,0 +1,16 @@
+<div id="header">
+  <%= image_tag 'patch.png', :id => 'patch' %>
+  <%= image_tag 'taz.png', :id => 'taz' %>
+  <h1>OVFC LOSAP</h1>
+</div>
+
+<form action="<%= members_url %>">
+<p>Enter your name or badge number:</p>
+<p><%= text_field_tag 'member_name', '', :size => 25 %></p>
+</form>
+
+<div id="newmemberdiv">
+<h2>-OR-</h2>
+
+<p><%= link_to 'Register New Member', new_member_path, :id => 'newmember' %></p>
+</div>

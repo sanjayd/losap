@@ -1,0 +1,10 @@
+<% if flash[:notice] %>
+<div class="ui-widget">
+  <div class="ui-state-highlight ui-corner-all flash" id="flashnotice">
+    <p>
+      <span class="ui-icon ui-icon-check"></span>
+      <%= flash[:notice] %>
+    </p>
+  </div>
+</div>
+<% end %>

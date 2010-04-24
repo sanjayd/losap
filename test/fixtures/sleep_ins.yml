@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  date: 2009-08-01
+  unit_type_id: 1
+
+two:
+  date: 2009-08-02
+  unit_type_id: 3
+
+three: 
+  date: 2009-08-01
+  unit_type_id: 1
+
+four:
+  date: 2009-08-02
+  unit_type_id: 2

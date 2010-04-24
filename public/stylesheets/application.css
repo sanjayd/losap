@@ -1,0 +1,126 @@
+body {
+    font-family: Verdana,Arial,sans-serif;
+    color: rgb(25, 25, 25);
+    background: #f2f3f4;
+}
+
+#main {
+    width: 640px;
+    background-color: #f5f5dc;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    text-align: center;
+}
+
+#header {
+    width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#patch {
+    float: left;
+}
+
+#taz {
+    float: right;
+}
+
+.flash {
+    width: 350px;
+    margin: 15px auto;
+    padding: 0 1em;
+}
+
+.flash p span {
+    float: left;
+}
+
+#flashnotice p {
+    color: green;
+}
+
+
+#flashwarning p {
+    color: orange;
+}
+
+.rounded {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#membertable {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+}
+
+#membertable th {
+  border: 1px solid rgb(25, 25, 25);
+  background-color: rgb(227, 141, 20);
+  color: rgb(240, 240, 240);
+}
+
+#membertable td {
+  border: 1px solid rgb(25, 25, 25);
+}
+
+a {
+  color: #318ce7;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+span.deleted {
+  color: gray;
+  text-decoration: line-through;
+}
+
+.shortstandby {
+  color: rgb(227, 141, 20);
+}
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: inline;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}

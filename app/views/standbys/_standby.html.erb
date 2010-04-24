@@ -1,0 +1,21 @@
+<% if standby.deleted? -%>
+<span class="deleted"><%= render :partial => 'standbys/times', :locals =>
+ {:standby => standby} %></span>
+(<%= link_to 'Undelete', [@member, standby], :class => :undelete_standby
+  %>)
+<% 
+   elsif standby.short?
+     @standbywarning = true
+ -%>
+<span class="shortstandby">
+<%= render :partial => 'standbys/times', :locals => {:standby =>
+standby} %> 
+(<%= link_to 'Delete', [@member, standby], :class => :delete_standby %>)
+*</span>
+<% else -%>
+<%= render :partial => 'standbys/times', :locals => {:standby =>
+standby} %>
+(<%= link_to 'Delete', [@member, standby], :class => 'delete_standby'
+%>)
+<% end -%>
+

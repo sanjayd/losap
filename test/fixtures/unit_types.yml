@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+engine:
+  name: Engine
+  id: 1
+
+truck:
+  name: Truck
+  id: 2
+
+ambulance:
+  name: Ambulance
+  id: 3
