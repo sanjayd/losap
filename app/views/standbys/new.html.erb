@@ -6,6 +6,7 @@
   <p>
     <%= f.label :start_time, 'Start' %>:
     <%= f.text_field :start_date, :size => 10, :class => 'date',
+    :size => 10,
     :value => format_date_for_standby(Date.today) %>&nbsp;
     <%= f.time_select :start_time,
 	:minute_step => 15,
@@ -14,6 +15,7 @@
   <p>
     <%= f.label :end_time, 'End' %>:
     <%= f.text_field :end_date, :size => 10, :class => 'date',
+    :size => 10,
     :value => format_date_for_standby(Date.today) %>&nbsp;
     <%= f.time_select :end_time,
 	:minute_step => 15,

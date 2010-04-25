@@ -15,7 +15,7 @@
 
   <%= render_sleep_ins_and_standbys(@member, @month) %>
 
-  <tr>
+  <tr id="newrow">
     <td>&nbsp;</td>
     <td><%= link_to "New Standby", new_member_standby_path(@member) %></td>
     <td><%= link_to "New Sleep-In", new_member_sleep_in_path(@member) %></td>

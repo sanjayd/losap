@@ -1,11 +1,20 @@
 body {
     font-family: Verdana,Arial,sans-serif;
+    font-size: 1.25em;
     color: rgb(25, 25, 25);
     background: #f2f3f4;
 }
 
+input {
+    font-size: 1.25em;
+}
+
+select {
+    font-size: 1.25em;
+}
+
 #main {
-    width: 640px;
+    width: 950px;
     background-color: #f5f5dc;
     border: 1px solid black;
     margin-left: auto;
@@ -15,7 +24,7 @@ body {
 }
 
 #header {
-    width: 550px;
+    width: 850px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -29,7 +38,7 @@ body {
 }
 
 .flash {
-    width: 350px;
+    width: 550px;
     margin: 15px auto;
     padding: 0 1em;
 }
@@ -54,7 +63,7 @@ body {
 }
 
 #membertable {
-  width: 500px;
+  width: 750px;
   margin-left: auto;
   margin-right: auto;
   border-collapse: collapse;
@@ -68,6 +77,16 @@ body {
 
 #membertable td {
   border: 1px solid rgb(25, 25, 25);
+}
+
+#newrow td {
+  border: none;
+}
+
+#newrow a {
+  margin-top: 5px;
+  font-size: 0.8em;
+  font-weight: bold;
 }
 
 a {

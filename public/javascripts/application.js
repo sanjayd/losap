@@ -22,6 +22,7 @@ $(function() {
     $("a.delete_standby").click(delete_standby);
     $("a.undelete_sleep_in").click(undelete_sleep_in);
     $("a.undelete_standby").click(undelete_standby);
+    $("#newrow a").button();
   });
 
 function getFirstOfNextMonth() {
