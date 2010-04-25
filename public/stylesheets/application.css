@@ -107,6 +107,10 @@ span.deleted {
   color: rgb(227, 141, 20);
 }
 
+#newstandbydivider {
+  width: 400px;
+}
+
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
