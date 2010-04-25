@@ -7,7 +7,8 @@
   <p><%= f.label :date %>: <%= f.text_field :date, :class => 'date',
   :size => 10 %></p>
   <p><%= f.label :unit %>: <%= f.select :unit, unit_names %></p>
-  <p><%= f.submit :Add %></p>
+  <p>
+    <%= f.submit :Add %>
+    <%= link_to 'Cancel', member_path(@member), :class => 'button' %>
+  </p>
 <% end %>
-
-<p><%= link_to 'Back', member_path(@member) %></p>

@@ -22,7 +22,8 @@
 	:minute_step => 15,
     :default => Time.parse('7:00')%>
   </p>
-  <p><%= f.submit :Add %></p>
+  <p>
+    <%= f.submit :Add %>
+    <%= link_to 'Cancel', member_path(@member), :class => 'button' %>
+  </p>
 <% end %>
-
-<p><%= link_to 'Back', member_path(@member) %></p>

@@ -9,6 +9,11 @@ input {
     font-size: 1.25em;
 }
 
+input[type='submit'] {
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
 select {
     font-size: 1.25em;
 }
@@ -85,8 +90,6 @@ select {
 
 #newrow a {
   margin-top: 5px;
-  font-size: 0.8em;
-  font-weight: bold;
 }
 
 a {
@@ -96,6 +99,11 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+a.button {
+  font-size: 0.8em;
+  font-weight: bold;
 }
 
 span.deleted {
