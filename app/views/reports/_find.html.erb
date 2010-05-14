@@ -1,0 +1,7 @@
+<form action="#" id="reportform">
+  <p><%= label_tag 'year' %>: <%= text_field_tag 'year' %></p>
+  <p><%= label_tag 'month' %>: <%= select_month Date.today, {}, :id => 'month', :name => 'month' %></p>
+  <p><%= submit_tag 'Run Report' %></p>
+</form>
+
+<%= text_area_tag 'report', nil, :rows => 15, :cols => 40 %>
