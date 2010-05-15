@@ -3,6 +3,8 @@ class ReportsController < ApplicationController
     @members = Member.all
     @month = get_month
 
-    render :content_type => 'text/plain'
+    respond_to do |format|
+      format.js {render :layout => false }
+    end
   end
 end
