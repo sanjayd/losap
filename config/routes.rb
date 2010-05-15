@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
     member.resources :sleep_ins, :standbys
   end
   
-  map.resource :admin_panel
+  map.resource :admin_console
 
   # The priority is based upon order of creation: first created -> highest priority.
 
