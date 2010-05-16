@@ -282,6 +282,16 @@ class StandbyTest < ActiveSupport::TestCase
     assert_equal(Time.local(2010, 4, 17, 3, 0, 0), sb.end_time)
   end
 
+  test 'oldest' do
+    assert_equal(2009, Standby.oldest.date.year)
+
+    sb = Standby.new(:start_time => Time.local(2007, 4, 25, 7, 0, 0),
+                     :end_time => Time.local(2007, 4, 25, 14, 0, 0),
+                     :member_id => @m1.id)
+    assert(sb.save)
+    assert_equal(sb, Standby.oldest)
+  end
+
   private
   def get_time
     t = Time.now

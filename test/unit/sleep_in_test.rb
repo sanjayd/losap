@@ -134,4 +134,13 @@ class SleepInTest < ActiveSupport::TestCase
     assert(sb.save)
     assert(si.save)
   end
+
+  test 'oldest' do
+    assert_equal(2009, SleepIn.oldest.date.year)
+    si = SleepIn.new(:date => Date.parse('2007-04-25'),
+                     :unit => 'Engine',
+                     :member_id => @m1.id)
+    assert(si.save)
+    assert_equal(si, SleepIn.oldest)
+  end
 end

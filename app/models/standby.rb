@@ -94,7 +94,11 @@ class Standby < ActiveRecord::Base
                               date + 1.day,
 			      false],
               :order => "start_time ASC")
-  end       
+  end      
+
+  def self.oldest
+    self.find(:first, :order => 'start_time ASC')
+  end
 
   protected
   def start_before_end

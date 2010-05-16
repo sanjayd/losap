@@ -51,6 +51,10 @@ class SleepIn < ActiveRecord::Base
                       :conditions => ["deleted = ?", false])
   end
 
+  def self.oldest
+    self.find(:first, :order => 'date ASC')
+  end
+
   private
   def no_future_months
     if date and date > Date.today.end_of_month
