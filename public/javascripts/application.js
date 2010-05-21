@@ -24,6 +24,7 @@ $(function() {
     $("a.undelete_standby").click(undelete_standby);
     $("a.button").button();
     $("input[type='submit']").button();
+    flash_dialogs();
   });
 
 function getFirstOfNextMonth() {
@@ -104,6 +105,13 @@ function delete_standby() {
 	   }
 	 });
   return false;
+}
+
+function flash_dialogs() {
+  $('div.flash').dialog({modal: true,
+	buttons: {"Ok": function() {
+	  $(this).dialog('destroy')
+	    }}});
 }
 
 function undelete_sleep_in() {
