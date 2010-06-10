@@ -3,6 +3,10 @@ module MembersHelper
     date.strftime("%a, %d %b")
   end
 
+  def locked?(month)
+    LockedMonth.find_by_month(month)
+  end
+
   def show_month(month)
     month.strftime("%B %Y")
   end

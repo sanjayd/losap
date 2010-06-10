@@ -1,7 +1,13 @@
 <% if sleep_in.deleted? -%>
-<span class="deleted"><%=h sleep_in.unit %></span> (<%= link_to 'Undelete',
+<span class="deleted"><%=h sleep_in.unit %></span>
+<% unless sleep_in.locked? -%>
+(<%= link_to 'Undelete',
 							[@member, sleep_in],
 							:class => :undelete_sleep_in %>)
+<% end -%>						
 <% else -%>
-  <%=h sleep_in.unit %> (<%= link_to 'Delete', [@member, sleep_in], :class => :delete_sleep_in %>)
+  <%=h sleep_in.unit %> 
+  <% unless sleep_in.locked? -%>
+  (<%= link_to 'Delete', [@member, sleep_in], :class => :delete_sleep_in %>)
+  <% end -%>
 <% end -%>
