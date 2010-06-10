@@ -13,5 +13,5 @@ end
 
 # Lock months in current year prior to current month
 (1 .. Date.today.month - 1).each do |month|
-  LockedMonth.create(:month => Date.parse("#{Date.today.year}-#{Date.today.month}-1"))
+  LockedMonth.create(:month => Date.parse("#{Date.today.year}-#{month}-1"))
 end
