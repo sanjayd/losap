@@ -2,6 +2,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :members do |member|
     member.resources :sleep_ins, :standbys
   end
+
+  map.resources :locked_months
   
   map.resource :admin_console
 

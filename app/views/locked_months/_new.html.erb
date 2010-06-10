@@ -1,0 +1,10 @@
+<div>
+<%= render :partial => 'members/flash_notice' %>
+<%= render :partial => 'members/flash_warning' %>
+<% form_for @locked_month do |f| %>
+  <p>
+    <%= f.date_select :month, :discard_day => true %>
+    <%= f.submit 'Lock' %>
+  </p>
+<% end %>
+</div>

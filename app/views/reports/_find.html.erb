@@ -1,12 +1,14 @@
-<form action="#" id="reportform">
-  <p>
-    <%= label_tag 'year' %>: 
-    <%= select_year Date.today,
-	{:start_year => oldest_date.year,
-    :end_year => Date.today.year},
-    :id => 'year',
-    :name => 'year' %>
-  </p>
-  <p><%= label_tag 'month' %>: <%= select_month Date.today, {}, :id => 'month', :name => 'month' %></p>
-  <p><%= submit_tag 'Run Report' %></p>
-</form>
+<div>
+  <form action="#" id="reportform">
+    <p>
+      <%= label_tag 'year' %>: 
+      <%= select_year Date.today,
+      {:start_year => oldest_date.year,
+        :end_year => Date.today.year},
+        :id => 'year',
+        :name => 'year' %>
+    </p>
+    <p><%= label_tag 'month' %>: <%= select_month Date.today, {}, :id => 'month', :name => 'month' %></p>
+    <p><%= submit_tag 'Run Report' %></p>
+    </form>
+</div>

@@ -1,0 +1,12 @@
+<div>
+<% form_tag locked_months_url, 
+  :method => :delete, 
+  :id => 'unlock_month_form' do %>
+
+  <p>
+    <%= select_tag :locked_month_id, options_for_locked_months(@locked_months) %>
+    <%= submit_tag 'Unlock' %>
+  </p>
+
+<% end %>
+</div>
