@@ -66,15 +66,15 @@ class StandbyTest < ActiveSupport::TestCase
     m = Member.create(:firstname => 'bob', 
                       :lastname => 'jones', 
                       :badgeno => '532103')
-    sb = Standby.new(:start_time => Time.local(2010, 4, 13, 18, 0, 0),
-                     :end_time => Time.local(2010, 4, 13, 23, 0, 0),
+    sb = Standby.new(:start_time => Time.local(2010, 2, 13, 18, 0, 0),
+                     :end_time => Time.local(2010, 2, 13, 23, 0, 0),
                      :member_id => m.id)
     assert(sb.valid?)
 
-    sb.end_time = Time.local(2010, 4, 14, 6, 59, 59)
+    sb.end_time = Time.local(2010, 2, 14, 6, 59, 59)
     assert(sb.valid?)
     
-    sb.end_time = Time.local(2010, 4, 14, 7, 0, 0)
+    sb.end_time = Time.local(2010, 2, 14, 7, 0, 0)
     assert(!sb.valid?)
   end
 
@@ -179,6 +179,7 @@ class StandbyTest < ActiveSupport::TestCase
   end
 
   test 'no_overlap_with_sleep_in' do
+    LockedMonth.delete_all
     m1 = members(:one)
     assert_not_nil(m1)
 
@@ -263,23 +264,23 @@ class StandbyTest < ActiveSupport::TestCase
   end
 
   test 'dates' do
-    sb = Standby.new(:start_date => '4/15/2010',
-                     :end_date => '4/15/2010',
-                     :start_time => Time.local(2010, 4, 5, 7, 0, 0),
-                     :end_time => Time.local(2010, 4, 5, 12, 0, 0),
+    sb = Standby.new(:start_date => '4/15/2009',
+                     :end_date => '4/15/2009',
+                     :start_time => Time.local(2009, 4, 5, 7, 0, 0),
+                     :end_time => Time.local(2009, 4, 5, 12, 0, 0),
                      :member_id => @m1.id)
     assert(sb.save)
-    assert_equal(Time.local(2010, 4, 15, 7, 0, 0), sb.start_time)
-    assert_equal(Time.local(2010, 4, 15, 12, 0, 0), sb.end_time)    
+    assert_equal(Time.local(2009, 4, 15, 7, 0, 0), sb.start_time)
+    assert_equal(Time.local(2009, 4, 15, 12, 0, 0), sb.end_time)    
 
-    sb = Standby.new(:start_date => '4/16/2010',
-                     :end_date => '4/17/2010',
-                     :start_time => Time.local(2010, 4, 20, 19, 0, 0),
-                     :end_time => Time.local(2010, 4, 20, 3, 0, 0),
+    sb = Standby.new(:start_date => '4/16/2009',
+                     :end_date => '4/17/2009',
+                     :start_time => Time.local(2009, 4, 20, 19, 0, 0),
+                     :end_time => Time.local(2009, 4, 20, 3, 0, 0),
                      :member_id => @m1.id)
     assert(sb.save)
-    assert_equal(Time.local(2010, 4, 16, 19, 0, 0), sb.start_time)
-    assert_equal(Time.local(2010, 4, 17, 3, 0, 0), sb.end_time)
+    assert_equal(Time.local(2009, 4, 16, 19, 0, 0), sb.start_time)
+    assert_equal(Time.local(2009, 4, 17, 3, 0, 0), sb.end_time)
   end
 
   test 'oldest' do
@@ -290,6 +291,19 @@ class StandbyTest < ActiveSupport::TestCase
                      :member_id => @m1.id)
     assert(sb.save)
     assert_equal(sb, Standby.oldest)
+  end
+
+  test 'unlocked' do
+    sb = Standby.new(:start_time => Time.local(2010, 6, 15, 7, 0, 0),
+                     :end_time => Time.local(2010, 6, 15, 16, 0, 0),
+                     :member_id => @m1.id)
+    assert(sb.save)
+    
+    sb = Standby.new(:start_time => Time.local(2010, 5, 16, 7, 0, 0),
+                     :end_time => Time.local(2010, 5, 16, 16, 0, 0),
+                     :member_id => @m1.id)
+    assert(!sb.save)
+    assert_not_nil(sb.errors[:start_time])
   end
 
   private

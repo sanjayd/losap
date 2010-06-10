@@ -39,7 +39,7 @@ class SleepInTest < ActiveSupport::TestCase
     assert(si.save)
     si.destroy
     
-    si = SleepIn.new(:date => Date.today - 1.month, :unit => 'Engine')
+    si = SleepIn.new(:date => Date.parse('2010-2-5'), :unit => 'Engine')
     assert(si.save)
     si.destroy
 
@@ -142,5 +142,20 @@ class SleepInTest < ActiveSupport::TestCase
                      :member_id => @m1.id)
     assert(si.save)
     assert_equal(si, SleepIn.oldest)
+  end
+
+  test 'locked' do
+    si = SleepIn.new(:date => Date.parse('2010-5-15'),
+      :unit => 'Engine',
+      :member_id => @m1.id)
+    assert !si.save
+    assert_not_nil si.errors[:date]
+    assert si.locked?
+    
+    si = SleepIn.new(:date => Date.parse('2010-1-13'),
+      :unit => 'Engine',
+      :member_id => @m1.id)
+    assert si.save
+    assert !si.locked?
   end
 end

@@ -75,6 +75,13 @@ class StandbysControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal(standby_count, Standby.count)
     assert_template('standbys/new')
+
+    post :create, :standby => {:start_time => Date.parse('2010-5-10') + 7.hours,
+        :end_time => Date.parse('2010-5-10') + 15.hours},
+        :member_id => @m1.id
+    assert_response :success
+    assert_equal(standby_count, Standby.count)
+    assert_template('standbys/new')    
   end                        
 
   test 'destroy' do

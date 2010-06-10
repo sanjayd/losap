@@ -5,7 +5,7 @@ class SleepIn < ActiveRecord::Base
   validates_presence_of :date, :unit
   validates_uniqueness_of :date, :scope => :member_id, 
                           :message => " can only have one Sleep-In"
-  validate :no_future_months, :no_overlap_with_existing_standby
+  validate :unlocked, :no_future_months, :no_overlap_with_existing_standby
 
   belongs_to :unit_type
   belongs_to :member
@@ -20,6 +20,10 @@ class SleepIn < ActiveRecord::Base
 
   def deleted?
     self.deleted
+  end
+
+  def locked?
+    self.date and LockedMonth.find_by_month(self.date.beginning_of_month)
   end
 
   def unit
@@ -56,6 +60,12 @@ class SleepIn < ActiveRecord::Base
   end
 
   private
+  def unlocked
+    if self.date and self.locked?
+      errors.add(:date, 'cannot be in a locked month')
+    end
+  end
+  
   def no_future_months
     if date and date > Date.today.end_of_month
       errors.add(:date, "cannot be in future months")

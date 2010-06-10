@@ -56,7 +56,7 @@ class SleepInsControllerTest < ActionController::TestCase
 
   test 'create' do
     sleepin_count = SleepIn.count
-    post :create, :sleep_in => {:date => Date.today - 1.month,
+    post :create, :sleep_in => {:date => Date.parse('2010-6-15'),
                                 :unit => 'Engine'},
                   :member_id => @m1.id
     assert_not_nil(assigns(:sleep_in))
@@ -71,6 +71,13 @@ class SleepInsControllerTest < ActionController::TestCase
     end
 
     post :create, :sleep_in => {:unit => 'Ambulance'},
+                  :member_id => @m1.id
+    assert_response :success
+    assert_equal(sleepin_count, SleepIn.count)
+    assert_template('sleep_ins/new')
+    
+    post :create, :sleep_in => {:unit => 'Ambulance',
+                                :date => Date.parse('2010-5-14')},
                   :member_id => @m1.id
     assert_response :success
     assert_equal(sleepin_count, SleepIn.count)

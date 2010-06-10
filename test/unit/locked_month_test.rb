@@ -2,26 +2,26 @@ require 'test_helper'
 
 class LockedMonthTest < ActiveSupport::TestCase
   test 'month_date' do
-    april = Date.parse('2010-4-1')
-    m = LockedMonth.new(:month => april)
-    assert_nil(LockedMonth.find_by_month(april))
+    march = Date.parse('2010-3-1')
+    m = LockedMonth.new(:month => march)
+    assert_nil(LockedMonth.find_by_month(march))
     assert m.save
-    assert_equal(april, m.month)
-    assert_not_nil(LockedMonth.find_by_month(april))
+    assert_equal(march, m.month)
+    assert_not_nil(LockedMonth.find_by_month(march))
     
-    may = Date.parse('2010-3-1')
-    m = LockedMonth.new(:month => Date.parse('2010-3-13'))
+    june = Date.parse('2010-6-1')
+    m = LockedMonth.new(:month => Date.parse('2010-6-13'))
     assert m.save
-    assert_equal(may, m.month)
-    assert_not_nil(LockedMonth.find_by_month(may))
+    assert_equal(june, m.month)
+    assert_not_nil(LockedMonth.find_by_month(june))
   end
   
   test 'no_duplicates' do
-    april = Date.parse('2010-4-1')
-    m = LockedMonth.new(:month => april)
+    march = Date.parse('2010-3-1')
+    m = LockedMonth.new(:month => march)
     assert m.save
     
-    m = LockedMonth.new(:month => april)
+    m = LockedMonth.new(:month => march)
     assert !m.save
     assert_not_nil(m.errors['month'])
     
@@ -56,8 +56,8 @@ class LockedMonthTest < ActiveSupport::TestCase
   end
   
   test 'locked?' do
-    assert LockedMonth.locked? Date.parse('2010-6-1')
-    assert LockedMonth.locked? Date.parse('2010-6-15')
-    assert !(LockedMonth.locked?(Date.parse('2010-4-25')))
+    assert LockedMonth.locked? Date.parse('2010-5-1')
+    assert LockedMonth.locked? Date.parse('2010-5-15')
+    assert !(LockedMonth.locked?(Date.parse('2010-6-25')))
   end
 end

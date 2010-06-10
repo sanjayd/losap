@@ -5,6 +5,7 @@ class Standby < ActiveRecord::Base
   validate :no_overlap_with_existing_sleep_in, :no_future_months, :if => "self.start_time"
   validate :start_before_end, :end_before_next_morning, :no_overlap,
            :if => "self.start_time and self.end_time"
+  validate :unlocked
 
   belongs_to :member
 
@@ -18,6 +19,10 @@ class Standby < ActiveRecord::Base
     if self.end_time
       (self.end_time - self.start_time) < 4.hours
     end
+  end
+  
+  def locked?
+    self.date ? LockedMonth.find_by_month(self.date.beginning_of_month) : nil
   end
 
   def date
@@ -161,6 +166,12 @@ class Standby < ActiveRecord::Base
     if @end_date
       self.end_time = combine_date_and_time(@end_date,
                                             self.end_time)
+    end
+  end
+  
+  def unlocked
+    if self.locked?
+      errors.add(:start_time, 'cannot be in a locked month.')
     end
   end
 
