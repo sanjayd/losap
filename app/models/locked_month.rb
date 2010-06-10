@@ -2,7 +2,9 @@ class LockedMonth < ActiveRecord::Base
   validates_uniqueness_of :month, :message => 'is already locked'
 
   def self.last_two_years
-    self.find(:all, :conditions => ["month >= ?", 2.years.ago.to_date])
+    self.find(:all, 
+      :conditions => ["month >= ?", 2.years.ago.to_date],
+      :order => 'month DESC')
   end
   
   def month=(month)

@@ -39,4 +39,19 @@ class LockedMonthTest < ActiveSupport::TestCase
     assert_not_nil(months)
     assert_equal(3, months.size)
   end
+
+  test 'order' do
+    m1 = LockedMonth.create(:month => Date.parse('2009-12-1'))
+    m2 = LockedMonth.create(:month => Date.parse('2009-10-1'))
+    m3 = LockedMonth.create(:month => Date.parse('2009-11-1'))
+    
+    assert_equal(5, LockedMonth.count)
+    
+    months = LockedMonth.last_two_years
+    assert_equal(locked_months(:one), months[0])
+    assert_equal(locked_months(:two), months[1])
+    assert_equal(m1, months[2])
+    assert_equal(m3, months[3])
+    assert_equal(m2, months[4])
+  end
 end
