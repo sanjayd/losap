@@ -54,4 +54,10 @@ class LockedMonthTest < ActiveSupport::TestCase
     assert_equal(m3, months[3])
     assert_equal(m2, months[4])
   end
+  
+  test 'locked?' do
+    assert LockedMonth.locked? Date.parse('2010-6-1')
+    assert LockedMonth.locked? Date.parse('2010-6-15')
+    assert !(LockedMonth.locked?(Date.parse('2010-4-25')))
+  end
 end
