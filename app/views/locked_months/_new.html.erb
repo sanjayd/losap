@@ -3,7 +3,7 @@
 <%= render :partial => 'members/flash_warning' %>
 <% form_for @locked_month do |f| %>
   <p>
-    <%= f.date_select :month, :discard_day => true %>
+    <%= f.select :month, options_for_months(@unlocked_months) %>
     <%= f.submit 'Lock' %>
   </p>
 <% end %>
