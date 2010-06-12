@@ -2,6 +2,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :members do |member|
     member.resources :sleep_ins, :standbys
   end
+  
+  map.member_month '/members/:id/:year/:month',
+    :controller => 'members',
+    :action => 'show'
 
   map.resources :locked_months
   

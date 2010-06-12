@@ -13,17 +13,17 @@ module MembersHelper
   
   def previous_month(member, month)
     month = month - 1.month
-    link_to('Previous Month', member_url(member, 
-                                         :year => month.year, 
-                                         :month => month.month))
+    link_to('Previous Month', member_month_url(member, 
+                                               :year => month.year, 
+                                               :month => month.month))
   end
 
   def next_month(member, month)
     unless month + 1.month > Date.today
       month = month + 1.month
-      ' | ' + link_to('Next Month', member_url(member,
-                                               :year => month.year,
-                                               :month => month.month))
+      ' | ' + link_to('Next Month', member_month_url(member,
+                                                     :year => month.year,
+                                                     :month => month.month))
     end
   end
 
