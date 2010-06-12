@@ -1,12 +1,7 @@
 <div>
   <form action="#" id="reportform">
     <p>
-      <%= select_year Date.today,
-      {:start_year => oldest_date.year,
-        :end_year => Date.today.year},
-        :id => 'year',
-        :name => 'year' %>
-      <%= select_month Date.today, {}, :id => 'month', :name => 'month' %>
+      <%= select_tag :month, options_for_past_months %>
       <%= submit_tag 'Run Report' %>
     </p>
     </form>

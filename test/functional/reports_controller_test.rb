@@ -7,9 +7,8 @@ class ReportsControllerTest < ActionController::TestCase
   end
 
   test 'show' do
-    assert_raise(ActionController::RoutingError) {post :show}
-    assert_raise(ActionController::RoutingError) {post :show, :year => '2009'}
-    post :show, :year => '2009', :month => '1'
+    assert_raise(ActionController::RoutingError) {get :show}
+    get :show, :month => '2009-1-1'
     assert_response :success
     assert_not_nil(assigns(:members))
     assert_not_nil(assigns(:month))

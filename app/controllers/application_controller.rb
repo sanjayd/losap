@@ -4,12 +4,6 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
 
-  def get_month
-    year = params[:year] || Date.today.year
-    month = params[:month] || Date.today.month
-    Date.parse("#{year}-#{month}-01")
-  end
-
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => 'e514ecdd3c1b385997be492546c101e3'

@@ -4,7 +4,7 @@ $(function() {
   });
 
 function monthlyReport() {
-  $.get('/reports/' + $('#year').val() + '/' + $('#month').val(),
+   $.get('/reports/' + $('#month').val(),
 	null,
 	null,
 	'script');

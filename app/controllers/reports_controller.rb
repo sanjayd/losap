@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
   def show
     @members = Member.all
-    @month = get_month
+    @month = Date.parse(params[:month])
 
     respond_to do |format|
       format.js {render :layout => false }

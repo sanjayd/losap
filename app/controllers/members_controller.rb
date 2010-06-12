@@ -86,4 +86,11 @@ class MembersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+  def get_month
+    year = params[:year] || Date.today.year
+    month = params[:month] || Date.today.month
+    Date.parse("#{year}-#{month}-01")
+  end
 end
