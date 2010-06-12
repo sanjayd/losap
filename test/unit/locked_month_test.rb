@@ -48,11 +48,11 @@ class LockedMonthTest < ActiveSupport::TestCase
     assert_equal(5, LockedMonth.count)
     
     months = LockedMonth.last_two_years
-    assert_equal(locked_months(:one), months[0])
-    assert_equal(locked_months(:two), months[1])
-    assert_equal(m1, months[2])
-    assert_equal(m3, months[3])
-    assert_equal(m2, months[4])
+    assert_equal(locked_months(:one).month, months[0])
+    assert_equal(locked_months(:two).month, months[1])
+    assert_equal(m1.month, months[2])
+    assert_equal(m3.month, months[3])
+    assert_equal(m2.month, months[4])
   end
   
   test 'locked?' do
