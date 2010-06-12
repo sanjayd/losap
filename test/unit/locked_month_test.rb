@@ -30,12 +30,30 @@ class LockedMonthTest < ActiveSupport::TestCase
     assert_not_nil(m.errors['month'])
   end
   
+  test 'last_two_years' do
+    months = LockedMonth.last_two_years
+    assert_not_nil(months)
+    assert_equal(10, months.size)
+    
+    si = SleepIn.new(:date => Date.parse('2009-7-1'),
+                     :unit => 'Engine',
+                     :member_id => members(:one).id)
+    assert(si.save)
+    months = LockedMonth.last_two_years
+    assert_not_nil(months)
+    assert_equal(11, months.size)
+    
+    months = LockedMonth.unlocked_in_last_two_years
+    assert_not_nil(months)
+    assert_equal(9, months.size)
+  end
+  
   test 'two_years_ago' do
     month = LockedMonth.new(:month => (2.years.ago + 1.month).to_date)
     assert(month.save)
     month = LockedMonth.new(:month => (2.years.ago - 1.month).to_date)
     
-    months = LockedMonth.last_two_years
+    months = LockedMonth.locked_in_last_two_years
     assert_not_nil(months)
     assert_equal(3, months.size)
   end
@@ -47,12 +65,12 @@ class LockedMonthTest < ActiveSupport::TestCase
     
     assert_equal(5, LockedMonth.count)
     
-    months = LockedMonth.last_two_years
-    assert_equal(locked_months(:one).month, months[0])
-    assert_equal(locked_months(:two).month, months[1])
-    assert_equal(m1.month, months[2])
-    assert_equal(m3.month, months[3])
-    assert_equal(m2.month, months[4])
+    months = LockedMonth.locked_in_last_two_years
+    assert_equal(locked_months(:one), months[0])
+    assert_equal(locked_months(:two), months[1])
+    assert_equal(m1, months[2])
+    assert_equal(m3, months[3])
+    assert_equal(m2, months[4])
   end
   
   test 'locked?' do

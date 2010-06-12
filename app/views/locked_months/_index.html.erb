@@ -4,7 +4,7 @@
   :id => 'unlock_month_form' do %>
 
   <p>
-    <%= select_tag :locked_month_id, options_for_months(@locked_months) %>
+    <%= select_tag :locked_month_id, options_for_locked_months(@locked_months) %>
     <%= submit_tag 'Unlock' %>
   </p>
 

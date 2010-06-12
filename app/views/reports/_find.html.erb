@@ -1,7 +1,7 @@
 <div>
   <form action="#" id="reportform">
     <p>
-      <%= select_tag :month, options_for_past_months %>
+      <%= select_tag :month, options_for_months(@all_months) %>
       <%= submit_tag 'Run Report' %>
     </p>
     </form>
