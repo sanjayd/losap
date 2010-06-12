@@ -1,4 +1,7 @@
 <div>
+<% if @locked_months.empty? %>
+  <p>All months for which data exists are currently unlocked.</p>
+<% else %>
 <% form_tag locked_months_url, 
   :method => :delete, 
   :id => 'unlock_month_form' do %>
@@ -8,5 +11,6 @@
     <%= submit_tag 'Unlock' %>
   </p>
 
+<% end %>
 <% end %>
 </div>
