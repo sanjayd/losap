@@ -55,10 +55,6 @@ class SleepIn < ActiveRecord::Base
                       :conditions => ["deleted = ?", false])
   end
 
-  def self.oldest
-    self.find(:first, :order => 'date ASC')
-  end
-
   private
   def unlocked
     if self.date and self.locked?

@@ -1,9 +1,7 @@
 <div>
 <% if @unlocked_months.empty? %>
-  <p>All months for which data exists are currently locked.</p>
+  <p>The last six months are currently locked.</p>
 <% else %>
-<%= render :partial => 'members/flash_notice' %>
-<%= render :partial => 'members/flash_warning' %>
 <% form_for @locked_month do |f| %>
   <p>
     <%= f.select :month, options_for_months(@unlocked_months) %>
