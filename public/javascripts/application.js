@@ -25,8 +25,6 @@ $(function() {
     $("a.button").button();
     $("input[type='submit']").button();
     flash_dialogs();
-    $("#unlock_month_form").submit(unlock_month_form);
-    $('#accordion').accordion();
   });
 
 function getFirstOfNextMonth() {
@@ -161,10 +159,4 @@ function delete_form() {
     f.submit();
   };
   return false;
-}
-
-function unlock_month_form() {
-  var form = $('#unlock_month_form');
-  var action = form.attr('action');
-  form.attr('action', action + '/' + $('#locked_month_id').val());
 }
