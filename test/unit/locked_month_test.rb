@@ -15,6 +15,13 @@ class LockedMonthTest < ActiveSupport::TestCase
     assert_equal(june, m.month)
     assert_not_nil(LockedMonth.find_by_month(june))
   end
+
+  test 'empty_database' do
+    SleepIn.delete_all
+    Standby.delete_all
+    months = LockedMonth.last_two_years
+    assert_equal(0, months.size)
+  end
   
   test 'no_duplicates' do
     march = Date.parse('2010-3-1')

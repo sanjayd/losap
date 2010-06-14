@@ -2,16 +2,30 @@ class LockedMonth < ActiveRecord::Base
   validates_uniqueness_of :month, :message => 'is already locked'
 
   def self.oldest_month
-    [SleepIn.oldest.date, Standby.oldest.date].min.beginning_of_month
+    oldest_sleep_in = SleepIn.oldest
+    oldest_standby = Standby.oldest
+    
+    if oldest_sleep_in.nil? and oldest_standby.nil?
+      nil
+    elsif oldest_sleep_in.nil?
+      oldest_standby
+    elsif oldest_standby.nil?
+      oldest_sleep_in
+    else
+      [oldest_sleep_in.date, oldest_standby.date].min.beginning_of_month
+    end
   end
 
   def self.last_two_years
     months = []
-    
-    (1 .. 24).each do |num_months|
-      month = Date.today.beginning_of_month - num_months.months
-      break if self.oldest_month > month
-      months << month
+    oldest_month = self.oldest_month
+
+    if oldest_month
+      (1 .. 24).each do |num_months|
+        month = Date.today.beginning_of_month - num_months.months
+        break if oldest_month > month
+        months << month
+      end
     end
 
     months
