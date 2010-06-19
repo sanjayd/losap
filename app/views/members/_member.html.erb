@@ -1,0 +1,9 @@
+<tr>
+  <td>
+    <%= link_to "#{member.lastname}, #{member.firstname} (##{member.badgeno})",  
+      member_url(member) %>
+  </td>
+  <td><%= link_to 'Edit', edit_member_url(member) %></td>
+  <td><%= link_to 'Delete', member_url(member), :class => 'delete' %></td>
+</tr>
+  
