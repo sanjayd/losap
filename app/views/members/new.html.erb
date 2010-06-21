@@ -16,8 +16,7 @@
     <%= f.text_field :badgeno %>
   </p>
   <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit 'Register' %>
+    <%= link_to 'Cancel', root_path, :class => 'button'  %>
   </p>
 <% end %>
-
-<%= link_to 'Back', members_path %>
