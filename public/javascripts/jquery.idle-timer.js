@@ -30,53 +30,6 @@
  * THE SOFTWARE.
  */
 
-
- // API available in <= v0.8
- /*******************************
- 
- // idleTimer() takes an optional argument that defines the idle timeout
- // timeout is in milliseconds; defaults to 30000
- $.idleTimer(10000);
-
-
- $(document).bind("idle.idleTimer", function(){
-    // function you want to fire when the user goes idle
- });
-
-
- $(document).bind("active.idleTimer", function(){
-  // function you want to fire when the user becomes active again
- });
-
- // pass the string 'destroy' to stop the timer
- $.idleTimer('destroy');
- 
- // you can query if the user is idle or not with data()
- $.data(document,'idleTimer');  // 'idle'  or 'active'
-
- // you can get time elapsed since user when idle/active
- $.idleTimer('getElapsedTime'); // time since state change in ms
- 
- ********/
- 
- 
- 
- // API available in >= v0.9
- /*************************
- 
- // bind to specific elements, allows for multiple timer instances
- $(elem).idleTimer(timeout|'destroy'|'getElapsedTime');
- $.data(elem,'idleTimer');  // 'idle'  or 'active'
- 
- // if you're using the old $.idleTimer api, you should not do $(document).idleTimer(...)
- 
- // element bound timers will only watch for events inside of them.
- // you may just want page-level activity, in which case you may set up
- //   your timers on document, document.documentElement, and document.body
- 
- 
- ********/
-
 (function($){
 
 $.idleTimer = function(newTimeout, elem){
