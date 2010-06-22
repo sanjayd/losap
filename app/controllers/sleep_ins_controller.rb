@@ -40,9 +40,15 @@ class SleepInsController < ApplicationController
     
     respond_to do |format|
       if @sleep_in.update_attributes(params[:sleep_in])
+        if @sleep_in.deleted?
+          flash[:notice] = 'Sleep-In Deleted'
+        else
+          flash[:notice] = 'Sleep-In Undeleted'
+        end
         format.js {head :ok}
       else
-        format.js {head :unprocessable_entity}
+        flash[:warning] = 'Undeleting this Sleep-In would conflict with a Standby'          
+        format.js {head :ok}
       end
     end
   end
