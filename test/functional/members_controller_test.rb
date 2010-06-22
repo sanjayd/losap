@@ -92,7 +92,7 @@ class MembersControllerTest < ActionController::TestCase
                                :lastname => 'gupta',
                                :badgeno => @one.badgeno}}
     assert_not_nil(assigns(:member))
-    assert_redirected_to(member_path(assigns(:member)))
+    assert_redirected_to(admin_console_path)
     assert_equal(flash[:notice], 'Member was successfully updated.')
     assert_equal(member_count, Member.count)
     @one.reload
