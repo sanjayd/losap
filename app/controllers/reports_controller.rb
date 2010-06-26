@@ -5,14 +5,16 @@ class ReportsController < ApplicationController
     @members = Member.all
     
     if params[:date] =~ /^\d{4}$/
-      @year = params[:date]
+      @year = Date.parse("#{params[:date]}-01-01")
     else
       @month = Date.parse(params[:date])
     end
 
     respond_to do |format|
-      format.html {render :layout => "annual_report"}
-      format.js {render :layout => false }
+      format.html {render :layout => "annual_report",
+                    :template => "reports/annual/show"}
+      format.js {render :layout => false, 
+                    :template => "reports/monthly/show" }
     end
   end
 end
