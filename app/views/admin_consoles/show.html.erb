@@ -9,7 +9,8 @@
 <p>
   Admin:
   <%=h current_admin.username %>
-  <%= link_to "Logout", logout_path %>
+  [<%= link_to "Change Password", edit_admin_path(current_admin) %>]
+  [<%= link_to "Logout", logout_path %>]
 </p>
 
 <div id="admintabs">
