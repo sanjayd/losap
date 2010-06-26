@@ -1,0 +1,6 @@
+<h2>Sleep-Ins</h2>
+<ul>
+  <%= render :partial => "reports/annual/sleep_in",
+   :collection => member.sleep_ins.find_by_year(@year) %>
+</ul>
+<p><%= h member.sleep_in_points(:year => @year) %> points</p>

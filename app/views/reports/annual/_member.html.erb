@@ -1,7 +1,28 @@
-<h1>
-  <%= h member.lastname %>,
-  <%= h member.firstname %>
-  (#<%= h member.badgeno %>)
-</h1>
+<div id="header">
+  <h1>
+    <%= h member.lastname %>,
+    <%= h member.firstname %>
+    (#<%= h member.badgeno %>)
+  </h1>
 
-<h2><%= @year.strftime("%Y") %> LOSAP Annual Report</h2>
+  <h2><%= @year.strftime("%Y") %> LOSAP Annual Report</h2>
+
+  <p>
+    <%= h(member.sleep_in_points(:year => @year) +
+      member.standby_points(:year => @year)) %>
+    Total LOSAP Points.
+  </p>
+</div>
+
+<table id="data">
+  <tr>
+    <td id="sleep_ins">
+      <%= render :partial => 'reports/annual/sleep_ins',
+        :locals => {:member => member} %>
+    </td>
+    <td id="standbys">
+      <%= render :partial => 'reports/annual/standbys',
+        :locals => {:member => member} %>
+    </td>
+  </tr>
+</table>

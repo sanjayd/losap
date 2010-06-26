@@ -1,0 +1,6 @@
+<h2>Standbys</h2>
+<ul>
+  <%= render :partial => "reports/annual/standby",
+   :collection => member.standbys.find_by_year(@year) %>
+</ul>
+<p><%= h member.standby_points(:year => @year) %> points</p>
