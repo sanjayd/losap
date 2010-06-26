@@ -1,4 +1,6 @@
 class AdminsController < ApplicationController
+  before_filter :require_admin, :only => [:new, :create]
+  
   def new
     @admin = Admin.new
   end
