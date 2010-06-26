@@ -1,0 +1,16 @@
+<%= render :partial => "members/flash_notice" %>
+
+<h2>Admin Login</h2>
+
+<% form_for @admin_session do |f| -%>
+  <p><%= f.error_messages %></p>
+  <p>
+    <%= f.label :username, "Username" %>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :password, "Password" %>
+    <%= f.password_field :password %>
+  </p>
+  <p><%= f.submit "Log In" %>
+<% end -%>

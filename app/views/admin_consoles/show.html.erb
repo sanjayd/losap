@@ -6,6 +6,12 @@
 
 <h2>LOSAP Adminstration Menu</h2>
 
+<p>
+  Admin:
+  <%=h current_admin.username %>
+  <%= link_to "Logout", logout_path %>
+</p>
+
 <div id="admintabs">
   <ul id="adminmenu">
     <li><a href="#tab-1">Monthly Reports</a></li>

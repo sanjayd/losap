@@ -10,6 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :locked_months  
   map.resource :admin_console
   map.resources :admins
+  map.resources :admin_sessions
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -21,6 +22,8 @@ ActionController::Routing::Routes.draw do |map|
   # Sample of named route:
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
   # This route can be invoked with purchase_url(:id => product.id)
+  map.login 'login', :controller => 'admin_sessions', :action => 'new'
+  map.logout 'logout', :controller => 'admin_sessions', :action => 'destroy'
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
