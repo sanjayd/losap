@@ -2,7 +2,7 @@ class CreateAdmins < ActiveRecord::Migration
   def self.up
     create_table :admins do |t|
       t.string :username
-      t.string :crpyted_password
+      t.string :crypted_password
       t.string :password_salt
       t.string :persistence_token
 
