@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+  before_filter :require_admin, :only => [:edit, :destroy]
+
   # GET /members
   # GET /members.xml
   def index

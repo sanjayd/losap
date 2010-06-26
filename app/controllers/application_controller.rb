@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password
   
   helper_method :current_admin
-  
+
   private
   def current_admin_session
     return @current_admin_session if defined?(@current_admin_session)
@@ -23,5 +23,11 @@ class ApplicationController < ActionController::Base
   
   def current_admin
     @current_admin = current_admin_session && current_admin_session.record
+  end
+
+  def require_admin
+    unless current_admin
+      redirect_to(login_path)
+    end
   end
 end
