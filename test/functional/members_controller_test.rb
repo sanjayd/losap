@@ -1,9 +1,13 @@
 require 'test_helper'
 
 class MembersControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
+  include Authlogic::TestCase
+  
+  setup :activate_authlogic
   
   def setup
+    AdminSession.create(admins(:one))
+    
     @one = members(:one)
     @two = members(:two)
     @three = members(:three)

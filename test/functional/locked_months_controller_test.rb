@@ -1,6 +1,14 @@
 require 'test_helper'
 
 class LockedMonthsControllerTest < ActionController::TestCase
+  include Authlogic::TestCase
+  
+  setup :activate_authlogic
+
+  def setup
+    AdminSession.create(admins(:one))
+  end
+  
   test 'create' do
     locked_months_count = LockedMonth.count
     post :create, :locked_month => {:month => Date.parse('2010-3-1')}
