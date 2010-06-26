@@ -14,7 +14,7 @@ class ReportsControllerTest < ActionController::TestCase
 
   test 'show' do
     assert_raise(ActionController::RoutingError) {get :show}
-    get :show, :month => '2009-1-1'
+    get :show, :date => '2009-1-1'
     assert_response :success
     assert_not_nil(assigns(:members))
     assert_not_nil(assigns(:month))

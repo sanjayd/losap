@@ -11,10 +11,13 @@ class ReportsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {render :layout => "annual_report",
-                    :template => "reports/annual/show"}
-      format.js {render :layout => false, 
-                    :template => "reports/monthly/show" }
+      if @year
+        format.html {render :layout => "annual_report",
+                      :template => "reports/annual/show"}
+      elsif @month
+        format.js {render :layout => false, 
+                      :template => "reports/monthly/show" }
+      end
     end
   end
 end
