@@ -15,3 +15,9 @@ end
 (1 .. Date.today.month - 1).each do |month|
   LockedMonth.create(:month => Date.parse("#{Date.today.year}-#{month}-1"))
 end
+
+# Add an initial admin 'sanjayd' with password 'password'
+Admin.create(:username => 'sanjayd',
+             :password => "password",
+             :password_confirmation => "password")
+             
