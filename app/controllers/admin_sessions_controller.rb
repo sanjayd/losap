@@ -1,5 +1,9 @@
 class AdminSessionsController < ApplicationController
   def new
+    if current_admin
+      redirect_to(admin_console_path)
+    end
+    
     @admin_session = AdminSession.new
   end
 
@@ -8,7 +12,6 @@ class AdminSessionsController < ApplicationController
     
     respond_to do |wants|
       if @admin_session.save
-        flash[:notice] = 'Logged In'
         wants.html { redirect_to(admin_console_path) }
         wants.xml { render :xml => @admin_session, :status => :created, :location => @admin_session }
       else
@@ -19,9 +22,11 @@ class AdminSessionsController < ApplicationController
   end
   
   def destroy
-    @admin_session = AdminSession.find
-    @admin_session.destroy
-    flash[:notice] = "Logged Out"
+    if current_admin
+      @admin_session = AdminSession.find
+      @admin_session.destroy
+    end
+    
     redirect_to(login_path)
   end
   
