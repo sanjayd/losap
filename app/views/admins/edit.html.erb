@@ -16,5 +16,8 @@
     <%= f.label :password_confirmation, "Confirm New Password" %>
     <%= f.password_field :password_confirmation %>
   </p>
-  <p><%= f.submit "Change Password" %></p>
+  <p>
+    <%= f.submit "Change" %>
+    <%= link_to "Cancel", admin_console_path, :class => "button"  %>
+  </p>
 <% end -%>
