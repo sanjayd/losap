@@ -1,6 +1,13 @@
 <h2>Change Password</h2>
+
+<%= render :partial => "members/flash_warning" %>
+
 <% form_for @admin do |f| -%>
   <%= f.error_messages %>
+  <p>
+    <%= label_tag :old_password, "Current Password" %>
+    <%= text_field_tag :old_password %>
+  </p>
   <p>
     <%= f.label :password, "New Password" %>
     <%= f.password_field :password %>

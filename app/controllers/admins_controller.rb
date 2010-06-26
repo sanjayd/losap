@@ -26,7 +26,10 @@ class AdminsController < ApplicationController
     @admin = current_admin
     
     respond_to do |wants|
-      if @admin.update_attributes(params[:admin])
+      if !current_admin.valid_password? params[:old_password]
+        flash[:warning] = 'Invalid Current Password'
+        wants.html { render :action => "edit" }
+      elsif @admin.update_attributes(params[:admin])
         flash[:notice] = "Password Changed"
         wants.html { redirect_to(admin_console_path) }
       else
