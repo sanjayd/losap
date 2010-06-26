@@ -2,6 +2,7 @@ $(function() {
     $('#accordion').accordion();
     $('#admintabs').tabs({cookie: {expires: 1}});
     $('#reportform').submit(monthlyReport);
+    $('#annualreportform').submit(annualReport);
     $("#unlock_month_form").submit(unlock_month_form);
   });
 
@@ -11,6 +12,12 @@ function monthlyReport() {
 	null,
 	'script');
   return false;
+}
+
+function annualReport() {
+  this.action = '/reports/' + $('#year').val();
+  this.target='_blank';
+  return true;
 }
 
 function unlock_month_form() {

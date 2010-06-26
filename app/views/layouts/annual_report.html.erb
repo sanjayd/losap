@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>OVFC LOSAP - <%=h @year %> Annual Report</title>
+  <style type="text/css">
+  @media all {
+    body {
+      font-family: Arial, sans-serif;
+    }
+  }
+  @media screen {
+    .page-break {
+      display: none;
+    }
+  }
+  @media print {
+    .page-break {
+      display: block;
+      page-break-before: always;
+      height: 0;
+    }
+  }    
+  </style>
+</head>
+<body>
+<%= yield %>
+</body>
+</html>
