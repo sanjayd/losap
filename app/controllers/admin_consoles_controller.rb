@@ -5,6 +5,7 @@ class AdminConsolesController < ApplicationController
     @all_months = LockedMonth.last_six_months
     @locked_months = LockedMonth.locked_in_last_six_months
     @unlocked_months = LockedMonth.unlocked_in_last_six_months
-    @members = Member.all(:order => 'lastname ASC, firstname ASC, badgeno ASC')
+    @members = Member.paginate(:page => params[:page],
+      :order => 'lastname ASC, firstname ASC, badgeno ASC')
   end
 end

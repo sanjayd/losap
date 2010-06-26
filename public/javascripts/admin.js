@@ -1,8 +1,8 @@
 $(function() {
+    $('#accordion').accordion();
     $('#admintabs').tabs({cookie: {expires: 1}});
     $('#reportform').submit(monthlyReport);
     $("#unlock_month_form").submit(unlock_month_form);
-    $('#accordion').accordion();
   });
 
 function monthlyReport() {
