@@ -6,8 +6,8 @@ class Member < ActiveRecord::Base
                             :less_than => 1000000
   validates_uniqueness_of :badgeno
 
-  has_many :sleep_ins, :order => 'date ASC'
-  has_many :standbys, :order => 'start_time ASC'
+  has_many :sleep_ins, :order => 'date ASC', :dependent => :destroy
+  has_many :standbys, :order => 'start_time ASC', :dependent => :destroy
 
   cattr_reader :per_page
   @@per_page = 15

@@ -333,4 +333,26 @@ class MemberTest < ActiveSupport::TestCase
     assert_equal(si2, list[3])
     assert_equal(sb2, list[4])
   end 
+
+  test 'dependent_destroy' do
+    m = Member.new(:firstname => "bob", 
+      :lastname => "jones",
+      :badgeno => "978568")
+    assert(m.save)
+    
+    si = SleepIn.new(:date => Date.parse('2010-6-19'),
+      :unit => "Engine",
+      :member_id => m.id)
+    assert(si.save)
+    
+    sb = Standby.new(:start_time => Time.local(2010, 6, 20, 7, 0, 0),
+      :end_time => Time.local(2010, 6, 20, 15, 0, 0),
+      :member_id => m.id)
+    assert(sb.save)
+    
+    m.destroy
+    assert_raise(ActiveRecord::RecordNotFound) {Member.find(m.id)}
+    assert_raise(ActiveRecord::RecordNotFound) {SleepIn.find(si.id)}
+    assert_raise(ActiveRecord::RecordNotFound) {Standby.find(sb.id)}
+  end
 end
