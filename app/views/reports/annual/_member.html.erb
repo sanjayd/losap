@@ -7,11 +7,7 @@
 
   <h2><%= @year.strftime("%Y") %> LOSAP Annual Report</h2>
 
-  <p>
-    <%= h(member.sleep_in_points(:year => @year) +
-      member.standby_points(:year => @year)) %>
-    Total LOSAP Points.
-  </p>
+  <p><%= total_points(member) %> Total LOSAP Points.</p>
 </div>
 
 <table id="data">

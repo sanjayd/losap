@@ -84,7 +84,7 @@ class MembersController < ApplicationController
     @member.destroy
 
     respond_to do |format|
-      format.html { redirect_to(members_url) }
+      format.html { redirect_to(admin_console_path) }
       format.xml  { head :ok }
     end
   end
