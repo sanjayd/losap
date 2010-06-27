@@ -25,7 +25,7 @@ class MembersControllerTest < ActionController::TestCase
     get :index, {:term => '501'}
     assert_response :success
     assert_not_nil(assigns(:members))
-    assert_not_nil(assigns(:members).find(@two))
+    assert_not_nil(assigns(:members).find {|m| m.id == @two.id})
     assert_equal(assigns(:members).length, 1)
     assert_template('members/index')
   end
