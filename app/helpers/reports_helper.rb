@@ -8,4 +8,9 @@ module ReportsHelper
       member.standby_points(:year => @year)
     (points > 20) ? 20 : points
   end
+  
+  def filter_standbys(member)
+    standbys = member.standbys.find_by_year(@year)
+    standbys.find_all {|sb| sb.points > 0}
+  end
 end
