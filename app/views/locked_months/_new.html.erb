@@ -1,6 +1,6 @@
 <div>
 <% if @unlocked_months.empty? %>
-  <p>The last six months are currently locked.</p>
+  <p>All months in the current year are locked.</p>
 <% else %>
 <% form_for @locked_month do |f| %>
   <p>

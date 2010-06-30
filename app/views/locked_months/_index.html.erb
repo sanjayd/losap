@@ -1,6 +1,6 @@
 <div>
 <% if @locked_months.empty? %>
-  <p>The last six months are currently unlocked.</p>
+  <p>All months in the current year are unlocked.</p>
 <% else %>
 <% form_tag locked_months_url, 
   :method => :delete, 

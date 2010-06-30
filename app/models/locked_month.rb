@@ -1,26 +1,37 @@
 class LockedMonth < ActiveRecord::Base
   validates_uniqueness_of :month, :message => 'is already locked'
 
-  def self.last_six_months
-    months = []
-
-    (1 .. 6).each do |num_months|
-      months << Date.today.beginning_of_month - num_months.months
+  def self.months
+    if Date.today.month == 1
+      (1 .. 12).map do |month|
+        Date.parse("#{Date.today.year - 1}-#{month}-1")
+      end.reverse
+    else
+      (1 .. Date.today.month - 1).map do |month|
+        Date.parse("#{Date.today.year}-#{month}-1")
+      end.reverse
     end
-
-    months
   end
 
-  def self.locked_in_last_six_months
+  def self.locked_months
+    conditions = nil
+    
+    if Date.today.month == 1
+      conditions = ["month >= ? and month <= ?", 
+        (Date.today - 1.year).beginning_of_year,
+        (Date.today - 1.year).end_of_year]
+    else
+      conditions = ["month >= ?", Date.today.beginning_of_year]
+    end
+    
     self.find(:all,
-      :select => 'month, id',
-      :conditions => ["month >= ?", 7.months.ago.to_date],
-      :order => 'month DESC')
-  end    
-
-  def self.unlocked_in_last_six_months
-    locked = self.locked_in_last_six_months.map {|m| m.month}
-    self.last_six_months - locked
+      :select => "month, id",
+      :conditions => ["month >= ?", Date.today.beginning_of_year],
+      :order => "month DESC")
+  end
+  
+  def self.unlocked_months
+    self.months - self.locked_months.map {|m| m.month}
   end
 
   def self.locked?(month)

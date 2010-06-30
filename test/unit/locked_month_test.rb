@@ -39,7 +39,7 @@ class LockedMonthTest < ActiveSupport::TestCase
     
     assert_equal(3, LockedMonth.count)
     
-    months = LockedMonth.locked_in_last_six_months
+    months = LockedMonth.locked_months
     assert_equal(m1, months[0])
     assert_equal(m3, months[1])
     assert_equal(m2, months[2])
