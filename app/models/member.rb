@@ -9,9 +9,6 @@ class Member < ActiveRecord::Base
   has_many :sleep_ins, :order => 'date ASC', :dependent => :destroy
   has_many :standbys, :order => 'start_time ASC', :dependent => :destroy
 
-  cattr_reader :per_page
-  @@per_page = 15
-
   def self.all_like(str)
     str.split.inject([]) do |arr, s|
       str_with_wildcards = "%#{s}%"

@@ -4,6 +4,8 @@ $(function() {
     $('#reportform').submit(monthlyReport);
     $('#annualreportform').submit(annualReport);
     $("#unlock_month_form").submit(unlock_month_form);
+    $('#members').tablesorter({headers: {2: {sorter: false},
+                                        3: {sorter: false}}});
   });
 
 function monthlyReport() {
