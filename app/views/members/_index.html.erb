@@ -3,6 +3,12 @@
 <% end -%>
 
 <table id="members">
+  <thead>
+    <tr>
+      <th>Member</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
   <%= render :partial => "members/member", :collection => @members %>
 </table>
 
