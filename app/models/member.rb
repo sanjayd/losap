@@ -1,6 +1,6 @@
 class Member < ActiveRecord::Base
   validates_presence_of :firstname, :lastname, :badgeno
-  validates_format_of :badgeno, :with => /^\d{1,6}$/, :message => "is invalid"
+  validates_format_of :badgeno, :with => /^((\d{1,6})|([A-Za-z]{4}\d{1,2}))$/, :message => "is invalid"
   validates_uniqueness_of :badgeno
 
   has_many :sleep_ins, :order => 'date ASC', :dependent => :destroy

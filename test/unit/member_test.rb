@@ -52,6 +52,15 @@ class MemberTest < ActiveSupport::TestCase
     @one.badgeno = "999999"
     assert @one.save
 
+    @one.badgeno = "DESH1"
+    assert @one.save
+    
+    @one.badgeno = "DESH01"
+    assert @one.save
+    
+    @one.badgeno = "DESH011"
+    assert !@one.save
+
     @one.badgeno = @two.badgeno
     assert !@one.save
     assert_not_nil @one.errors['badgeno']
