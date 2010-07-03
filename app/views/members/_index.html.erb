@@ -1,20 +1,11 @@
 <% content_for :head do -%>
-  <%= javascript_include_tag 'jquery.tablesorter.min' %>
-  <%= stylesheet_link_tag 'tablesorter/style' %>
+  <%= stylesheet_link_tag 'pagination' %>
 <% end -%>
 
-<table id="members" class="tablesorter">
-  <thead>
-    <tr>
-      <th>Badge Number</th>
-      <th>Last Name</th>
-      <th>First Name</th>
-      <th colspan="2">&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render :partial => 'members/member', :collection => @members %>    
-  </tbody>
+<table id="members">
+  <%= render :partial => "members/member", :collection => @members %>
 </table>
+
+<%= will_paginate @members, :class => "apple_pagination" %>
 
 <br />
