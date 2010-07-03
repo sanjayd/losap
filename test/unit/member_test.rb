@@ -54,9 +54,11 @@ class MemberTest < ActiveSupport::TestCase
 
     @one.badgeno = "DESH1"
     assert @one.save
+    assert_equal("DESH1", @one.badgeno)
     
     @one.badgeno = "DESH01"
     assert @one.save
+    assert_equal("DESH01", @one.badgeno)
     
     @one.badgeno = "DESH011"
     assert !@one.save
