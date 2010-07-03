@@ -1,9 +1,6 @@
 class Member < ActiveRecord::Base
   validates_presence_of :firstname, :lastname, :badgeno
-  validates_numericality_of :badgeno, 
-                            :only_integer => true,
-                            :greater_than => 0,
-                            :less_than => 1000000
+  validates_format_of :badgeno, :with => /^\d{1,6}$/, :message => "is invalid"
   validates_uniqueness_of :badgeno
 
   has_many :sleep_ins, :order => 'date ASC', :dependent => :destroy

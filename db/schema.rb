@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100626001646) do
+ActiveRecord::Schema.define(:version => 20100703121835) do
 
   create_table "admins", :force => true do |t|
     t.string   "username"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20100626001646) do
   create_table "members", :force => true do |t|
     t.string   "firstname"
     t.string   "lastname"
-    t.integer  "badgeno"
+    t.string   "badgeno",    :limit => 6
     t.datetime "created_at"
     t.datetime "updated_at"
   end

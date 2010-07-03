@@ -29,27 +29,27 @@ class MemberTest < ActiveSupport::TestCase
     assert !@one.save
     assert_not_nil @one.errors['badgeno']
     
-    @one.badgeno = 5.5
+    @one.badgeno = "5.5"
     assert !@one.save
     assert_not_nil @one.errors['badgeno']
     
-    @one.badgeno = -1
+    @one.badgeno = "-1"
     assert !@one.save
     
-    @one.badgeno = 1040423
+    @one.badgeno = "1040423"
     assert !@one.save
     
-    @one.badgeno = 1
+    @one.badgeno = "1"
     @one.save
     assert @one.save
     
-    @one.badgeno = 100
+    @one.badgeno = "100"
     assert @one.save
 
-    @one.badgeno = 503338
+    @one.badgeno = "503338"
     assert @one.save
 
-    @one.badgeno = 999999
+    @one.badgeno = "999999"
     assert @one.save
 
     @one.badgeno = @two.badgeno
