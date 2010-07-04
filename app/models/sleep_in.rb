@@ -10,6 +10,19 @@ class SleepIn < ActiveRecord::Base
   belongs_to :unit_type
   belongs_to :member
 
+  named_scope :by_year,
+    lambda { |year| { :conditions => ['date >= ? and date <= ?',
+      year.to_date.beginning_of_year, 
+      year.to_date.end_of_year],
+      :order => "date asc" } }
+  
+  named_scope :by_month, 
+    lambda { |month| { :conditions => ['date >= ? and date <= ?', 
+      month.to_date.beginning_of_month,
+      month.to_date.end_of_month],
+      :order => "date asc" } }
+  
+
   def hours
     self.deleted? ? 0 : HOURS
   end
@@ -32,22 +45,6 @@ class SleepIn < ActiveRecord::Base
 
   def unit=(unit_name)
     self.unit_type = UnitType.find_by_name(unit_name)
-  end
-
-  def self.find_by_year(year)
-    self.find(:all,
-              :conditions => ["date >= ? AND date <= ?",
-                              year.to_date.beginning_of_year,
-                              year.to_date.end_of_year],
-              :order => "date ASC")
-  end
-
-  def self.find_by_month(month)
-    self.find(:all, 
-              :conditions => ["date >= ? AND date <= ?",
-                              month.to_date.beginning_of_month,
-                              month.to_date.end_of_month],
-              :order => "date ASC")
   end
 
   def self.find_undeleted_by_date(date)

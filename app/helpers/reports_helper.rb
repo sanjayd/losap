@@ -10,7 +10,7 @@ module ReportsHelper
   end
   
   def filter_standbys(member)
-    standbys = member.standbys.find_by_year(@year)
+    standbys = member.standbys.by_year(@year)
     standbys.find_all {|sb| sb.points > 0}
   end
 end

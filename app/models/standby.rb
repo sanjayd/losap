@@ -11,6 +11,18 @@ class Standby < ActiveRecord::Base
 
   before_validation :add_in_dates
 
+  named_scope :by_year, 
+    lambda { |year| { :conditions => ['start_time >= ? and start_time <= ?', 
+      year.to_time.beginning_of_year,
+      year.to_time.end_of_year],
+      :order => "start_time asc" } }
+      
+  named_scope :by_month,
+    lambda { |month| { :conditions => ['start_time >= ? and start_time <= ?',
+     month.to_time.beginning_of_month,
+     month.to_time.end_of_month],
+     :order => "start_time asc" } }
+
   def deleted?
     self.deleted
   end
@@ -73,22 +85,6 @@ class Standby < ActiveRecord::Base
     else
       self.end_time = combine_date_and_time(date, self.end_time)
     end
-  end
-
-  def self.find_by_year(year)
-    self.find(:all, 
-              :conditions => ["start_time >= ? AND start_time <= ?",
-                              year.to_time.beginning_of_year,
-                              year.to_time.end_of_year],
-              :order => "start_time ASC")
-  end
-
-  def self.find_by_month(month)
-    self.find(:all,
-              :conditions => ["start_time >= ? AND start_time <= ?",
-                              month.to_time.beginning_of_month,
-                              month.to_time.end_of_month],
-              :order => "start_time ASC")
   end
 
   def self.find_by_date(date)

@@ -26,11 +26,11 @@ class Member < ActiveRecord::Base
   def sleep_ins_and_standbys(params={})
     sleep_ins = standbys = nil
     if params[:month]
-      sleep_ins = self.sleep_ins.find_by_month(params[:month])
-      standbys = self.standbys.find_by_month(params[:month])
+      sleep_ins = self.sleep_ins.by_month(params[:month])
+      standbys = self.standbys.by_month(params[:month])
     elsif params[:year]
-      sleep_ins = self.sleep_ins.find_by_year(params[:year])
-      standbys = self.standbys.find_by_year(params[:year])
+      sleep_ins = self.sleep_ins.by_year(params[:year])
+      standbys = self.standbys.by_year(params[:year])
     else
       return nil
     end
@@ -54,11 +54,11 @@ class Member < ActiveRecord::Base
   def hours(params={})
     sleep_ins = standbys = nil
     if params[:month]
-      sleep_ins = self.sleep_ins.find_by_month(params[:month])
-      standbys = self.standbys.find_by_month(params[:month])
+      sleep_ins = self.sleep_ins.by_month(params[:month])
+      standbys = self.standbys.by_month(params[:month])
     elsif params[:year]
-      sleep_ins = self.sleep_ins.find_by_year(params[:year])
-      standbys = self.standbys.find_by_year(params[:year])
+      sleep_ins = self.sleep_ins.by_year(params[:year])
+      standbys = self.standbys.by_year(params[:year])
     else
       return nil
     end
@@ -70,8 +70,8 @@ class Member < ActiveRecord::Base
 
   def sleep_in_points(params={})
     sleep_ins = nil
-    sleep_ins = self.sleep_ins.find_by_month(params[:month]) if params[:month]
-    sleep_ins = self.sleep_ins.find_by_year(params[:year]) if params[:year]
+    sleep_ins = self.sleep_ins.by_month(params[:month]) if params[:month]
+    sleep_ins = self.sleep_ins.by_year(params[:year]) if params[:year]
     return nil if sleep_ins.nil?
 
     sleep_ins.inject(0) do |total, s|
@@ -81,8 +81,8 @@ class Member < ActiveRecord::Base
 
   def standby_points(params={})
     standbys = nil
-    standbys = self.standbys.find_by_month(params[:month]) if params[:month]
-    standbys = self.standbys.find_by_year(params[:year]) if params[:year]
+    standbys = self.standbys.by_month(params[:month]) if params[:month]
+    standbys = self.standbys.by_year(params[:year]) if params[:year]
     return nil if standbys.nil?
 
     standbys.inject(0) do |total, s|
