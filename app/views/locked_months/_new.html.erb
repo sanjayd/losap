@@ -1,10 +1,10 @@
 <div>
-<% if @admin_console.unlocked_months.empty? %>
+<% if unlocked_months.empty? %>
   <p>All months in the current year are locked.</p>
 <% else %>
-<% form_for @admin_console.locked_month do |f| %>
+<% form_for locked_month do |f| %>
   <p>
-    <%= f.select :month, options_for_months(@admin_console.unlocked_months) %>
+    <%= f.select :month, options_for_months(unlocked_months) %>
     <%= f.submit 'Lock' %>
   </p>
 <% end %>

@@ -3,7 +3,10 @@
   <%= render :partial => 'reports/monthly/find',
    :locals => {:all_months => @admin_console.all_months} %>
   <h3><a href="#">Lock Month</a></h3>
-  <%= render :partial => 'locked_months/new' %>
+  <%= render :partial => 'locked_months/new',
+   :locals => {:unlocked_months => @admin_console.unlocked_months,
+               :locked_month => @admin_console.locked_month}  %>
   <h3><a href="#">Unlock Month</a></h3>
-  <%= render :partial => 'locked_months/index' %>
+  <%= render :partial => 'locked_months/index',
+   :locals => {:locked_months => @admin_console.locked_months} %>
 </div>
