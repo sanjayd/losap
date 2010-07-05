@@ -9,9 +9,9 @@
       <th colspan="2">Actions</th>
     </tr>
   </thead>
-  <%= render :partial => "members/member", :collection => @members %>
+  <%= render :partial => "members/member", :collection => members %>
 </table>
 
-<%= will_paginate @members, :class => "apple_pagination" %>
+<%= will_paginate members, :class => "apple_pagination" %>
 
 <br />

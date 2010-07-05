@@ -1,5 +1,5 @@
 <div>
-<% if @locked_months.empty? %>
+<% if @admin_console.locked_months.empty? %>
   <p>All months in the current year are unlocked.</p>
 <% else %>
 <% form_tag locked_months_url, 
@@ -7,7 +7,7 @@
   :id => 'unlock_month_form' do %>
 
   <p>
-    <%= select_tag :locked_month_id, options_for_locked_months(@locked_months) %>
+    <%= select_tag :locked_month_id, options_for_locked_months(@admin_console.locked_months) %>
     <%= submit_tag 'Unlock' %>
   </p>
 

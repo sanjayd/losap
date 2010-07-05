@@ -26,7 +26,7 @@
     <%= render :partial => "reports/annual/find" %>
   </div>
   <div id="tab-3">
-    <%= render :partial => 'members/index' %>
+    <%= render :partial => 'members/index', :locals => {:members => @admin_console.members} %>
   </div>
 </div>
 
