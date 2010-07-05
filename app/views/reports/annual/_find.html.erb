@@ -1,7 +1,7 @@
 <div>
   <% form_tag('#', {:id => "annualreportform"}) do %>
     <p>
-      <%= select_tag :year, options_for_select([2009, 2008, 2007]) %>
+      <%= select_tag :year, options_for_select(years) %>
       <%= submit_tag "Run Report" %>
     </p>
   <% end -%>

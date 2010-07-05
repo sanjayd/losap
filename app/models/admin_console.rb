@@ -22,5 +22,9 @@ class AdminConsole
   def members
     @members ||= Member.paginate(:page => @page, 
       :order => "lastname ASC, firstname ASC, badgeno ASC")
-  end  
+  end
+    
+  def years
+    @years ||= (1 .. 3).to_a.map {|i| Date.today.beginning_of_year.year - i}
+  end
 end
