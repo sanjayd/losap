@@ -1,5 +1,4 @@
 class Report
-  attr_reader :members
   attr_reader :month
   attr_reader :year
 
@@ -11,10 +10,12 @@ class Report
       @month = Date.parse(date)
       @type = :monthly
     end
-    
-    @members = Member.all
   end
-  
+
+  def members
+    @members ||= Member.all
+  end
+
   def monthly?
     @type == :monthly
   end
