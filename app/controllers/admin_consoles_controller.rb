@@ -1,10 +1,7 @@
 class AdminConsolesController < ApplicationController
+  before_filter :require_admin
+
   def show
-    unless current_admin
-      redirect_to(login_path)
-      return
-    end
-    
     @locked_month = LockedMonth.new
     @all_months = LockedMonth.months
     @locked_months = LockedMonth.locked_months
