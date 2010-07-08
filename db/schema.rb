@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100703121835) do
+ActiveRecord::Schema.define(:version => 20100708011304) do
 
   create_table "admins", :force => true do |t|
     t.string   "username"
@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(:version => 20100703121835) do
     t.boolean  "deleted",      :default => false, :null => false
   end
 
+  add_index "sleep_ins", ["member_id"], :name => "index_sleep_ins_on_member_id"
+  add_index "sleep_ins", ["unit_type_id"], :name => "index_sleep_ins_on_unit_type_id"
+
   create_table "standbys", :force => true do |t|
     t.datetime "start_time"
     t.datetime "end_time"
@@ -51,6 +54,8 @@ ActiveRecord::Schema.define(:version => 20100703121835) do
     t.integer  "member_id"
     t.boolean  "deleted",    :default => false, :null => false
   end
+
+  add_index "standbys", ["member_id"], :name => "index_standbys_on_member_id"
 
   create_table "unit_types", :force => true do |t|
     t.string   "name"
