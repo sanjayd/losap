@@ -2,24 +2,24 @@ class Ability
   include CanCan::Ability
 
   def initialize(admin)
-    if admin.nil?
-      can :read, Member
-      return
-    end
+    can [:read, :create], Member
+
+    return if admin.nil?
     
-    can :manage, :all if admin.has_role?('superuser')
-    
-    if admin.has_role?('reports')
-      can :read, AdminConsole
-      can :read, Report
-      can :manage, LockedMonth
+    if admin.has_role?('superuser')
+      can :manage, :all
+    else
       can :manage, Admin, :id => admin.id
-    end
-    
-    if admin.has_role?('membership')
       can :read, AdminConsole
-      can :manage, Member
-      can :manage, Admin, :id => admin.id
+      
+      if admin.has_role?('reports')
+        can :read, Report
+        can :manage, LockedMonth
+      end
+      
+      if admin.has_role?('membership')
+        can :manage, Member
+      end
     end    
   end
 end

@@ -7,6 +7,7 @@ class ReportsControllerTest < ActionController::TestCase
   
   def setup
     AdminSession.create(admins(:one))
+    admins(:one).roles << roles(:reports)
 
     @one = members(:one)
     @two = members(:two)

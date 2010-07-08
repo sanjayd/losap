@@ -1,7 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
+superuser:
+  name: superuser
 
-two:
-  name: MyString
+reports:
+  name: reports
+  
+membership:
+  name: membership

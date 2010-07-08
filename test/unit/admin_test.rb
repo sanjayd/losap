@@ -12,11 +12,8 @@ class AdminTest < ActiveSupport::TestCase
       :password_confirmation => "password")
     assert(!ad.save, "Saved an admin with duplicate username")
         
-    r = Role.new(:name => 'superuser')
-    assert(r.save)
-
     ad = Admin.find_by_username("a_username")
-    ad.roles << r
+    ad.roles << roles(:superuser)
 
     assert(ad.has_role?("superuser"))
   end

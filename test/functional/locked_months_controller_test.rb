@@ -7,6 +7,7 @@ class LockedMonthsControllerTest < ActionController::TestCase
 
   def setup
     AdminSession.create(admins(:one))
+    admins(:one).roles << roles(:reports)
   end
   
   test 'create' do
