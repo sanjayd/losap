@@ -1,5 +1,5 @@
 class StandbysController < ApplicationController
-  before_filter :find_member
+  before_filter :find_member, :except => :update
 
   def index
     @standbys = @member.standbys
@@ -10,8 +10,7 @@ class StandbysController < ApplicationController
   end
 
   def new
-    @standby = Standby.new
-    @standby.member = @member
+    @standby = @member.standbys.build
     
     respond_to do |format|
       format.html
@@ -20,8 +19,7 @@ class StandbysController < ApplicationController
   end
 
   def create
-    @standby = Standby.new(params[:standby])
-    @standby.member = @member
+    @standby = @member.standbys.build(params[:standby])
 
     respond_to do |format|
       if @standby.save

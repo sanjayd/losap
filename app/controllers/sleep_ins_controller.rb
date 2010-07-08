@@ -1,5 +1,5 @@
 class SleepInsController < ApplicationController
-  before_filter :find_member
+  before_filter :find_member, :except => :update
 
   def index
     @sleep_ins = @member.sleep_ins
@@ -10,8 +10,7 @@ class SleepInsController < ApplicationController
   end
 
   def new
-    @sleep_in = SleepIn.new
-    @sleep_in.member = @member
+    @sleep_in = @member.sleep_ins.build
 
     respond_to do |format|
       format.html
@@ -20,8 +19,7 @@ class SleepInsController < ApplicationController
   end
 
   def create
-    @sleep_in = SleepIn.new(params[:sleep_in])
-    @sleep_in.member = @member
+    @sleep_in = @member.sleep_ins.build(params[:sleep_in])
 
     respond_to do |format|
       if @sleep_in.save
