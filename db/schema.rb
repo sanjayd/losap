@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100708011304) do
+ActiveRecord::Schema.define(:version => 20100708014535) do
 
   create_table "admins", :force => true do |t|
     t.string   "username"
@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(:version => 20100708011304) do
     t.string   "firstname"
     t.string   "lastname"
     t.string   "badgeno",    :limit => 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

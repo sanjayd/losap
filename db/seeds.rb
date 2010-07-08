@@ -16,6 +16,11 @@ end
   LockedMonth.create(:month => Date.parse("#{Date.today.year}-#{month}-1"))
 end
 
+# Add initial roles
+%w(superuser reports membership).each do |role_name|
+  Role.create(:name => role_name)
+end
+
 # Add an initial admin 'sanjayd' with password 'password'
 Admin.create(:username => 'sanjayd',
              :password => "password",
