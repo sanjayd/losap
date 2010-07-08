@@ -23,6 +23,6 @@ end
 
 # Add an initial admin 'sanjayd' with password 'password'
 Admin.create(:username => 'sanjayd',
-             :password => "password",
-             :password_confirmation => "password")
+              :password => "password",
+              :password_confirmation => "password").roles << Role.find_by_name('superuser')
              

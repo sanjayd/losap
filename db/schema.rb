@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100708014535) do
+ActiveRecord::Schema.define(:version => 20100708015008) do
 
   create_table "admins", :force => true do |t|
     t.string   "username"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(:version => 20100708014535) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "admins_roles", :id => false, :force => true do |t|
+    t.integer  "admin_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admins_roles", ["admin_id"], :name => "index_admins_roles_on_admin_id"
+  add_index "admins_roles", ["role_id"], :name => "index_admins_roles_on_role_id"
 
   create_table "locked_months", :force => true do |t|
     t.date     "month"
