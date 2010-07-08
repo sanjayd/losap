@@ -1,5 +1,5 @@
 class LockedMonthsController < ApplicationController
-  before_filter :require_admin
+  load_and_authorize_resource
 
   def create
     @locked_month = LockedMonth.new(params[:locked_month])

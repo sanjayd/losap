@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_filter :require_admin, :only => [:edit, :destroy]
+  load_and_authorize_resource
 
   # GET /members
   # GET /members.xml

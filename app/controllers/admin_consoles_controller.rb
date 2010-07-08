@@ -1,5 +1,5 @@
 class AdminConsolesController < ApplicationController
-  before_filter :require_admin
+  load_and_authorize_resource
 
   def show
     @admin_console = AdminConsole.new(params[:page])

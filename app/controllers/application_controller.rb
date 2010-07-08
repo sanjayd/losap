@@ -25,9 +25,7 @@ class ApplicationController < ActionController::Base
     @current_admin = current_admin_session && current_admin_session.record
   end
 
-  def require_admin
-    unless current_admin
-      redirect_to(login_path)
-    end
+  def current_ability
+    @current_ability ||= Ability.new(current_admin)
   end
 end

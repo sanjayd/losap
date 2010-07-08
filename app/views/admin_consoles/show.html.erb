@@ -15,10 +15,15 @@
 
 <div id="admintabs">
   <ul id="adminmenu">
+    <% if can? :read, Report %>
     <li><a href="#tab-1">Monthly Reports</a></li>
     <li><a href="#tab-2">Annual Reports</a></li>
+    <% end %>
+    <% if can? :manage, Member %>
     <li><a href="#tab-3">Manage Users</a></li>
+    <% end %>
   </ul>
+  <% if can? :read, Report %>
   <div id="tab-1">
     <%= render :partial => "monthly_reports" %>
   </div>
@@ -26,9 +31,12 @@
     <%= render :partial => "reports/annual/find",
      :locals => {:years => @admin_console.years} %>
   </div>
+  <% end %>
+  <% if can? :manage, Member %>
   <div id="tab-3">
     <%= render :partial => 'members/index', :locals => {:members => @admin_console.members} %>
   </div>
+  <% end %>
 </div>
 
 <%= render :partial => 'shared/flash_notice' %>

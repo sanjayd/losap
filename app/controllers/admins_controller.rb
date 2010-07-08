@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_filter :require_admin, :only => [:new, :create]
+  load_and_authorize_resource
   
   def new
     @admin = Admin.new
