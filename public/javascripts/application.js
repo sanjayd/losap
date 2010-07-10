@@ -25,10 +25,6 @@ $(function() {
     $("a.button").button();
     $("input[type='submit']").button();
     flash_dialogs();
-    $.idleTimer(300000);
-    $(document).bind('idle.idleTimer', function() {
-      document.location = '/';
-    });
   });
 
 function getFirstOfNextMonth() {
