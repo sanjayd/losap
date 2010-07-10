@@ -21,15 +21,15 @@ class AdminsController < ApplicationController
   end
 
   def edit
-    @admin = current_admin
+    @admin = Admin.find(params[:id])
   end
   
   def update
-    @admin = current_admin
+    @admin = Admin.find(params[:id])
     
     respond_to do |wants|
       if !current_admin.valid_password? params[:old_password]
-        flash[:warning] = 'Invalid Current Password'
+        flash[:warning] = 'Current password is incorrect'
         wants.html { render :action => "edit" }
       elsif @admin.update_attributes(params[:admin])
         flash[:notice] = "Password Changed"
