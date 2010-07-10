@@ -15,6 +15,15 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_admin
 
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:warning] = exception.message
+    if current_admin
+      redirect_to(admin_console_path)
+    else
+      redirect_to(login_path)
+    end
+  end
+
   private
   def current_admin_session
     return @current_admin_session if defined?(@current_admin_session)
