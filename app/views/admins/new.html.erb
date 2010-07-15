@@ -1,3 +1,5 @@
+<%= render :partial => "shared/admin" -%>
+
 <h2>Create New Administrator</h2>
 <% form_for @admin do |f| -%>
   <%= f.error_messages %>
@@ -13,5 +15,9 @@
     <%= f.label :password_confirmation, "Confirm Password" %>
     <%= f.password_field :password_confirmation %>
   </p>
+  <p>Roles:</p>
+  <% for role in Role.all %>
+    <p><%= check_box_tag "admin[role_ids][]", role.id %><%= h role.name.capitalize %></p>
+  <% end %>
   <p><%= f.submit "Register Admin" %></p>
 <% end -%>
