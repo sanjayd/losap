@@ -51,7 +51,7 @@ class MembersController < ApplicationController
     respond_to do |format|
       if @member.save
         flash[:notice] = 'Member was successfully created.'
-        format.html { redirect_to(@member) }
+        format.html { redirect_to(admin_console_path) }
         format.xml  { render :xml => @member, :status => :created, :location => @member }
       else
         format.html { render :action => "new" }

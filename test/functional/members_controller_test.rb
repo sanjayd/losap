@@ -66,7 +66,7 @@ class MembersControllerTest < ActionController::TestCase
                               :lastname => 'tables',
                               :badgeno => '123456'}
     assert_not_nil(assigns(:member))
-    assert_redirected_to(member_path(assigns(:member)))
+    assert_redirected_to(admin_console_path)
     assert_equal(flash[:notice], 'Member was successfully created.')
     member_count = member_count + 1
     assert_equal(member_count, Member.count)
