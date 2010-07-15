@@ -19,5 +19,8 @@
   <% for role in Role.all %>
     <p><%= check_box_tag "admin[role_ids][]", role.id %><%= h role.name.capitalize %></p>
   <% end %>
-  <p><%= f.submit "Register Admin" %></p>
+  <p>
+    <%= f.submit "Register Admin" -%>
+    <%= link_to "Cancel", admin_console_path, :class => "button" %>
+  </p>
 <% end -%>
