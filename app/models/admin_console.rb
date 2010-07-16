@@ -1,6 +1,5 @@
 class AdminConsole
-  def initialize(current_ability, page=nil)
-    @current_ability = current_ability
+  def initialize(page=nil)
     @page = page || 1
   end
   
@@ -26,7 +25,7 @@ class AdminConsole
   end
 
   def admins
-    @admins ||= Admin.accessible_by(@current_ability)
+    @admins ||= Admin.all
   end
     
   def years
