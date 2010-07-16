@@ -15,15 +15,18 @@
 
 <div id="admintabs">
   <ul id="adminmenu">
-    <% if can? :read, Report %>
+    <% if can? :read, Report -%>
     <li><a href="#tab-1">Monthly Reports</a></li>
     <li><a href="#tab-2">Annual Reports</a></li>
-    <% end %>
-    <% if can? :manage, Member %>
+    <% end -%>
+    <% if can? :manage, Member -%>
     <li><a href="#tab-3">Manage Users</a></li>
-    <% end %>
+    <% end -%>
+    <% if can? :manage, :all -%>
+    <li><a href="#tab-4">Manage Admins</a></li>
+    <% end -%>
   </ul>
-  <% if can? :read, Report %>
+  <% if can? :read, Report -%>
   <div id="tab-1">
     <%= render :partial => "monthly_reports" %>
   </div>
@@ -31,12 +34,17 @@
     <%= render :partial => "reports/annual/find",
      :locals => {:years => @admin_console.years} %>
   </div>
-  <% end %>
-  <% if can? :manage, Member %>
+  <% end -%>
+  <% if can? :manage, Member -%>
   <div id="tab-3">
     <%= render :partial => 'members/index', :locals => {:members => @admin_console.members} %>
   </div>
-  <% end %>
+  <% end -%>
+  <% if can? :manage, :all -%>
+  <div id="tab-4">
+    <%= render :partial => "admins/index", :locals => { :admins => @admin_console.admins } %>
+  </div>
+  <% end -%>
 </div>
 
 <p>&nbsp;</p>

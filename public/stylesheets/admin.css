@@ -8,7 +8,7 @@ body {
   margin-right: auto;
 }
 
-#members {
+.userlist {
   width: 650px;
   margin-left: auto;
   margin-right: auto;
@@ -17,19 +17,19 @@ body {
   border: 1px solid gray;
 }
 
-#members thead {
+.userlist thead {
   background: #cb842e;
 }
 
-#members th, td {
+.userlist th, td {
   border: 1px solid gray;
 }
 
-#members tr.even {
+.userlist tr.even {
   background: #f5f5dc;
 }
 
-#members a {
+.userlist a {
   color: #318ce7;
   text-decoration: none;
 }

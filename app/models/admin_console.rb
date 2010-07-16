@@ -1,5 +1,6 @@
 class AdminConsole
-  def initialize(page)
+  def initialize(current_ability, page=nil)
+    @current_ability = current_ability
     @page = page || 1
   end
   
@@ -22,6 +23,10 @@ class AdminConsole
   def members
     @members ||= Member.paginate(:page => @page, 
       :order => "lastname ASC, firstname ASC, badgeno ASC")
+  end
+
+  def admins
+    @admins ||= Admin.accessible_by(@current_ability)
   end
     
   def years
