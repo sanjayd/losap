@@ -1,4 +1,4 @@
-<%= render :partial => "shared/admin" %>
+<%= render :partial => "shared/admin" if current_admin %>
 
 <h1>Register New Member</h1>
 
@@ -19,6 +19,10 @@
   </p>
   <p>
     <%= f.submit 'Register' %>
-    <%= link_to 'Cancel', admin_console_path, :class => 'button'  %>
+    <% if current_admin -%>
+      <%= link_to 'Cancel', admin_console_path, :class => 'button'  %>
+    <% else -%>
+      <%= link_to "Cancel", root_path, :class => "button" %>
+    <% end -%>
   </p>
 <% end %>

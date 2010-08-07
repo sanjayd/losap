@@ -90,6 +90,7 @@ class MembersController < ApplicationController
     @member.destroy
 
     respond_to do |format|
+      flash[:notice] = 'Member was successfully deleted.'
       format.html { redirect_to(admin_console_path) }
       format.xml  { head :ok }
     end
