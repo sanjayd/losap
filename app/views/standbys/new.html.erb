@@ -1,6 +1,6 @@
 <h2><%=h @member.lastname %>, <%=h @member.firstname %> (#<%=h @member.badgeno %>)</h2>
 
-<p>The current time is <%= Time.now.strftime("%H:%m") %></p>
+<p>The current time is <%= Time.now.strftime("%H:%M") %></p>
 
 <p>Add Standby:</p>
 <% form_for([@member, @standby]) do |f| %>
