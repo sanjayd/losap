@@ -3,6 +3,7 @@
     <p>
       <%= select_tag :month, options_for_months(all_months) %>
       <%= submit_tag 'Run Report' %>
+      <%= image_tag 'spinner.gif', :id => "reportpending" %>
     </p>
     </form>
 </div>

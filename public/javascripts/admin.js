@@ -7,10 +7,16 @@ $(function() {
   });
 
 function monthlyReport() {
-  $.get('/reports/' + $('#month').val(),
-	null,
-	null,
-	'script');
+  $.ajax({
+    url: '/reports/' + $('#month').val(),
+    beforeSend: function(request) {
+      $('#reportpending').css('display', 'inline');
+    },
+    success: function(data) {
+      $('#reportpending').css('display', 'none');
+    },
+    dataType: 'script'
+  });
   return false;
 }
 
