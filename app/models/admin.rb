@@ -1,5 +1,7 @@
 class Admin < ActiveRecord::Base
-  acts_as_authentic
+  acts_as_authentic do |c|
+    c.logged_in_timeout = 10.minutes
+  end
   
   has_and_belongs_to_many :roles
   
