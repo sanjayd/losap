@@ -9,7 +9,7 @@ body {
 }
 
 #reportpending {
-  display: none;
+  visibility: hidden;
 }
 
 .userlist {

@@ -10,10 +10,10 @@ function monthlyReport() {
   $.ajax({
     url: '/reports/' + $('#month').val(),
     beforeSend: function(request) {
-      $('#reportpending').css('display', 'inline');
+      $('#reportpending').css('visibility', 'visible');
     },
     success: function(data) {
-      $('#reportpending').css('display', 'none');
+      $('#reportpending').css('visibility', 'hidden');
     },
     dataType: 'script'
   });
