@@ -26,7 +26,7 @@ class LockedMonth < ActiveRecord::Base
     
     self.find(:all,
       :select => "month, id",
-      :conditions => ["month >= ?", Date.today.beginning_of_year],
+      :conditions => conditions,
       :order => "month DESC")
   end
   
