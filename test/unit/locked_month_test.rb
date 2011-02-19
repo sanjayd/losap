@@ -33,16 +33,18 @@ class LockedMonthTest < ActiveSupport::TestCase
   test 'order' do
     LockedMonth.delete_all
     
-    m1 = LockedMonth.create(:month => 3.months.ago.to_date.beginning_of_month)
-    m2 = LockedMonth.create(:month => 5.months.ago.to_date.beginning_of_month)
-    m3 = LockedMonth.create(:month => 4.months.ago.to_date.beginning_of_month)
+    m1 = LockedMonth.create(:month => Date.parse('2009-4-1'))
+    m2 = LockedMonth.create(:month => Date.parse('2009-6-1'))
+    m3 = LockedMonth.create(:month => Date.parse('2009-5-1'))
     
     assert_equal(3, LockedMonth.count)
-    
-    months = LockedMonth.locked_months
-    assert_equal(m1, months[0])
-    assert_equal(m3, months[1])
-    assert_equal(m2, months[2])
+
+    pretend_now_is(Time.local(2009, 7, 4, 7, 0, 0)) do
+      months = LockedMonth.locked_months
+      assert_equal(m2, months[0])
+      assert_equal(m3, months[1])
+      assert_equal(m1, months[2])
+    end
   end
   
   test 'locked?' do
