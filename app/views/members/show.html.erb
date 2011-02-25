@@ -3,6 +3,10 @@
 
 <h3><%=h show_month(@month) %></h3>
 
+<% if @member.badgeno == "503660" -%>
+<p><%= image_tag 'kangaroo.jpg' %></p>
+<% end -%>
+
 <table id="membertable">
   <tr>
     <th>Date</th>
