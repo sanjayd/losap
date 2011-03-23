@@ -1,3 +1,4 @@
+<% cache do %>
 $('#main').after('<%= escape_javascript(render(:partial => 'reports/monthly/report')) %>');
 $('#report').dialog({width: 450, 
                      title: '<%= format_month(@report.month) + " Monthly Report" %>',
@@ -5,3 +6,4 @@ $('#report').dialog({width: 450,
 		         $('#report').dialog('destroy');
 			 $('#report').remove();
 			 }});
+<% end %>

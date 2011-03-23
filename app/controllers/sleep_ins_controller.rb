@@ -1,5 +1,6 @@
 class SleepInsController < ApplicationController
   before_filter :find_member, :except => :update
+  cache_sweeper :report_sweeper, :only => [:create, :update, :destroy]
 
   def index
     @sleep_ins = @member.sleep_ins
