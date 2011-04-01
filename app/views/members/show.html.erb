@@ -1,6 +1,7 @@
 <h2><%=h @member.lastname %>, <%=h @member.firstname %>
   (#<%=h @member.badgeno %>)</h2>
 
+<% cache(:fragment => @month) do %>
 <h3><%=h show_month(@month) %></h3>
 
 <% if @member.badgeno == "501431" -%>
@@ -28,7 +29,22 @@
 </table>
 
 <%= render :partial => 'standbys/standby_warning' %>
-<%= render :partial => 'totals' %>
+<p>
+  Month-to-date:
+  <%=h @member.sleep_in_points(:month => @month) %> Sleep-In Points, 
+  <%=h @member.standby_points(:month => @month) %> Standby Points,
+  <%=h @member.hours(:month => @month) %> Hours
+</p>
+<% end %>
+
+<% cache(:fragment => @month.year) do %>
+<p>
+  Year-to-date:
+  <%=h @member.sleep_in_points(:year => @month) %> Sleep-In Points,
+  <%=h @member.standby_points(:year => @month) %> Standby Points,
+  <%=h @member.hours(:year => @month) %> Hours
+</p>
+<% end %>
 
 <p><%= previous_month(@member, @month) %><%= next_month(@member, @month) %></p>
 <p><%= link_to 'Exit', root_path, :class => "button" %></p>
