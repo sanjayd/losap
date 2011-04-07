@@ -1,0 +1,12 @@
+#header
+  = image_tag 'patch.png', :id => 'patch'
+  = image_tag 'taz.png', :id=> 'taz'
+  %h1 OVFC LOSAP
+
+%form(action='#{members_url}')
+  %p Enter your name or badge number
+  %p= text_field_tag 'member_name', '', :size => 25
+
+#newmemberdiv
+  %h2 -OR-
+  %p= link_to 'Register New Member', new_member_path, :id => 'newmember' 

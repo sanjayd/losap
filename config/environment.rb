@@ -30,6 +30,7 @@ Rails::Initializer.run do |config|
   config.gem 'authlogic'
   config.gem 'cancan'
   config.gem 'will_paginate'
+  config.gem 'haml'
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
