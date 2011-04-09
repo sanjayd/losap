@@ -1,0 +1,13 @@
+- content_for :head do
+  = stylesheet_link_tag 'pagination', :cache => true
+
+%table.userlist
+  %thead
+    %tr
+      %th Member
+      %th(colspan='2') Actions
+  = render members
+  
+= will_paginate members, :class => 'apple_pagination'
+
+%p= link_to "New Member", new_member_path, :class => 'button'

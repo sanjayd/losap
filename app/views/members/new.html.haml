@@ -1,0 +1,22 @@
+= render :partial => "shared/admin" if current_admin
+
+%h1 Register New Member
+
+- form_for(@member) do |f|
+  = f.error_messages
+  
+  %p
+    = f.label :firstname, 'First Name: '
+    = f.text_field :firstname
+  %p
+    = f.label :lastname, "Last Name: "
+    = f.text_field :lastname
+  %p
+    = f.label :badgeno, "Badge Number: "
+    = f.text_field :badgeno
+  %p
+    = f.submit "Register"
+    - if current_admin
+      = link_to "Cancel", admin_console_path, :class => 'button'
+    - else
+      = link_to "Cancel", root_path, :class => 'button'
