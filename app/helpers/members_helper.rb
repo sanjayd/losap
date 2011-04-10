@@ -12,25 +12,24 @@ module MembersHelper
   end
   
   def previous_month(member, month)
-    month = month - 1.month
     link_to('Previous Month', member_month_url(member, 
-                                               :year => month.year, 
-                                               :month => month.month))
+                                               :year => month.last_month.year, 
+                                               :month => month.last_month.month))
   end
 
   def next_month(member, month)
-    unless month + 1.month > Date.today
-      month = month + 1.month
+    unless month.next_month > Date.today
       ' | ' + link_to('Next Month', member_month_url(member,
-                                                     :year => month.year,
-                                                     :month => month.month))
+                                                     :year => month.next_month.year,
+                                                     :month => month.next_month.month))
     end
   end
 
   def render_sleep_ins_and_standbys(member, month)
     sleep_ins_and_standbys = member.sleep_ins_and_standbys(:month => month)
     if sleep_ins_and_standbys.empty?
-      "<tr><td colspan=\"3\">No sleep-ins or standbys this month</td></tr>"
+      content_tag 'tr', raw(
+        content_tag('td', 'No sleep-ins or standbys this month', :colspan => "3"))
     else
       sleep_ins_and_standbys_helper(sleep_ins_and_standbys)
     end
