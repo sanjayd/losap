@@ -1,1 +1,1 @@
-<%= member.badgeno %>,<%= @report.month.strftime('%m/%d/%Y') %>,0,0,0,<%= member.sleep_in_points(:month => @report.month) %>,<%= member.hours(:month => @report.month) %>,<%= member.standby_points(:month => @report.month) %>
+<%= member.badgeno %>,<%= @report.month.strftime('%m/%d/%Y') %>,0,0,0,<%= @report.sleep_in_points(member) %>,<%= @report.hours(member) %>,<%= @report.standby_points(member) %>
