@@ -3,17 +3,17 @@ module ReportsHelper
     month.strftime("%B %Y")
   end
 
-  def total_points(member)
-    points = member.sleep_in_points(:year => @report.year) +
-      member.standby_points(:year => @report.year)
+  def total_points(report, member)
+    points = report.sleep_in_points(member) +
+      report.standby_points(member)
     (points > 20) ? 20 : points
   end
   
-  def filter_standbys(member)
-    member.standbys.by_year(@report.year).find_all {|sb| sb.points > 0}
+  def filter_standbys(report, member)
+    report.standbys_for_member(member).find_all {|sb| sb.points > 0}
   end
   
-  def filter_sleep_ins(member)
-    member.sleep_ins.by_year(@report.year).find_all {|si| si.points > 0}
+  def filter_sleep_ins(report, member)
+    report.sleep_ins_for_member(member).find_all {|si| si.points > 0}
   end
 end

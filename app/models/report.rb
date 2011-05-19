@@ -17,7 +17,11 @@ class Report
   end
 
   def sleep_ins
-    @sleep_ins ||= build_hash(SleepIn.by_month(@month))
+    @sleep_ins ||= build_hash(monthly? ? SleepIn.by_month(@month) : SleepIn.by_year(@year))
+  end
+  
+  def sleep_ins_for_member(member)
+    sleep_ins[member.id] ? sleep_ins[member.id] : []
   end
 
   def sleep_in_points(member)
@@ -25,7 +29,11 @@ class Report
   end
   
   def standbys
-    @standbys ||= build_hash(Standby.by_month(@month))
+    @standbys ||= build_hash(monthly? ? Standby.by_month(@month) : Standby.by_year(@year))
+  end
+
+  def standbys_for_member(member)
+    standbys[member.id] ? standbys[member.id] : []
   end
 
   def standby_points(member)

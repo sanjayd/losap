@@ -7,7 +7,7 @@
 
   <h2><%= @report.year.strftime("%Y") %> LOSAP Annual Report</h2>
 
-  <p><%= total_points(member) %> Total LOSAP Points.</p>
+  <p><%= total_points(@report, member) %> Total LOSAP Points.</p>
 </div>
 
 <table id="data">

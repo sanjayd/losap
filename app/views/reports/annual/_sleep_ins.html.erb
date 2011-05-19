@@ -1,6 +1,6 @@
 <h2>Sleep-Ins</h2>
 <ul>
   <%= render :partial => "reports/annual/sleep_in",
-   :collection => filter_sleep_ins(member) %>
+   :collection => filter_sleep_ins(@report, member) %>
 </ul>
-<p><%= h member.sleep_in_points(:year => @report.year) %> points</p>
+<p><%= h @report.sleep_in_points(member) %> points</p>
