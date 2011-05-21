@@ -1,0 +1,9 @@
+%table.userlist
+  %thead
+    %tr
+      %th Username
+      %th Roles
+      %th(colspan='2') Actions
+  =render :partial => "admins/admin", :collection => admins
+  
+= link_to "New Admin", new_admin_path, :class => "button"

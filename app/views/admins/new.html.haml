@@ -1,0 +1,22 @@
+= render :partial => "shared/admin"
+
+%h2 Create New Administrator
+- form_for @admin do |f|
+  = f.error_messages
+  %p
+    = f.label :username, "Username"
+    = f.text_field :username
+  %p
+    = f.label :password, "Password"
+    = f.password_field :password
+  %p
+    = f.label :password_confirmation, "Confirm Password"
+    = f.password_field :password_confirmation
+  %p Roles:
+  - for role in Role.all
+    %p
+      = check_box_tag "admin[role_ids][]", role.id
+      = role.name.capitalize
+  %p
+    = f.submit 'Register Admin'
+    = link_to 'Cancel', admin_console_path, :class => 'button'

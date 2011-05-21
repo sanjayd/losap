@@ -1,0 +1,5 @@
+%tr{:class => cycle('odd', 'even')}
+  %td= admin.username
+  %td= role_names(admin)
+  %td= link_to "Edit", edit_admin_path(admin)
+  %td= link_to "Delete", admin_path(admin), :class => 'delete'

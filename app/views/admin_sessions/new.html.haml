@@ -1,0 +1,13 @@
+= render :partial => "shared/admin"
+
+%h2 Admin Login
+
+- form_for @admin_session do |f|
+  = f.error_messages
+  %p
+    = f.label :username, 'Username'
+    = f.text_field :username
+  %p
+    = f.label :password, 'Password'
+    = f.password_field :password
+  %p= f.submit "Log In"

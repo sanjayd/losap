@@ -1,0 +1,37 @@
+=render :partial => "shared/admin"
+
+-content_for :head do
+  = javascript_include_tag 'jquery.cookie'
+
+%h2 LOSAP Adminstration
+
+%p
+  Admin:
+  = current_admin.username
+  [#{link_to "Change Password", edit_admin_path(current_admin)}]
+  [#{link_to "Logout", logout_path}]
+
+#admintabs
+  %ul#adminmenu
+    - if can? :read, Report
+      %li= link_to "Monthly Reports", '#tab-1'
+      %li= link_to "Annual Reports", '#tab-2'
+    - if can? :manage, Member
+      %li= link_to "Manage Users", '#tab-3'
+    - if can? :manage, :all
+      %li= link_to "Manage Admins", '#tab-4'
+  - if can? :read, Report
+    #tab-1= render :partial => "monthly_reports"
+    #tab-2
+      = render :partial => "reports/annual/find",
+               :locals => {:years => @admin_console.years}
+  - if can? :manage, Member
+    #tab-3
+      = render :partial => "members/index",
+               :locals => {:members => @admin_console.members}
+  - if can? :manage, :all
+    #tab-4
+      = render :partial => "admins/index",
+               :locals => {:admins => @admin_console.admins}
+
+%p &nbsp;

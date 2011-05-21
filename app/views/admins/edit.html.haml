@@ -1,0 +1,18 @@
+= render :partial => "shared/admin"
+
+%h2 Change Password
+
+- form_for @admin do |f|
+  = f.error_messages
+  %p
+    = label_tag :old_password, 'Current Password'
+    = password_field_tag :old_password
+  %p
+    = f.label :password, "New Password"
+    = f.password_field :password
+  %p
+    = f.label :password_confirmation, 'Confirm New Password'
+    = f.password_field :password_confirmation
+  %p
+    = f.submit 'Change'
+    = link_to "Cancel", admin_console_path, :class => 'button'
