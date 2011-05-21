@@ -1,0 +1,8 @@
+%div
+  - if unlocked_months.empty?
+    %p All months in the current year are locked.
+  - else
+    - form_for locked_month do |f|
+      %p
+        = f.select :month, options_for_months(unlocked_months)
+        = f.submit 'Lock'

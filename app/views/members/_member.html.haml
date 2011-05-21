@@ -1,0 +1,4 @@
+%tr{:class => cycle('odd', 'even')}
+  %td #{member.lastname} #{member.firstname} (##{member.badgeno})
+  %td= link_to 'Edit', edit_member_path(member)
+  %td= link_to 'Delete', member_path(member), :class => 'delete'
