@@ -1,0 +1,8 @@
+- if sleep_in.deleted?
+  %span.deleted= sleep_in.unit
+  - unless sleep_in.locked?
+    (#{link_to 'Undelete', [@member, sleep_in], :class => :undelete_sleep_in})
+- else
+  = sleep_in.unit
+  - unless sleep_in.locked?
+    (#{link_to 'Delete', [@member, sleep_in], :class => :delete_sleep_in})
