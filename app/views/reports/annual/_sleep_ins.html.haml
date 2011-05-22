@@ -1,0 +1,5 @@
+%h2 Sleep-Ins
+%ul
+  = render :partial => "reports/annual/sleep_in",
+           :collection => filter_sleep_ins(@report, member)
+%p #{@report.sleep_in_points(member)} points

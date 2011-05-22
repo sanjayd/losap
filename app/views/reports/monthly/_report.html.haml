@@ -1,0 +1,4 @@
+#report
+  = text_area_tag 'report',
+    render(:partial => "reports/monthly/member", :collection => @report.members),
+    :rows => 10, :cols => 43

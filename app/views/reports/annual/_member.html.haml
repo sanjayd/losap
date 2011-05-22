@@ -1,0 +1,13 @@
+#header
+  %h1 #{member.lastname}, #{member.firstname} (##{member.badgeno})
+  %h2 #{@report.year.strftime("%Y")} LOSAP Annual Report
+  %p #{total_points(@report, member)} Total LOSAP Points.
+  
+%table#data
+  %tr
+    %td#sleep_ins
+      =render :partial => "reports/annual/sleep_ins",
+              :locals => {:member => member}
+    %td#standbys
+      =render :partial => "reports/annual/standbys",
+              :locals => {:member => member}
