@@ -1,4 +1,3 @@
-# Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   def yield_authenticity_token
     if protect_against_forgery?
@@ -19,3 +18,4 @@ JAVASCRIPT
     end)
   end
 end
+
