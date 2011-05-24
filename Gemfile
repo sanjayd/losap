@@ -13,5 +13,6 @@ end
 gem 'authlogic'
 gem 'cancan'
 gem 'haml'
+gem 'jquery-rails'
 gem 'will_paginate'
 
