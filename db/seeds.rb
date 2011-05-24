@@ -2,11 +2,9 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 # Examples:
-#   
+#
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Major.create(:name => 'Daley', :city => cities.first)
-
-# Add unit types
+#   Mayor.create(:name => 'Daley', :city => cities.first)
 %w(Engine Truck Ambulance).each do |s|
   UnitType.create(:name => s)
 end
@@ -23,6 +21,5 @@ end
 
 # Add an initial admin 'sanjayd' with password 'password'
 Admin.create(:username => 'sanjayd',
-              :password => "password",
-              :password_confirmation => "password").roles << Role.find_by_name('superuser')
-             
+             :password => "password",
+             :password_confirmation => "password").roles << Role.find_by_name('superuser')
