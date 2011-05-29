@@ -10,13 +10,13 @@ class SleepIn < ActiveRecord::Base
   belongs_to :unit_type
   belongs_to :member
 
-  named_scope :by_year,
+  scope :by_year,
     lambda { |year| { :conditions => ['date >= ? and date <= ?',
       year.to_date.beginning_of_year, 
       year.to_date.end_of_year],
       :order => "date asc" } }
   
-  named_scope :by_month, 
+  scope :by_month, 
     lambda { |month| { :conditions => ['date >= ? and date <= ?', 
       month.to_date.beginning_of_month,
       month.to_date.end_of_month],

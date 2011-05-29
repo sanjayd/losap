@@ -11,13 +11,13 @@ class Standby < ActiveRecord::Base
 
   before_validation :add_in_dates
 
-  named_scope :by_year, 
+  scope :by_year, 
     lambda { |year| { :conditions => ['start_time >= ? and start_time <= ?', 
       year.to_time.beginning_of_year,
       year.to_time.end_of_year],
       :order => "start_time asc" } }
       
-  named_scope :by_month,
+  scope :by_month,
     lambda { |month| { :conditions => ['start_time >= ? and start_time <= ?',
      month.to_time.beginning_of_month,
      month.to_time.end_of_month],
