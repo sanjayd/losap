@@ -12,6 +12,6 @@ Losap::Application.routes.draw do
   match 'reports/:date' => 'reports#show'
   match 'login' => 'admin_sessions#new', :as => :login
   match 'logout' => 'admin_sessions#destroy', :as => :logout
-  match '/' => 'members#index'
+  root :to => 'members#index'
 end
 
