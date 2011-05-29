@@ -35,23 +35,23 @@ class SleepInTest < ActiveSupport::TestCase
   end
 
   test "no_future_months" do
-    si = SleepIn.new(:date => Date.today, :unit => 'Engine')
+    si = @m1.sleep_ins.build(:date => Date.today, :unit => 'Engine')
     assert(si.save)
     si.destroy
     
-    si = SleepIn.new(:date => Date.parse('2010-2-5'), :unit => 'Engine')
+    si = @m1.sleep_ins.build(:date => Date.parse('2010-2-5'), :unit => 'Engine')
     assert(si.save)
     si.destroy
 
-    si = SleepIn.new(:date => Date.today.end_of_month, :unit => 'Engine')
+    si = @m1.sleep_ins.build(:date => Date.today.end_of_month, :unit => 'Engine')
     assert(si.save)
     si.destroy
     
-    si = SleepIn.new(:date => (Date.today + 1.month).beginning_of_month, :unit => 'Engine')
+    si = @m1.sleep_ins.build(:date => (Date.today + 1.month).beginning_of_month, :unit => 'Engine')
     assert(!si.save)
     si.destroy
 
-    si = SleepIn.new(:date => Date.today + 1.month, :unit => 'Engine')
+    si = @m1.sleep_ins.build(:date => Date.today + 1.month, :unit => 'Engine')
     assert(!si.save)
   end
 

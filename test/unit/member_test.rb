@@ -116,8 +116,10 @@ class MemberTest < ActiveSupport::TestCase
     four = sleep_ins(:four)
     three.date = sleep_ins(:one).date - 1.month
     four.date = sleep_ins(:one).date + 1.month
-    assert(three.save, three.errors)
-    assert(four.save, four.errors)
+    @two.sleep_ins << three
+    @two.sleep_ins << four
+    assert(!three.new_record?, three.errors)
+    assert(!four.new_record?, four.errors)
     @one.sleep_ins << three
     @one.sleep_ins << four
     
@@ -163,29 +165,25 @@ class MemberTest < ActiveSupport::TestCase
 
   test "sleep_in_points" do
     month = Date.parse '2009-08-01'
-    si = SleepIn.create(:date => '2009-08-01', :unit => 'Engine')
-    @one.sleep_ins << si
+    si = @one.sleep_ins.build(:date => '2009-08-01', :unit => 'Engine')
     assert(@one.save, @one.errors.inspect)
     assert_equal(1,
                  @one.sleep_in_points(:month => month),
                  "1 != #{@one.sleep_in_points(:month => month)}")
 
-    si = SleepIn.create(:date => '2009-08-02', :unit => 'Ambulance')
-    @one.sleep_ins << si
+    si = @one.sleep_ins.build(:date => '2009-08-02', :unit => 'Ambulance')
     assert(@one.save, @one.errors.inspect)
     assert_equal(2,
                  @one.sleep_in_points(:month => month), 
                  "2 != #{@one.sleep_in_points(:month => month)}")
 
-    si = SleepIn.create(:date => '2009-08-31', :unit => 'Truck')
-    @one.sleep_ins << si
+    si = @one.sleep_ins.build(:date => '2009-08-31', :unit => 'Truck')
     assert(@one.save, @one.errors.inspect)
     assert_equal(3,
                  @one.sleep_in_points(:month => month),
                  "3 != #{@one.sleep_in_points(:month => month)}")
     
-    si = SleepIn.create(:date => '2009-07-31', :unit => 'Engine')
-    @one.sleep_ins << si
+    si = @one.sleep_ins.build(:date => '2009-07-31', :unit => 'Engine')
     assert(@one.save, @one.errors.inspect)
     assert_equal(3, 
                  @one.sleep_in_points(:month => month), 
@@ -194,8 +192,7 @@ class MemberTest < ActiveSupport::TestCase
                  @one.sleep_in_points(:year => month),
                  "4 != #{@one.sleep_in_points(:year => month)}")
 
-    si = SleepIn.create(:date => '2009-09-01', :unit => 'Engine')
-    @one.sleep_ins << si
+    si = @one.sleep_ins.build(:date => '2009-09-01', :unit => 'Engine')
     assert(@one.save, @one.errors.inspect)
     assert_equal(3,
                  @one.sleep_in_points(:month => month), 
@@ -204,15 +201,13 @@ class MemberTest < ActiveSupport::TestCase
                  @one.sleep_in_points(:year => month),
                  "5 != #{@one.sleep_in_points(:year => month)}")
 
-    si = SleepIn.create(:date => '2008-12-31', :unit => 'Engine')
-    @one.sleep_ins << si
+    si = @one.sleep_ins.build(:date => '2008-12-31', :unit => 'Engine')
     assert(@one.save, @one.errors.inspect)
     assert_equal(5,
                  @one.sleep_in_points(:year => month),
                  "5 != #{@one.sleep_in_points(:year => month)}")
 
-    si = SleepIn.create(:date => '2010-1-1', :unit => 'Engine')
-    @one.sleep_ins << si
+    si = @one.sleep_ins.build(:date => '2010-1-1', :unit => 'Engine')
     assert(@one.save, @one.errors.inspect)
     assert_equal(5,
                  @one.sleep_in_points(:year => month),
