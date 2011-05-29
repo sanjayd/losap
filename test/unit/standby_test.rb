@@ -130,7 +130,7 @@ class StandbyTest < ActiveSupport::TestCase
     sb1 = Standby.new(:start_time => start1,
                       :end_time => end1,
                       :member_id => m.id)
-    assert(sb1.save, sb1.errors)
+    assert(sb1.save, sb1.errors.inspect)
     
     sb2 = Standby.new(:start_time => start2,
                       :end_time => end2,
@@ -264,21 +264,21 @@ class StandbyTest < ActiveSupport::TestCase
   end
 
   test 'dates' do
-    sb = Standby.new(:start_date => '4/15/2009',
-                     :end_date => '4/15/2009',
+    sb = Standby.new(:start_date => '2009-04-15',
+                     :end_date => '2009-04-15',
                      :start_time => Time.local(2009, 4, 5, 7, 0, 0),
                      :end_time => Time.local(2009, 4, 5, 12, 0, 0),
                      :member_id => @m1.id)
-    assert(sb.save)
+    assert(sb.save, sb.errors.inspect)
     assert_equal(Time.local(2009, 4, 15, 7, 0, 0), sb.start_time)
     assert_equal(Time.local(2009, 4, 15, 12, 0, 0), sb.end_time)    
 
-    sb = Standby.new(:start_date => '4/16/2009',
-                     :end_date => '4/17/2009',
+    sb = Standby.new(:start_date => '2009-04-16',
+                     :end_date => '2009-04-17',
                      :start_time => Time.local(2009, 4, 20, 19, 0, 0),
                      :end_time => Time.local(2009, 4, 20, 3, 0, 0),
                      :member_id => @m1.id)
-    assert(sb.save)
+    assert(sb.save, sb.errors.inspect)
     assert_equal(Time.local(2009, 4, 16, 19, 0, 0), sb.start_time)
     assert_equal(Time.local(2009, 4, 17, 3, 0, 0), sb.end_time)
   end
@@ -287,7 +287,7 @@ class StandbyTest < ActiveSupport::TestCase
     sb = Standby.new(:start_time => Time.local(2010, 6, 15, 7, 0, 0),
                      :end_time => Time.local(2010, 6, 15, 16, 0, 0),
                      :member_id => @m1.id)
-    assert(sb.save)
+    assert(sb.save, sb.errors.inspect)
     
     sb = Standby.new(:start_time => Time.local(2010, 5, 16, 7, 0, 0),
                      :end_time => Time.local(2010, 5, 16, 16, 0, 0),

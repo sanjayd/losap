@@ -108,7 +108,7 @@ class MemberTest < ActiveSupport::TestCase
       hours + sl.hours
     end
 
-    assert(@one.save, @one.errors)
+    assert(@one.save, @one.errors.inspect)
     assert_equal(total_hours, @one.hours(:month => month),
                  "#{total_hours} != #{@one.hours(:month => month)}")
     
@@ -118,12 +118,12 @@ class MemberTest < ActiveSupport::TestCase
     four.date = sleep_ins(:one).date + 1.month
     @two.sleep_ins << three
     @two.sleep_ins << four
-    assert(!three.new_record?, three.errors)
-    assert(!four.new_record?, four.errors)
+    assert(!three.new_record?, three.errors.inspect)
+    assert(!four.new_record?, four.errors.inspect)
     @one.sleep_ins << three
     @one.sleep_ins << four
     
-    assert(@one.save, @one.errors)
+    assert(@one.save, @one.errors.inspect)
     assert_equal(total_hours, @one.hours(:month => month),
                  "#{total_hours} != #{@one.hours(:month => month)}")   
     assert_equal(total_hours + three.hours + four.hours,
