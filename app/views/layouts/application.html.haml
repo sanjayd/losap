@@ -13,7 +13,7 @@
       = javascript_include_tag 'jquery.idle-timer'
       = javascript_include_tag 'timer'
     = yield :head
-    = yield_authenticity_token
+    = raw yield_authenticity_token
   %body
     #main.rounded
       = yield
