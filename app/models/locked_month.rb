@@ -14,20 +14,16 @@ class LockedMonth < ActiveRecord::Base
   end
 
   def self.locked_months
-    conditions = nil
-    
+    rel = nil
+
     if Date.today.month == 1
-      conditions = ["month >= ? and month <= ?", 
-        (Date.today - 1.year).beginning_of_year,
-        (Date.today - 1.year).end_of_year]
+      rel = where('month >= ?', (Date.today - 1.year).beginning_of_year)\
+            .where('month <= ?', (Date.today - 1.year).end_of_year)
     else
-      conditions = ["month >= ?", Date.today.beginning_of_year]
+      rel = where('month >= ?', Date.today.beginning_of_year)
     end
     
-    self.find(:all,
-      :select => "month, id",
-      :conditions => conditions,
-      :order => "month DESC")
+    rel.order('month desc')
   end
   
   def self.unlocked_months

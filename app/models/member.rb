@@ -12,14 +12,12 @@ class Member < ActiveRecord::Base
   def self.all_like(str)
     str.split.inject([]) do |arr, s|
       str_with_wildcards = "%#{s}%"
-      arr + self.find(:all,
-                      :select => 'id, firstname, lastname, badgeno',
-                      :conditions => ["firstname like ? or lastname like ? or badgeno like ?",
-                                      str_with_wildcards,
-                                      str_with_wildcards,
-                                      str_with_wildcards],
-                      :order => 'lastname ASC, firstname ASC',
-                      :limit => 10)
+      arr + select('id, firstname, lastname, badgeno')\
+            .where('firstname like ?', str_with_wildcards)\
+            .where('lastname like ?', str_with_wildcards)\
+            .where('badgeno like ?', str_with_wildcards)\
+            .order('lastname asc, firstname asc')\
+            .limit(10).all
     end.uniq
   end
 

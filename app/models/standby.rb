@@ -12,16 +12,18 @@ class Standby < ActiveRecord::Base
   before_validation :add_in_dates
 
   scope :by_year, 
-    lambda { |year| { :conditions => ['start_time >= ? and start_time <= ?', 
-      year.to_time.beginning_of_year,
-      year.to_time.end_of_year],
-      :order => "start_time asc" } }
-      
+    lambda { |year|
+      where('start_time >= ?', year.to_time.beginning_of_year)\
+      .where('start_time <= ?', year.to_time.end_of_year)\
+      .order('start_time asc')
+    }
+
   scope :by_month,
-    lambda { |month| { :conditions => ['start_time >= ? and start_time <= ?',
-     month.to_time.beginning_of_month,
-     month.to_time.end_of_month],
-     :order => "start_time asc" } }
+    lambda { |month| 
+      where('start_time >= ?', month.to_time.beginning_of_month)\
+      .where('start_time <= ?', month.to_time.end_of_month)\
+      .order('start_time asc')
+    }
 
   def deleted?
     self.deleted
@@ -89,12 +91,11 @@ class Standby < ActiveRecord::Base
 
   def self.find_by_date(date)
     date = date.to_date
-    self.find(:all,
-              :conditions => ["start_time >= ? AND start_time < ? AND deleted = ?",
-                              date,
-                              date + 1.day,
-			      false],
-              :order => "start_time ASC")
+    
+    where('start_time >= ?', date)\
+    .where('start_time < ?', date + 1.day)\
+    .where('deleted = ?', false)\
+    .order('start_time asc')
   end      
 
   protected
