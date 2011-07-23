@@ -20,8 +20,8 @@ class AdminConsole
   end
   
   def members
-    @members ||= Member.paginate(:page => @page, 
-      :order => "lastname ASC, firstname ASC, badgeno ASC")
+    @members ||= Member.order('lastname asc, firstname asc, badgeno asc')\
+                       .paginate(:page => @page)
   end
 
   def admins

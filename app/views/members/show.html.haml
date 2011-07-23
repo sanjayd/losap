@@ -9,7 +9,7 @@
       %th Standby
       %th Sleep-In
       
-    = render_sleep_ins_and_standbys(@member, @month)
+    = raw render_sleep_ins_and_standbys(@member, @month)
   
     - unless locked?(@month)
       %tr#newrow
@@ -39,7 +39,7 @@
     Hours
 
 %p
-  = previous_month(@member, @month)
-  = next_month(@member, @month)
+  = raw previous_month(@member, @month)
+  = raw next_month(@member, @month)
   
 %p= link_to 'Exit', root_path, :class => 'button'
