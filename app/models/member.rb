@@ -13,9 +13,8 @@ class Member < ActiveRecord::Base
     str.split.inject([]) do |arr, s|
       str_with_wildcards = "%#{s}%"
       arr + select('id, firstname, lastname, badgeno')\
-            .where('firstname like ?', str_with_wildcards)\
-            .where('lastname like ?', str_with_wildcards)\
-            .where('badgeno like ?', str_with_wildcards)\
+            .where('firstname like ? or lastname like ? or badgeno like ?', 
+                   str_with_wildcards, str_with_wildcards, str_with_wildcards)\
             .order('lastname asc, firstname asc')\
             .limit(10).all
     end.uniq
