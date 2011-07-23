@@ -2,7 +2,7 @@
 %p The current time is #{Time.now.strftime("%H:%M")}
 %p Add Standby:
 
-- form_for([@member, @standby]) do |f|
+= form_for([@member, @standby]) do |f|
   = f.error_messages
   %p
     #{f.label :start_time, 'Start'}:

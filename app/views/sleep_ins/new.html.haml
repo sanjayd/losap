@@ -1,6 +1,6 @@
 %h2 #{@member.lastname}, #{@member.firstname} (##{@member.badgeno})
 %p Add Sleep-In:
-- form_for([@member, @sleep_in]) do |f|
+= form_for([@member, @sleep_in]) do |f|
   = f.error_messages
   %p #{f.label :date}: #{f.text_field :date, :class => 'date', :size => 10}
   %p #{f.label :unit}: #{f.select :unit, unit_names}
