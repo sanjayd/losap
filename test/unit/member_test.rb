@@ -133,6 +133,7 @@ class MemberTest < ActiveSupport::TestCase
     three.date = month.end_of_month
     total_hours += three.hours
     assert(three.save)
+    @one.reload
     assert_equal(total_hours, @one.hours(:month => month),
                  "#{total_hours} != #{@one.hours(:month => month)}")
     assert_equal(total_hours + four.hours,
@@ -144,6 +145,7 @@ class MemberTest < ActiveSupport::TestCase
     sb = Standby.new(:start_time => start_time, :end_time => end_time)
     total_hours += sb.hours
     @one.standbys << sb
+    @one.reload
     assert_equal(total_hours, @one.hours(:month => month),
                  "#{total_hours} != #{@one.hours(:month => month)}")  
     assert_equal(total_hours + four.hours, @one.hours(:year => month),
@@ -152,6 +154,7 @@ class MemberTest < ActiveSupport::TestCase
     sb = Standby.new(:start_time => start_time + 1.month,
                         :end_time => end_time + 1.month)
     @one.standbys << sb
+    @one.reload
     assert_equal(total_hours, @one.hours(:month => month),
                  "#{total_hours} != #{@one.hours(:month => month)}")  
     assert_equal(total_hours + sb.hours + four.hours, @one.hours(:year => month),
@@ -173,18 +176,21 @@ class MemberTest < ActiveSupport::TestCase
 
     si = @one.sleep_ins.build(:date => '2009-08-02', :unit => 'Ambulance')
     assert(@one.save, @one.errors.inspect)
+    @one.reload
     assert_equal(2,
                  @one.sleep_in_points(:month => month), 
                  "2 != #{@one.sleep_in_points(:month => month)}")
 
     si = @one.sleep_ins.build(:date => '2009-08-31', :unit => 'Truck')
     assert(@one.save, @one.errors.inspect)
+    @one.reload
     assert_equal(3,
                  @one.sleep_in_points(:month => month),
                  "3 != #{@one.sleep_in_points(:month => month)}")
     
     si = @one.sleep_ins.build(:date => '2009-07-31', :unit => 'Engine')
     assert(@one.save, @one.errors.inspect)
+    @one.reload
     assert_equal(3, 
                  @one.sleep_in_points(:month => month), 
                  "3 != #{@one.sleep_in_points(:month => month)}")
@@ -194,6 +200,7 @@ class MemberTest < ActiveSupport::TestCase
 
     si = @one.sleep_ins.build(:date => '2009-09-01', :unit => 'Engine')
     assert(@one.save, @one.errors.inspect)
+    @one.reload
     assert_equal(3,
                  @one.sleep_in_points(:month => month), 
                  "3 != #{@one.sleep_in_points(:month => month)}")
@@ -203,12 +210,14 @@ class MemberTest < ActiveSupport::TestCase
 
     si = @one.sleep_ins.build(:date => '2008-12-31', :unit => 'Engine')
     assert(@one.save, @one.errors.inspect)
+    @one.reload
     assert_equal(5,
                  @one.sleep_in_points(:year => month),
                  "5 != #{@one.sleep_in_points(:year => month)}")
 
     si = @one.sleep_ins.build(:date => '2010-1-1', :unit => 'Engine')
     assert(@one.save, @one.errors.inspect)
+    @one.reload
     assert_equal(5,
                  @one.sleep_in_points(:year => month),
                  "5 != #{@one.sleep_in_points(:year => month)}")                 
@@ -237,6 +246,7 @@ class MemberTest < ActiveSupport::TestCase
                         :end_time => end_time + 1.day)
     @one.standbys << sb
     assert(@one.save, @one.errors.inspect)
+    @one.reload
     assert_equal(2,
                  @one.standby_points(:month => month),
                  "2 != #{@one.standby_points(:month => month)}")
@@ -245,6 +255,7 @@ class MemberTest < ActiveSupport::TestCase
                         :end_time => end_time - 1.month)
     @one.standbys << sb
     assert(@one.save, @one.errors.inspect)
+    @one.reload
     assert_equal(2,
                  @one.standby_points(:month => month),
                  "2 != #{@one.standby_points(:month => month)}")
@@ -259,6 +270,7 @@ class MemberTest < ActiveSupport::TestCase
     assert_equal(2,
                  @one.standby_points(:month => month),
                  "2 != #{@one.standby_points(:month => month)}")
+    @one.reload
     assert_equal(4,
                  @one.standby_points(:year => month),
                  "4 != #{@one.standby_points(:year => month)}")
@@ -267,6 +279,7 @@ class MemberTest < ActiveSupport::TestCase
                         :end_time => end_time.beginning_of_month + 9.hours)
     @one.standbys << sb
     assert(@one.save, @one.errors.inspect)
+    @one.reload
     assert_equal(3,
                  @one.standby_points(:month => month),
                  "3 != #{@one.standby_points(:month => month)}")
@@ -274,6 +287,7 @@ class MemberTest < ActiveSupport::TestCase
     sb = Standby.new(:start_time => start_time.end_of_month - 8.hours,
                         :end_time => end_time.end_of_month - 4.hours)
     @one.standbys << sb
+    @one.reload
     assert(@one.save, @one.errors.inspect)
     assert_equal(4,
                  @one.standby_points(:month => month),
@@ -313,16 +327,19 @@ class MemberTest < ActiveSupport::TestCase
     assert_equal(si1, list[0])
 
     assert(si2.save)
+    m.reload
     list = m.sleep_ins_and_standbys(:month => Date.parse('2010-01-01'))
     assert_equal(2, list.size)
     assert_equal(si2, list[1])
 
     assert(sb1.save)
+    m.reload
     list = m.sleep_ins_and_standbys(:month => Date.parse('2010-01-01'))
     assert_equal(3, list.size)
     assert_equal(sb1, list[1])
 
     assert(sb2.save)
+    m.reload
     list = m.sleep_ins_and_standbys(:month => Date.parse('2010-01-01'))
     assert_equal(4, list.size)
     assert_equal(si1, list[0])
@@ -331,6 +348,7 @@ class MemberTest < ActiveSupport::TestCase
     assert_equal(sb2, list[3])
 
     assert(sb3.save)
+    m.reload
     list = m.sleep_ins_and_standbys(:month => Date.parse('2010-01-01'))
     assert_equal(5, list.size)
     assert_equal(si1, list[0])
