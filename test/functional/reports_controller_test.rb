@@ -15,7 +15,7 @@ class ReportsControllerTest < ActionController::TestCase
 
   test 'show' do
     assert_raise(ActionController::RoutingError) {get :show}
-    get :show, :date => '2009-7-1'
+    get :show, :date => '2009-7-1', :format => "js"
     assert_response :success, @response.body
     assert_not_nil(assigns(:report))
     assert(assigns(:report).monthly?, "Non-monthly report given")

@@ -13,7 +13,7 @@ class SleepInsControllerTest < ActionController::TestCase
 
   test 'index' do
     assert_raise(ActionController::RoutingError) {get :index}
-    get :index, :member_id => @m1.id
+    get :index, :member_id => @m1.id, :format => "xml"
     assert_response :success
     assert_not_nil(assigns(:member))
     assert_equal(@m1, assigns(:member))
@@ -24,7 +24,7 @@ class SleepInsControllerTest < ActionController::TestCase
     assert @one.save
     @two.member = @m1
     assert @two.save
-    get :index, :member_id => @m1.id
+    get :index, :member_id => @m1.id, :format => "xml"
     assert_response :success
     assert_not_nil(assigns(:sleep_ins))
     assert_equal(2, assigns(:sleep_ins).size)
@@ -36,7 +36,7 @@ class SleepInsControllerTest < ActionController::TestCase
     s.unit = 'Engine'
     s.member = @m1
     s.save
-    get :index, :member_id => @m1.id
+    get :index, :member_id => @m1.id, :format => "xml"
     assert_response :success
     assert_not_nil(assigns(:sleep_ins))
     assert_equal(3, assigns(:sleep_ins).size)

@@ -11,7 +11,7 @@ class StandbysControllerTest < ActionController::TestCase
 
   test 'index' do
     assert_raise(ActionController::RoutingError) {get :index}
-    get :index, :member_id => @m1.id
+    get :index, :member_id => @m1.id, :format => "xml"
     assert_response :success
     assert_not_nil(assigns(:member))
     assert_equal(@m1, assigns(:member))
@@ -24,7 +24,7 @@ class StandbysControllerTest < ActionController::TestCase
     @two.start_time = @one.start_time + 1.day
     @two.end_time = @one.end_time + 1.day
     assert @two.save, @two.errors.inspect
-    get :index, :member_id => @m1.id
+    get :index, :member_id => @m1.id, :format => "xml"
     assert_response :success
     assert_not_nil(assigns(:standbys))
     assert_equal(2, assigns(:standbys).size)
@@ -36,7 +36,7 @@ class StandbysControllerTest < ActionController::TestCase
     s.end_time = @one.end_time - 5.days
     s.member = @m1
     assert s.save
-    get :index, :member_id => @m1.id
+    get :index, :member_id => @m1.id, :format => "xml"
     assert_response :success
     assert_not_nil(assigns(:standbys))
     assert_equal(3, assigns(:standbys).size)
