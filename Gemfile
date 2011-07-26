@@ -10,7 +10,7 @@ group :production do
   gem 'mysql'
 end
 
-gem 'authlogic'
+gem 'authlogic', '3.0.2'
 gem 'cancan'
 gem 'haml'
 gem 'jquery-rails'
