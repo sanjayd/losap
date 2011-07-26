@@ -11,17 +11,18 @@ class SleepIn < ActiveRecord::Base
   belongs_to :member
 
   scope :by_year,
-    lambda { |year| { :conditions => ['date >= ? and date <= ?',
-      year.to_date.beginning_of_year, 
-      year.to_date.end_of_year],
-      :order => "date asc" } }
+    lambda { |year|
+      where('date >= ?', year.to_date.beginning_of_year)\
+      .where('date <= ?', year.to_date.end_of_year)\
+      .order('date asc')
+    }
   
   scope :by_month, 
-    lambda { |month| { :conditions => ['date >= ? and date <= ?', 
-      month.to_date.beginning_of_month,
-      month.to_date.end_of_month],
-      :order => "date asc" } }
-  
+    lambda { |month|
+      where('date >= ?', month.to_date.beginning_of_month)\
+      .where('date <= ?', month.to_date.end_of_month)\
+      .order('date asc')
+    }
 
   def hours
     self.deleted? ? 0 : HOURS
