@@ -84,7 +84,6 @@ function memberNameAutocomplete() {
 function delete_sleep_in() {
   $.post($(this).attr('href'),
 	 {_method: 'put',
-	     authenticity_token: window._auth_token,
 	     "sleep_in[deleted]": 'true'},
 	 function(data, status) {
 	   if (status == "success") {
@@ -97,7 +96,6 @@ function delete_sleep_in() {
 function delete_standby() {
   $.post($(this).attr('href'),
 	 {_method: 'put',
-	     authenticity_token: window._auth_token,
 	     'standby[deleted]': 'true'},
 	 function(data, status) {
 	   if (status == 'success') {
@@ -117,7 +115,6 @@ function flash_dialogs() {
 function undelete_sleep_in() {
   $.post($(this).attr('href'),
 	 {_method: 'put',
-	     authenticity_token: window._auth_token,
 	     "sleep_in[deleted]": 'false'},
 	 function(data, status) {
 	   if (status == "success") {
@@ -130,7 +127,6 @@ function undelete_sleep_in() {
 function undelete_standby() {
   $.post($(this).attr('href'),
 	 {_method: 'put',
-	     authenticity_token: window._auth_token,
 	     "standby[deleted]": 'false'},
 	 function(data, status) {
 	   if (status == "success") {
