@@ -117,11 +117,11 @@ class Standby < ActiveRecord::Base
   def no_overlap
     self.member.standbys.find_by_date(self.date).each do |s|
       unless s.end_time.nil? or self == s
-        if (self.start_time >= s.start_time) and (self.start_time <= s.end_time)
+        if self.start_time.between?(s.start_time, s.end_time)
           errors.add(:start_time, "cannot overlap with an existing Standby")
-        elsif (self.end_time >= s.start_time) and (self.end_time <= s.end_time)
+        elsif self.end_time.between?(s.start_time, s.end_time)
           errors.add(:end_time, "cannot overlap with an existing Standby")
-        elsif (s.end_time >= self.start_time) and (s.end_time <= self.end_time)
+        elsif s.end_time.between?(self.start_time, self.end_time)
           errors.add(:end_time, "cannot overlap with an existing Standby")
         end
       end
