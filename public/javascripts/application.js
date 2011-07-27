@@ -8,7 +8,8 @@ jQuery.ajaxSetup({
 
 $(function() {
     $("#newmember").button();
-    $("input.date").datepicker({maxDate: getFirstOfNextMonth()});
+    $("input.date").datepicker({maxDate: getFirstOfNextMonth(),
+                                dateFormat: 'yy-mm-dd'});
     memberNameAutocomplete();
     $("#standby_start_date").change(standbyStartDateSelect);
     $("#member_name").focusin(function() {
