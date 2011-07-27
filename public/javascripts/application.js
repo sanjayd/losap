@@ -13,11 +13,11 @@ $(function() {
     memberNameAutocomplete();
     $("#standby_start_date").change(standbyStartDateSelect);
     $("#member_name").focusin(function() {
-	$("#newmemberdiv").hide("blind");
-      });
+	    $("#newmemberdiv").hide("blind");
+    });
     $("#member_name").focusout(function() {
-	$("#newmemberdiv").show("blind");
-      });
+	    $("#newmemberdiv").show("blind");
+    });
     $("a.delete_sleep_in").click(delete_sleep_in);
     $("a.delete_standby").click(delete_standby);
     $("a.undelete_sleep_in").click(undelete_sleep_in);
