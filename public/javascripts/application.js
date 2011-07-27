@@ -7,7 +7,6 @@ jQuery.ajaxSetup({
   });
 
 $(function() {
-    $("a.delete").click(delete_form);
     $("#newmember").button();
     $("input.date").datepicker({maxDate: getFirstOfNextMonth()});
     memberNameAutocomplete();
@@ -137,26 +136,5 @@ function undelete_standby() {
 	     document.location.reload();
 	   }
 	 });
-  return false;
-}
-
-function delete_form() {
-  if (confirm('Are you sure?')) { 
-    var f = document.createElement('form'); 
-    f.style.display = 'none';
-    this.parentNode.appendChild(f); 
-    f.method = 'POST'; f.action = this.href;
-    var m = document.createElement('input'); 
-    m.setAttribute('type', 'hidden');
-    m.setAttribute('name', '_method'); 
-    m.setAttribute('value', 'delete');
-    f.appendChild(m);
-    var s = document.createElement('input');
-    s.setAttribute('type', 'hidden'); 
-    s.setAttribute('name', 'authenticity_token'); 
-    s.setAttribute('value', window._auth_token);
-    f.appendChild(s);
-    f.submit();
-  };
   return false;
 }
