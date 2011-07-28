@@ -1,1 +1,1 @@
-$("#sleep_in_#{@sleep_in.id}").html("#{escape_javascript(render @sleep_in)}");
+$("#sleep_in_#{@sleep_in.id}").replaceWith("#{escape_javascript(render @sleep_in)}");
