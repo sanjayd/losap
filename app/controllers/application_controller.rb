@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_admin
 
+  after_filter :flash_to_headers
+
   rescue_from CanCan::AccessDenied do |exception|
     flash[:warning] = exception.message
     if current_admin
@@ -25,6 +27,15 @@ class ApplicationController < ActionController::Base
 
   def current_ability
     @current_ability ||= Ability.new(current_admin)
+  end
+
+  def flash_to_headers
+    return unless request.xhr?
+    [:notice, :warning].each do |f|
+      unless flash[f].blank?
+        response.headers["X-Flash#{f.to_s.camelize}"] = flash[f]
+      end
+    end
   end
 end
 
