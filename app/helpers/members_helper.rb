@@ -55,14 +55,13 @@ module MembersHelper
         ret += "</td>\n"
         
         if list.first && list.first.date == o.date
-          p = list.shift
-          ret += "  <td id=\"sleep_in_#{p.id}\">#{render :partial => p}</td>\n"
+          ret += "  <td>#{render :partial => list.shift}</td>\n"
         else
           ret += "  <td>&nbsp;</td>"
         end
       else
         ret += "  <td>&nbsp;</td>\n"
-        ret += "  <td id=\"sleep_in_#{o.id}\">#{render :partial => o}</td>\n"
+        ret += "  <td>#{render :partial => o}</td>\n"
       end
 
       ret += "</tr>\n"
