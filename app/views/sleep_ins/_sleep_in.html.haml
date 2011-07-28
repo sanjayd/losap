@@ -1,8 +1,12 @@
-- if sleep_in.deleted?
-  %span.deleted= sleep_in.unit
-  - unless sleep_in.locked?
-    (#{link_to 'Undelete', [@member, sleep_in], :class => :undelete_sleep_in})
-- else
-  = sleep_in.unit
-  - unless sleep_in.locked?
-    (#{link_to 'Delete', [@member, sleep_in], :class => :delete_sleep_in})
+= form_for([sleep_in.member, sleep_in], :remote => true, :method => :put) do |f|
+  - if sleep_in.deleted?
+    = f.hidden_field :deleted, :value => false
+    %span.deleted= sleep_in.unit
+    - unless sleep_in.locked?
+      (#{link_to 'Undelete', '#', :class => :submit})
+  - else
+    = f.hidden_field :deleted, :value => true
+    = sleep_in.unit
+    - unless sleep_in.locked?
+      (#{link_to 'Delete', '#', :class => :submit})
+    
