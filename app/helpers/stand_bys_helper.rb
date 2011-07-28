@@ -4,6 +4,6 @@ module StandBysHelper
   end
 
   def format_date_for_standby(date)
-    date.strftime("%Y-%d-%m")
+    date.strftime("%Y-%m-%d")
   end
 end
