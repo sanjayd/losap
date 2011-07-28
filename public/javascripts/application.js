@@ -108,8 +108,9 @@ function delete_standby() {
 function flash_dialogs() {
   $('div.flash').dialog({modal: true,
 	buttons: {"Ok": function() {
-	  $(this).dialog('destroy')
-	    }}});
+	  $(this).dialog('destroy');
+	  $(this).remove();
+  }}});
 }
 
 function undelete_sleep_in() {
