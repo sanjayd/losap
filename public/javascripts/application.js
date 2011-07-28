@@ -26,8 +26,6 @@ $(function() {
       return false;
     });
     
-    $("a.delete_standby").click(delete_standby);
-    $("a.undelete_standby").click(undelete_standby);
     $("a.button").button();
     $("input[type='submit']").button();
     flash_dialogs();
@@ -97,34 +95,10 @@ function memberNameAutocomplete() {
   $("#member_name").parents("form").submit(submit);
 }
 
-function delete_standby() {
-  $.post($(this).attr('href'),
-	 {_method: 'put',
-	     'standby[deleted]': 'true'},
-	 function(data, status) {
-	   if (status == 'success') {
-	     document.location.reload();
-	   }
-	 });
-  return false;
-}
-
 function flash_dialogs() {
   $('div.flash').dialog({modal: true,
 	buttons: {"Ok": function() {
 	  $(this).dialog('destroy');
 	  $(this).remove();
   }}});
-}
-
-function undelete_standby() {
-  $.post($(this).attr('href'),
-	 {_method: 'put',
-	     "standby[deleted]": 'false'},
-	 function(data, status) {
-	   if (status == "success") {
-	     document.location.reload();
-	   }
-	 });
-  return false;
 }
