@@ -49,10 +49,10 @@ class StandbysController < ApplicationController
         else
           flash[:notice] = 'Standby Undeleted'
         end
-        format.js {head :ok}
+        format.js
       else
         flash[:warning] = 'Undeleting this Standby would conflict with a Sleep-In'
-        format.js {head :ok}
+        format.js {head :unprocessable_entity}
       end
     end
   end
