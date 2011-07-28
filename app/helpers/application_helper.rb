@@ -4,5 +4,9 @@ module ApplicationHelper
       [month.strftime("%b %Y"), month]
     end)
   end
+
+  def submit_link(name)
+    link_to name, '#', :class => "submit"
+  end
 end
 
