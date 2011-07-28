@@ -5,17 +5,17 @@
       %span.deleted
         = render :partial => "standbys/times", :locals => {:standby => standby}
       - unless standby.locked?
-        (#{link_to 'Undelete', '#', :class => :submit})
+        (#{submit_link 'Undelete'})
     - elsif standby.short?
       = f.hidden_field :deleted, :value => true
       - @standbywarning = true
       %span.shortstandby
         = render :partial => "standbys/times", :locals => {:standby => standby}
       - unless standby.locked?
-        (#{link_to 'Delete', '#', :class => :submit})
+        (#{submit_link 'Delete'})
       *
     - else
       = f.hidden_field :deleted, :value => true
       = render :partial => "standbys/times", :locals => {:standby => standby}
       - unless standby.locked?
-        (#{link_to 'Delete', '#', :class => :submit})
+        (#{submit_link 'Delete'})

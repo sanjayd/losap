@@ -4,10 +4,10 @@
       = f.hidden_field :deleted, :value => false
       %span.deleted= sleep_in.unit
       - unless sleep_in.locked?
-        (#{link_to 'Undelete', '#', :class => :submit})
+        (#{submit_link 'Undelete'})
     - else
       = f.hidden_field :deleted, :value => true
       = sleep_in.unit
       - unless sleep_in.locked?
-        (#{link_to 'Delete', '#', :class => :submit})
+        (#{submit_link 'Delete'})
     
