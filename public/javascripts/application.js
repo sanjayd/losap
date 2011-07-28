@@ -12,15 +12,21 @@ $(function() {
                                 dateFormat: 'yy-mm-dd'});
     memberNameAutocomplete();
     $("#standby_start_date").change(standbyStartDateSelect);
+    
     $("#member_name").focusin(function() {
 	    $("#newmemberdiv").hide("blind");
     });
+    
     $("#member_name").focusout(function() {
 	    $("#newmemberdiv").show("blind");
     });
-    $("a.delete_sleep_in").click(delete_sleep_in);
+    
+    $('a.submit').live('click', function() {
+      $(this).parent('form').submit();
+      return false;
+    });
+    
     $("a.delete_standby").click(delete_standby);
-    $("a.undelete_sleep_in").click(undelete_sleep_in);
     $("a.undelete_standby").click(undelete_standby);
     $("a.button").button();
     $("input[type='submit']").button();
@@ -91,18 +97,6 @@ function memberNameAutocomplete() {
   $("#member_name").parents("form").submit(submit);
 }
 
-function delete_sleep_in() {
-  $.post($(this).attr('href'),
-	 {_method: 'put',
-	     "sleep_in[deleted]": 'true'},
-	 function(data, status) {
-	   if (status == "success") {
-	     document.location.reload();
-	   }
-	 });
-  return false;
-}
-
 function delete_standby() {
   $.post($(this).attr('href'),
 	 {_method: 'put',
@@ -121,18 +115,6 @@ function flash_dialogs() {
 	  $(this).dialog('destroy');
 	  $(this).remove();
   }}});
-}
-
-function undelete_sleep_in() {
-  $.post($(this).attr('href'),
-	 {_method: 'put',
-	     "sleep_in[deleted]": 'false'},
-	 function(data, status) {
-	   if (status == "success") {
-	     document.location.reload();
-	   }
-	 });
-  return false;
 }
 
 function undelete_standby() {

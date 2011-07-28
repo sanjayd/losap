@@ -48,7 +48,7 @@ class SleepInsController < ApplicationController
         format.js {head :ok}
       else
         flash[:warning] = 'Undeleting this Sleep-In would conflict with a Standby'          
-        format.js {head :ok}
+        format.js {head :unprocessable_entity}
       end
     end
   end

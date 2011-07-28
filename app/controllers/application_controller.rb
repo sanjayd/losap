@@ -36,6 +36,8 @@ class ApplicationController < ActionController::Base
         response.headers["X-Flash#{f.to_s.camelize}"] = flash[f]
       end
     end
+    
+    flash.discard
   end
 end
 
