@@ -25,7 +25,17 @@ $(function() {
     $("a.button").button();
     $("input[type='submit']").button();
     flash_dialogs();
-  });
+});
+
+$(document).ajaxComplete(function(event, request) {
+  notice = request.getResponseHeader('X-FlashNotice');
+  if (notice) alert(notice);
+})
+
+$(document).ajaxError(function(event, request) {
+  warning = request.getResponseHeader('X-FlashWarning');
+  if (warning) alert(warning);
+})
 
 function getFirstOfNextMonth() {
   var today = new Date();
