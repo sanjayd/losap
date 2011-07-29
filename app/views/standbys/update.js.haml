@@ -1,1 +1,3 @@
 $("#standby_#{@standby.id}").replaceWith("#{escape_javascript(render @standby)}");
+$("#monthly_totals").replaceWith("#{escape_javascript(render :partial => 'members/monthly_totals', :locals => {:member => @standby.member, :month => @standby.start_time.beginning_of_month})}");
+$("#annual_totals").replaceWith("#{escape_javascript(render :partial => 'members/annual_totals', :locals => {:member => @standby.member, :month => @standby.start_time.beginning_of_month})}");
