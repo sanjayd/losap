@@ -20,6 +20,8 @@
   = render :partial => 'standbys/standby_warning'
 
   %p
+    -# THIS IS A HACK. FIGURE OUT WHY I NEED TO DO THIS AND FIX IT.
+    - @member.reload
     Month-to-date:
     =h @member.sleep_in_points(:month => @month)
     Sleep-In Points, 
