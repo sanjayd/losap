@@ -1,30 +1,17 @@
 $(function() {
-    $('#accordion').accordion();
-    $('#admintabs').tabs({cookie: {expires: 1}});
-    $('#reportform').submit(monthlyReport);
-    $('#annualreportform').submit(annualReport);
-    $("#unlock_month_form").submit(unlock_month_form);
-  });
+  $('#accordion').accordion();
+  $('#admintabs').tabs({cookie: {expires: 1}});
 
-function monthlyReport() {
-  $.ajax({
-    url: '/reports/' + $('#month').val(),
-    beforeSend: function(request) {
+  $('#reportform')
+    .bind('ajax:beforeSend', function(request) {
       $('#reportpending').css('visibility', 'visible');
-    },
-    success: function(data) {
+    })
+    .bind('ajax:success', function(data) {
       $('#reportpending').css('visibility', 'hidden');
-    },
-    dataType: 'script'
-  });
-  return false;
-}
-
-function annualReport() {
-  this.action = '/reports/' + $('#year').val();
-  this.target='_blank';
-  return true;
-}
+    });
+    
+  $("#unlock_month_form").submit(unlock_month_form);
+});
 
 function unlock_month_form() {
   var form = $('#unlock_month_form');

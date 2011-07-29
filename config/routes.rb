@@ -9,7 +9,7 @@ Losap::Application.routes.draw do
   resource :admin_console
   resources :admins
   resources :admin_sessions
-  match 'reports/:date' => 'reports#show'
+  match 'report' => 'reports#show', :as => :report
   match 'login' => 'admin_sessions#new', :as => :login
   match 'logout' => 'admin_sessions#destroy', :as => :logout
   root :to => 'members#index'
