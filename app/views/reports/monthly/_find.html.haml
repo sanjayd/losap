@@ -1,5 +1,5 @@
 %div
-  = form_tag(reports_url, :remote => true, :id => :monthly_report_form) do |f|
+  = form_tag('#', :remote => true, :id => :monthly_report_form, 'data-url' => reports_path) do |f|
     %p
       = select_tag :month, options_for_months(all_months)
       = submit_tag 'Run Report'

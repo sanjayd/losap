@@ -11,11 +11,11 @@ $(function() {
     });
 
   $('#monthly_report_form').submit(function () {
-    this.action = this.action + '/' + $('#month').val();
+    this.action = $(this).attr('data-url') + '/' + $('#month').val();
   })
   
   $('#annual_report_form').submit(function() {
-    this.action = this.action + '/' + $('#year').val();
+    this.action = $(this).attr('data-url') + '/' + $('#year').val();
   })
     
   $("#unlock_month_form").submit(unlock_month_form);
