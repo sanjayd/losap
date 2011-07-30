@@ -1,27 +1,24 @@
 %h2= "#{h @member.lastname}, #{h @member.firstname} (##{h @member.badgeno})"
 
-- cache :fragment => @month do
-  %h3= h show_month(@month)
+%h3= h show_month(@month)
 
-  %table#membertable
-    %tr
-      %th Date
-      %th Standby
-      %th Sleep-In
-      
-    = raw render_sleep_ins_and_standbys(@member, @month)
-  
-    - unless locked?(@month)
-      %tr#newrow
-        %td &nbsp;
-        %td= link_to "New Standby", new_member_standby_path(@member), :class => 'button'
-        %td= link_to "New Sleep-In", new_member_sleep_in_path(@member), :class => 'button'
+%table#membertable
+  %tr
+    %th Date
+    %th Standby
+    %th Sleep-In
+    
+  = raw render_sleep_ins_and_standbys(@member, @month)
 
-  = render :partial => 'standbys/standby_warning'
-  = render :partial => 'monthly_totals', :locals => {:member => @member, :month => @month}
+  - unless locked?(@month)
+    %tr#newrow
+      %td &nbsp;
+      %td= link_to "New Standby", new_member_standby_path(@member), :class => 'button'
+      %td= link_to "New Sleep-In", new_member_sleep_in_path(@member), :class => 'button'
 
-- cache :fragment => @month.year do
-  = render :partial => "annual_totals", :locals => {:member => @member, :month => @month}
+= render :partial => 'standbys/standby_warning'
+= render :partial => 'monthly_totals', :locals => {:member => @member, :month => @month}
+= render :partial => "annual_totals", :locals => {:member => @member, :month => @month}
 
 %p
   = raw previous_month(@member, @month)
