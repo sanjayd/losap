@@ -1,4 +1,4 @@
-- if flash[:warning]
-  .ui-widget
-    #flashwarning.ui-state-highlight.ui-corner-all.flash
+.ui-widget
+  #flashwarning.ui-state-highlight.ui-corner-all.flash
+    - if flash[:warning]
       %p= flash[:warning]

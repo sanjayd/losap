@@ -28,17 +28,22 @@ $(function() {
     
     $("a.button").button();
     $("input[type='submit']").button();
-    flash_dialogs();
+    flash_dialog($('div.flash:has(p)'));
 });
+
+function ajax_flash (elem, msg) {
+  elem.html('<p>' + msg + '</p>');
+  flash_dialog(elem);
+}
 
 $(document).ajaxComplete(function(event, request) {
   notice = request.getResponseHeader('X-FlashNotice');
-  if (notice) alert(notice);
+  if (notice) ajax_flash($('#flashnotice'), notice);
 })
 
 $(document).ajaxError(function(event, request) {
   warning = request.getResponseHeader('X-FlashWarning');
-  if (warning) alert(warning);
+  if (warning) ajax_flash($('#flashwarning'), warning);
 })
 
 function getFirstOfNextMonth() {
@@ -95,10 +100,11 @@ function memberNameAutocomplete() {
   $("#member_name").parents("form").submit(submit);
 }
 
-function flash_dialogs() {
-  $('div.flash').dialog({modal: true,
+function flash_dialog(elem) {
+  elem.dialog({modal: true,
 	buttons: {"Ok": function() {
 	  $(this).dialog('destroy');
-	  $(this).remove();
+	  $(this).hide();
   }}});
+  elem.show();
 }
