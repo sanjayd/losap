@@ -1,4 +1,4 @@
-- cache do
+- cache("report_#{@report.month}") do
   :plain
     $('#main').after('#{escape_javascript(render(:partial => 'reports/monthly/report'))}');
     $('#report').dialog({width: 450, 

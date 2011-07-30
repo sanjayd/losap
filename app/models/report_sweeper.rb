@@ -8,8 +8,8 @@ class ReportSweeper < ActionController::Caching::Sweeper
     else nil
     end
     
-    expire_fragment :controller => "reports", :action => "show", :date => month
-    expire_fragment :controller => "reports", :action => "show", :date => month.year
+    expire_fragment("report_#{month}")
+    expire_fragment("report_#{month.year}")
   end
   
   alias_method :after_save, :expire_cached_report
