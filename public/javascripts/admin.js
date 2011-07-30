@@ -9,6 +9,14 @@ $(function() {
     .bind('ajax:success', function(data) {
       $('#reportpending').css('visibility', 'hidden');
     });
+
+  $('#monthly_report_form').submit(function () {
+    this.action = this.action + '/' + $('#month').val();
+  })
+  
+  $('#annual_report_form').submit(function() {
+    this.action = this.action + '/' + $('#year').val();
+  })
     
   $("#unlock_month_form").submit(unlock_month_form);
 });

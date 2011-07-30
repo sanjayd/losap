@@ -1,6 +1,6 @@
 %div
-  = form_tag(report_url, :remote => true, :id => :reportform) do |f|
+  = form_tag(reports_url, :remote => true, :id => :monthly_report_form) do |f|
     %p
-      = select_tag :date, options_for_months(all_months)
+      = select_tag :month, options_for_months(all_months)
       = submit_tag 'Run Report'
       = image_tag 'spinner.gif', :id => 'reportpending'

@@ -1,5 +1,5 @@
 %div
-  = form_tag report_url, :target => '_blank' do
+  = form_tag(reports_url, :target => '_blank', :id => 'annual_report_form') do
     %p
-      = select_tag :date, options_for_select(years)
+      = select_tag :year, options_for_select(years)
       = submit_tag 'Run Report'
