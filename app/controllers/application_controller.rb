@@ -39,5 +39,15 @@ class ApplicationController < ActionController::Base
     
     flash.discard
   end
+
+  def redirect_to(path)
+    if request.xhr?
+      render :update do |page|
+        page.redirect_to(path)
+      end
+    else
+      super
+    end
+  end
 end
 
