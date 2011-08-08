@@ -11,7 +11,7 @@ class MembersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @members }
-      format.js {render :json => @members.to_json}
+      format.json {render :json => @members.to_json}
     end
   end
 

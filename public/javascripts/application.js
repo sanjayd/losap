@@ -1,11 +1,6 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-jQuery.ajaxSetup({
-    'beforeSend': function(xhr) {
-      xhr.setRequestHeader("Accept", "text/javascript")}
-  });
-
 $(function() {
     $("#newmember").button();
     $("input.date").datepicker({maxDate: getFirstOfNextMonth(),
@@ -60,17 +55,16 @@ function memberNameAutocomplete() {
   var members;
   var callback = function(request, response) {
     $.get($("#member_name").parents("form").attr("action"),
-    {term: encodeURIComponent(request.term)},
+    {term: encodeURIComponent(request.term), format: 'json'},
 	  function(data) {
-	    members = $.map($.parseJSON(data), function(e, i) {
-		m = e.member;
-		return {id: m.id,
-		    string: m.firstname + " " + m.lastname + " (#" + m.badgeno + ")"};
+	    members = $.map(data, function(e, i) {
+		    m = e.member;
+		    return {id: m.id,
+		      string: m.firstname + " " + m.lastname + " (#" + m.badgeno + ")"};
 	      });
-
 	    response($.map(members, function(e, i) {
-		  return e.string;
-		}));
+		    return e.string;
+		  }));
 	  });
   }
 
@@ -81,7 +75,7 @@ function memberNameAutocomplete() {
     for(i in members) {
       var member = members[i];
       if (member.string == item) {
-	document.location = $("#member_name").parents("form").attr("action") + "/" + member.id;
+	      document.location = $("#member_name").parents("form").attr("action") + "/" + member.id;
       }
     }
   }
