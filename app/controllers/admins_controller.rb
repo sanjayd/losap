@@ -1,21 +1,16 @@
 class AdminsController < ApplicationController
   load_and_authorize_resource
 
+  respond_to :html, :xml
+
   expose(:admin)
   
   def new
   end
   
   def create
-    respond_to do |format|
-      if admin.save
-        format.html { redirect_to(admin_console_path, notice: 'Registered New Admin') }
-        format.xml { render xml: admin, status: :created, location: admin }
-      else
-        format.html { render action: "new" }
-        format.xml { render xml: admin.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Registered New Admin' if admin.save
+    respond_with admin, location: admin_console_path
   end
 
   def edit
@@ -36,9 +31,7 @@ class AdminsController < ApplicationController
   
   def destroy
     admin.destroy
-    
-    respond_to do |format|
-      format.html { redirect_to(admin_console_path, notice: "Admin deleted") }
-    end
+    flash[:notice] = 'Admin deleted'
+    respond_with(admin, location: admin_console_path)
   end
 end

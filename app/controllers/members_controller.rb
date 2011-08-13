@@ -1,6 +1,8 @@
 class MembersController < ApplicationController
   load_and_authorize_resource
   
+  respond_to :html, :xml
+  
   expose(:month) do
     year = params[:year] || Date.today.year
     month = params[:month] || Date.today.month
@@ -14,67 +16,38 @@ class MembersController < ApplicationController
   expose(:member)
   
   def index
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => members }
-      format.json {render :json => members.to_json}
+    respond_with(members) do |format|
+      format.json {render json: members.to_json}
     end
   end
 
   def show
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => member }
-    end
+    respond_with(member)
   end
 
   def new
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => member }
-    end
+    respond_with(member)
   end
 
   def edit
+    respond_with(member)
   end
 
   def create
-    respond_to do |format|
-      if member.save
-        flash[:notice] = 'Member was successfully created.'
-        format.html do
-          if current_admin
-            redirect_to(admin_console_path)
-          else
-            redirect_to(member)
-          end
-        end
-        format.xml  { render :xml => member, :status => :created, :location => member }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => member.errors, :status => :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Member was successfully created.' if member.save
+    respond_with member, location: current_admin ? admin_console_path : member
   end
 
   def update
-    respond_to do |format|
-      if member.update_attributes(params[:member])
-        format.html { redirect_to admin_console_path, notice: 'Member was successfully updated.' }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => member.errors, :status => :unprocessable_entity }
-      end
+    if member.update_attributes(params[:member])
+      flash[:notice] = 'Member was successfully updated.' 
     end
+    respond_with member, location: admin_console_path
   end
 
   def destroy
     member.destroy
-
-    respond_to do |format|
-      format.html { redirect_to admin_console_path, notice: 'Member was successfully deleted.' }
-      format.xml  { head :ok }
-    end
+    flash[:notice] = 'Member was successfully deleted.'
+    respond_with member, location: admin_console_path
   end
 end
