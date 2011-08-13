@@ -1,8 +1,9 @@
-- cache("report_#{@report.month}") do
+- cache("report_#{report.month}") do
   :plain
-    $('#main').after('#{escape_javascript(render(:partial => 'reports/monthly/report'))}');
+    $('#main').after('#{escape_javascript(render(partial: 'reports/monthly/report',\
+                                                           locals: {report: report}))}');
     $('#report').dialog({width: 450, 
-                         title: '#{format_month(@report.month) + " Monthly Report"}',
+                         title: '#{format_month(report.month) + " Monthly Report"}',
     		                 close: function(event, ui) {
     		                   $('#report').dialog('destroy');
     			                 $('#report').remove();

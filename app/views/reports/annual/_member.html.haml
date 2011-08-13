@@ -1,7 +1,7 @@
 #header
   %h1 #{member.lastname}, #{member.firstname} (##{member.badgeno})
-  %h2 #{@report.year.strftime("%Y")} LOSAP Annual Report
-  %p #{total_points(@report, member)} Total LOSAP Points.
+  %h2 #{report.year.strftime("%Y")} LOSAP Annual Report
+  %p #{total_points(report, member)} Total LOSAP Points.
   
 %table#data
   %tr
