@@ -1,45 +1,40 @@
 class SleepInsController < ApplicationController
-  before_filter :find_member, :except => :update
   cache_sweeper :report_sweeper, :only => [:create, :update, :destroy]
 
-  def index
-    @sleep_ins = @member.sleep_ins
+  expose(:member)
+  expose(:sleep_ins) {member.sleep_ins}
+  expose(:sleep_in)
 
+  def index
     respond_to do |format|
-      format.xml {render :xml => @sleep_ins}
+      format.xml {render :xml => sleep_ins}
     end
   end
 
   def new
-    @sleep_in = @member.sleep_ins.build
-
     respond_to do |format|
       format.html
-      format.xml {render :xml => @sleep_in}
+      format.xml {render :xml => sleep_in}
     end
   end
 
   def create
-    @sleep_in = @member.sleep_ins.build(params[:sleep_in])
-
     respond_to do |format|
-      if @sleep_in.save
+      if sleep_in.save
         flash[:notice] = 'Saved Sleep-In'
-        format.html {redirect_to(@member)}
-        format.xml {render :xml => @member, :status => :created, :location => @member}
+        format.html {redirect_to(member)}
+        format.xml {render :xml => member, :status => :created, :location => member}
       else
         format.html {render :action => 'new'}
-        format.xml {render :xml => @sleep_in.errors, :status => :unprocessable_entity}
+        format.xml {render :xml => sleep_in.errors, :status => :unprocessable_entity}
       end
     end
   end
 
   def update
-    @sleep_in = SleepIn.find(params[:id])
-    
     respond_to do |format|
-      if @sleep_in.update_attributes(params[:sleep_in])
-        if @sleep_in.deleted?
+      if sleep_in.update_attributes(params[:sleep_in])
+        if sleep_in.deleted?
           flash[:notice] = 'Sleep-In Deleted'
         else
           flash[:notice] = 'Sleep-In Undeleted'
@@ -53,17 +48,11 @@ class SleepInsController < ApplicationController
   end
 
   def destroy
-    @sleep_in = SleepIn.find(params[:id])
-    @sleep_in.destroy
+    sleep_in.destroy
 
     respond_to do |format|
-      format.html {redirect_to(@member)}
+      format.html {redirect_to(member)}
       format.xml {head :ok}
     end
-  end
-
-  private
-  def find_member
-    @member = Member.find(params[:member_id])
   end
 end
