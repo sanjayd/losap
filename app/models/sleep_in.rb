@@ -2,6 +2,8 @@ class SleepIn < ActiveRecord::Base
   HOURS = 12
   POINTS = 1
 
+  attr_accessible :date, :unit, :member_id, :deleted
+
   validates_presence_of :date, :unit
   validates_uniqueness_of :date, :scope => :member_id, 
                           :message => " can only have one Sleep-In"

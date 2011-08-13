@@ -1,5 +1,7 @@
 class Standby < ActiveRecord::Base
   POINTS = 1
+  
+  attr_accessible :start_time, :end_time, :deleted, :date, :member_id
 
   validates_presence_of :start_time
   validate :no_overlap_with_existing_sleep_in, :no_future_months, :if => "self.start_time"

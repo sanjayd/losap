@@ -1,4 +1,6 @@
 class Member < ActiveRecord::Base
+  attr_accessible :firstname, :lastname, :badgeno
+
   validates_presence_of :firstname, :lastname, :badgeno
   validates_format_of :badgeno, :with => /^((\d{1,6})|([A-Za-z]{4}\d{1,2}))$/, :message => "is invalid"
   validates_uniqueness_of :badgeno

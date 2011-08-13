@@ -1,4 +1,6 @@
 class LockedMonth < ActiveRecord::Base
+  attr_accessible :month
+
   validates_uniqueness_of :month, :message => 'is already locked'
 
   def self.months
