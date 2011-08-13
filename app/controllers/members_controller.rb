@@ -1,13 +1,18 @@
 class MembersController < ApplicationController
   load_and_authorize_resource
+  
+  expose(:month) do
+    year = params[:year] || Date.today.year
+    month = params[:month] || Date.today.month
+    Date.parse("#{year}-#{month}-01")
+  end
 
   expose(:members) do
     Member.all_like(URI.unescape(params[:term])) if params[:term]
   end
 
   expose(:member)
-  expose(:month) {get_month}
-
+  
   def index
     respond_to do |format|
       format.html
@@ -73,12 +78,5 @@ class MembersController < ApplicationController
       format.html { redirect_to(admin_console_path) }
       format.xml  { head :ok }
     end
-  end
-
-  private
-  def get_month
-    year = params[:year] || Date.today.year
-    month = params[:month] || Date.today.month
-    Date.parse("#{year}-#{month}-01")
   end
 end
