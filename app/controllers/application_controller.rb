@@ -2,7 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
 
-  helper_method :current_admin
+  expose(:current_admin_session) {AdminSession.find}  
+  expose(:current_admin) {current_admin_session && current_admin_session.record}
+  expose(:current_ability) {Ability.new(current_admin)}
 
   after_filter :flash_to_headers
 
@@ -16,19 +18,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  def current_admin_session
-    return @current_admin_session if defined?(@current_admin_session)
-    @current_admin_session = AdminSession.find
-  end
-
-  def current_admin
-    @current_admin = current_admin_session && current_admin_session.record
-  end
-
-  def current_ability
-    @current_ability ||= Ability.new(current_admin)
-  end
-
   def flash_to_headers
     return unless request.xhr?
     [:notice, :warning].each do |f|

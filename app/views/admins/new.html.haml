@@ -1,7 +1,7 @@
 = render :partial => "shared/admin"
 
 %h2 Create New Administrator
-= form_for @admin do |f|
+= form_for admin do |f|
   = f.error_messages
   %p
     = f.label :username, "Username"

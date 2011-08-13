@@ -15,10 +15,6 @@ class SleepInsControllerTest < ActionController::TestCase
     assert_raise(ActionController::RoutingError) {get :index}
     get :index, :member_id => @m1.id, :format => "xml"
     assert_response :success
-    assert_not_nil(assigns(:member))
-    assert_equal(@m1, assigns(:member))
-    assert_not_nil(assigns(:sleep_ins))
-    assert_equal(@m1.sleep_ins.size, assigns(:sleep_ins).size)
     
     @one.member = @m1
     assert @one.save
@@ -26,10 +22,6 @@ class SleepInsControllerTest < ActionController::TestCase
     assert @two.save
     get :index, :member_id => @m1.id, :format => "xml"
     assert_response :success
-    assert_not_nil(assigns(:sleep_ins))
-    assert_equal(2, assigns(:sleep_ins).size)
-    assert_not_nil(assigns(:sleep_ins).find(@one))
-    assert_not_nil(assigns(:sleep_ins).find(@two))
 
     s = SleepIn.new
     s.date = @one.date + 5.days
@@ -38,49 +30,38 @@ class SleepInsControllerTest < ActionController::TestCase
     s.save
     get :index, :member_id => @m1.id, :format => "xml"
     assert_response :success
-    assert_not_nil(assigns(:sleep_ins))
-    assert_equal(3, assigns(:sleep_ins).size)
-    assert assigns(:sleep_ins)[1].date > assigns(:sleep_ins)[0].date
-    assert assigns(:sleep_ins)[2].date > assigns(:sleep_ins)[1].date
   end
 
   test 'new' do
     assert_raise(ActionController::RoutingError) {get :new}
     get :new, :member_id => @m1.id
     assert_response :success
-    assert_not_nil(assigns(:member))
-    assert_not_nil(assigns(:sleep_in))
-    assert_equal(@m1, assigns(:member))
     assert_template('sleep_ins/new')
   end
 
-  test 'create' do
-    sleepin_count = SleepIn.count
+  test 'create valid' do
     post :create, :sleep_in => {:date => Date.parse('2010-6-15'),
                                 :unit => 'Engine'},
                   :member_id => @m1.id
-    assert_not_nil(assigns(:sleep_in))
     assert_redirected_to(@m1)
     assert_equal('Saved Sleep-In', flash[:notice])
-    sleepin_count = sleepin_count + 1
-    assert_equal(sleepin_count, SleepIn.count)
 
     assert_raise(ActionController::RoutingError) do
       post :create, :sleep_in => {:date => Date.today - 1.month + 1.day,
                                   :unit => 'Truck'}
     end
-
+  end
+  
+  test 'create invalid' do
     post :create, :sleep_in => {:unit => 'Ambulance'},
                   :member_id => @m1.id
     assert_response :success
-    assert_equal(sleepin_count, SleepIn.count)
     assert_template('sleep_ins/new')
     
     post :create, :sleep_in => {:unit => 'Ambulance',
                                 :date => Date.parse('2010-5-14')},
                   :member_id => @m1.id
     assert_response :success
-    assert_equal(sleepin_count, SleepIn.count)
     assert_template('sleep_ins/new')
   end
 

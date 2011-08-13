@@ -1,6 +1,6 @@
-%h2= "#{h @member.lastname}, #{h @member.firstname} (##{h @member.badgeno})"
+%h2= "#{h member.lastname}, #{h member.firstname} (##{h member.badgeno})"
 
-%h3= h show_month(@month)
+%h3= h show_month(month)
 
 %table#membertable
   %tr
@@ -8,20 +8,20 @@
     %th Standby
     %th Sleep-In
     
-  = raw render_sleep_ins_and_standbys(@member, @month)
+  = raw render_sleep_ins_and_standbys(member, month)
 
-  - unless locked?(@month)
+  - unless locked?(month)
     %tr#newrow
       %td &nbsp;
-      %td= link_to "New Standby", new_member_standby_path(@member), :class => 'button'
-      %td= link_to "New Sleep-In", new_member_sleep_in_path(@member), :class => 'button'
+      %td= link_to "New Standby", new_member_standby_path(member), :class => 'button'
+      %td= link_to "New Sleep-In", new_member_sleep_in_path(member), :class => 'button'
 
 = render :partial => 'standbys/standby_warning'
-= render :partial => 'monthly_totals', :locals => {:member => @member, :month => @month}
-= render :partial => "annual_totals", :locals => {:member => @member, :month => @month}
+= render :partial => 'monthly_totals', :locals => {:member => member, :month => month}
+= render :partial => "annual_totals", :locals => {:member => member, :month => month}
 
 %p
-  = raw previous_month(@member, @month)
-  = raw next_month(@member, @month)
+  = raw previous_month(member, month)
+  = raw next_month(member, month)
   
 %p= link_to 'Exit', root_path, :class => 'button'

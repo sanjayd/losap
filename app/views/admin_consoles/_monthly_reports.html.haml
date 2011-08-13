@@ -1,11 +1,11 @@
 #accordion
   %h3= link_to "Run Report", '#'
   =render :partial => "reports/monthly/find",
-          :locals => {:all_months => @admin_console.all_months}
+          :locals => {:all_months => admin_console.all_months}
   %h3= link_to "Lock Month", '#'
   =render :partial => 'locked_months/new',
-          :locals => {:unlocked_months => @admin_console.unlocked_months,
-                      :locked_month => @admin_console.locked_month}
+          :locals => {:unlocked_months => admin_console.unlocked_months,
+                      :locked_month => admin_console.locked_month}
   %h3= link_to "Unlock Month", '#'
   =render :partial => 'locked_months/index',
-          :locals => {:locked_months => @admin_console.locked_months}
+          :locals => {:locked_months => admin_console.locked_months}

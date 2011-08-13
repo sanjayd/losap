@@ -4,6 +4,7 @@ class MemberTest < ActiveSupport::TestCase
   def setup
     @one = members(:one)
     @two = members(:two)
+    @three = members(:three)
   end
 
   test "require firstname" do
@@ -357,6 +358,19 @@ class MemberTest < ActiveSupport::TestCase
     assert_equal(si2, list[3])
     assert_equal(sb2, list[4])
   end 
+
+  test 'all_like' do
+    members = Member.all_like('503')
+    assert_not_nil(members)
+    assert_equal(2, members.length)
+    assert_equal(@three, members.first)
+    assert_equal(@one, members.second)
+    
+    members = Member.all_like('501')
+    assert_not_nil(members)
+    assert_equal(1, members.length)
+    assert_equal(@two, members.first)
+  end
 
   test 'dependent_destroy' do
     m = Member.new(:firstname => "bob", 

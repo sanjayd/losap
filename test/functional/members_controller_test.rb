@@ -17,17 +17,10 @@ class MembersControllerTest < ActionController::TestCase
   test "index" do
     get :index, {:term => '503'}
     assert_response :success
-    assert_not_nil(assigns(:members))
-    assert_equal(assigns(:members).length, 2)
-    assert_equal(@three, assigns(:members)[0])
-    assert_equal(@one, assigns(:members)[1])
     assert_template('members/index')
 
     get :index, {:term => '501'}
     assert_response :success
-    assert_not_nil(assigns(:members))
-    assert_not_nil(assigns(:members).find {|m| m.id == @two.id})
-    assert_equal(assigns(:members).length, 1)
     assert_template('members/index')
   end
 
@@ -36,20 +29,13 @@ class MembersControllerTest < ActionController::TestCase
     assert_raise(ActiveRecord::RecordNotFound) {get :show, :id => 7}
     get :show, :id => @one.id
     assert_response :success
-    assert_not_nil(assigns(:member))
-    assert_equal(assigns(:member), @one)
-    assert_not_nil(assigns(:month))
-    assert_equal(Date.today.beginning_of_month, assigns(:month))
     assert_template('members/show')
 
     d = Date.today - 1.month
 
     get :show, :id => @one.id, :year => d.year, :month => d.month
     assert_response :success
-    assert_not_nil(assigns(:member))
-    assert_not_nil(assigns(:month))
     assert_template('members/show')
-    assert_equal(d.beginning_of_month, assigns(:month))
   end
 
   test "new" do
@@ -60,21 +46,18 @@ class MembersControllerTest < ActionController::TestCase
     assert_template('members/new')
   end
 
-  test "create" do
-    member_count = Member.count
+  test "create valid member" do
     post :create, :member => {:firstname => 'bobby',
                               :lastname => 'tables',
                               :badgeno => '123456'}
-    assert_not_nil(assigns(:member))
     assert_redirected_to(admin_console_path)
     assert_equal(flash[:notice], 'Member was successfully created.')
-    member_count = member_count + 1
-    assert_equal(member_count, Member.count)
+  end
 
+  test "create invalid member" do
     post :create, :member => {:firstname => 'lenny',
                               :lastname => 'bruce'}
     assert_response :success
-    assert_equal(member_count, Member.count)
     assert_template('members/new')
   end
 

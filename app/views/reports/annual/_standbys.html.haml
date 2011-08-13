@@ -1,5 +1,5 @@
 %h2 Standbys
 %ul
   =render :partial => "reports/annual/standby",
-          :collection => filter_standbys(@report, member)
-%p #{@report.standby_points(member)} points
+          :collection => filter_standbys(report, member)
+%p #{report.standby_points(member)} points

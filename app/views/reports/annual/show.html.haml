@@ -1,3 +1,3 @@
-- cache("report_#{@report.year.year}") do
-  =render :partial => "reports/annual/member", :collection => @report.members,
+- cache("report_#{report.year.year}") do
+  =render :partial => "reports/annual/member", :collection => report.members,
           :as => :member, :spacer_template => 'reports/annual/page_break'
