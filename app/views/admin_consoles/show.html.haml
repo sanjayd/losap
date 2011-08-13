@@ -24,14 +24,14 @@
     #tab-1= render :partial => "monthly_reports"
     #tab-2
       = render :partial => "reports/annual/find",
-               :locals => {:years => @admin_console.years}
+               :locals => {:years => admin_console.years}
   - if can? :manage, Member
     #tab-3
       = render :partial => "members/index",
-               :locals => {:members => @admin_console.members}
+               :locals => {:members => admin_console.members}
   - if can? :manage, :all
     #tab-4
       = render :partial => "admins/index",
-               :locals => {:admins => @admin_console.admins}
+               :locals => {:admins => admin_console.admins}
 
 %p &nbsp;
