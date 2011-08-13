@@ -21,8 +21,7 @@ class SleepInsController < ApplicationController
   def create
     respond_to do |format|
       if sleep_in.save
-        flash[:notice] = 'Saved Sleep-In'
-        format.html {redirect_to(member)}
+        format.html {redirect_to(member, notice: 'Saved Sleep-In')}
         format.xml {render :xml => member, :status => :created, :location => member}
       else
         format.html {render :action => 'new'}

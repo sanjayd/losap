@@ -9,11 +9,10 @@ class ApplicationController < ActionController::Base
   after_filter :flash_to_headers
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:warning] = exception.message
     if current_admin
-      redirect_to(admin_console_path)
+      redirect_to admin_console_path, flash: {warning: exception.message}
     else
-      redirect_to(login_path)
+      redirect_to login_path, flash: {warning: exception.message}
     end
   end
 
@@ -29,7 +28,7 @@ class ApplicationController < ActionController::Base
     flash.discard
   end
 
-  def redirect_to(path)
+  def redirect_to(options={}, response_status={})
     if request.xhr?
       render :update do |page|
         page.redirect_to(path)

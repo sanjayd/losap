@@ -60,8 +60,7 @@ class MembersController < ApplicationController
   def update
     respond_to do |format|
       if member.update_attributes(params[:member])
-        flash[:notice] = 'Member was successfully updated.'
-        format.html { redirect_to(admin_console_path) }
+        format.html { redirect_to admin_console_path, notice: 'Member was successfully updated.' }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -74,8 +73,7 @@ class MembersController < ApplicationController
     member.destroy
 
     respond_to do |format|
-      flash[:notice] = 'Member was successfully deleted.'
-      format.html { redirect_to(admin_console_path) }
+      format.html { redirect_to admin_console_path, notice: 'Member was successfully deleted.' }
       format.xml  { head :ok }
     end
   end

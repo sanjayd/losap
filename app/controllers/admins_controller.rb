@@ -9,12 +9,11 @@ class AdminsController < ApplicationController
   def create
     respond_to do |format|
       if admin.save
-        flash[:notice] = 'Registered New Admin'
-        format.html { redirect_to(admin_console_path) }
-        format.xml { render :xml => admin, :status => :created, :location => admin }
+        format.html { redirect_to(admin_console_path, notice: 'Registered New Admin') }
+        format.xml { render xml: admin, status: :created, location: admin }
       else
-        format.html { render :action => "new" }
-        format.xml { render :xml => admin.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.xml { render xml: admin.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -25,13 +24,12 @@ class AdminsController < ApplicationController
   def update
     respond_to do |format|
       if !current_admin.valid_password? params[:old_password]
-        flash[:warning] = 'Current password is incorrect'
-        format.html { render :action => "edit" }
+        flash.now[:warning] = 'Current password is incorrect'
+        format.html { render action: "edit" }
       elsif admin.update_attributes(params[:admin])
-        flash[:notice] = "Password Changed"
-        format.html { redirect_to(admin_console_path) }
+        format.html { redirect_to(admin_console_path, notice: "Password Changed") }
       else
-        format.html { render :action => "edit" }
+        format.html { render action: "edit" }
       end
     end
   end
@@ -40,8 +38,7 @@ class AdminsController < ApplicationController
     admin.destroy
     
     respond_to do |format|
-      flash[:notice] = "Admin deleted"
-      format.html { redirect_to(admin_console_path) }
+      format.html { redirect_to(admin_console_path, notice: "Admin deleted") }
     end
   end
 end
