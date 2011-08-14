@@ -7,6 +7,12 @@ group :development, :test do
   gem 'sqlite3'
 end
 
+group :test do
+  gem 'factory_girl'
+  gem 'mocha'
+  gem 'shoulda'
+end
+
 group :production do
   gem 'mysql'
 end
