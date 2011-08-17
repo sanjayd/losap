@@ -53,7 +53,7 @@ class SleepInsControllerTest < ActionController::TestCase
   end
   
   test 'create invalid' do
-    post :create, :sleep_in => {:unit => 'Ambulance'},
+    post :create, :sleep_in => {},
                   :member_id => @m1.id
     assert_response :success
     assert_template('sleep_ins/new')

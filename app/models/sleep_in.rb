@@ -12,6 +12,8 @@ class SleepIn < ActiveRecord::Base
   belongs_to :unit_type
   belongs_to :member
 
+  after_initialize :init
+
   scope :by_year,
     lambda { |year|
       where('date >= ?', year.to_date.beginning_of_year)\
@@ -25,6 +27,10 @@ class SleepIn < ActiveRecord::Base
       .where('date <= ?', month.to_date.end_of_month)\
       .order('date asc')
     }
+
+  def init
+    self.date ||= Date.today
+  end
 
   def hours
     self.deleted? ? 0 : HOURS
