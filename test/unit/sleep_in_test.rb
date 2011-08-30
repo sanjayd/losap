@@ -15,6 +15,26 @@ class SleepInTest < ActiveSupport::TestCase
     assert_not_nil(@one.errors['date'])
   end
 
+  test 'date default' do
+    pretend_now_is(Time.local(2011, 4, 25, 0, 0, 0)) do
+      s = SleepIn.new
+      assert_not_nil(s.date)
+      assert_equal(Date.parse('2011-04-24'), s.date)
+    end
+    
+    pretend_now_is(Time.local(2011, 4, 25, 5, 0, 0)) do
+      s = SleepIn.new
+      assert_not_nil(s.date)
+      assert_equal(Date.parse('2011-04-24'), s.date)
+    end
+    
+    pretend_now_is(Time.local(2011, 4, 25, 7, 0, 0)) do
+      s = SleepIn.new
+      assert_not_nil(s.date)
+      assert_equal(Date.parse('2011-04-25'), s.date)
+    end
+  end
+
   test "require_unit" do
     @one.unit = nil
     assert(!@one.save)

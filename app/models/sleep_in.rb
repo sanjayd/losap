@@ -29,7 +29,7 @@ class SleepIn < ActiveRecord::Base
     }
 
   def init
-    self.date ||= Date.today
+    self.date ||= (Time.now - Time.now.beginning_of_day < 7.hours ? Date.yesterday : Date.today)
   end
 
   def hours
