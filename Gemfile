@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.10'
+gem 'rails', '3.1.0'
 
 group :development, :test do
   gem 'ruby-debug19', require: 'ruby-debug'
@@ -8,10 +8,10 @@ group :development, :test do
 end
 
 group :production do
-  gem 'mysql'
+  gem 'mysql2'
 end
 
-gem 'authlogic', '3.0.2'
+gem 'authlogic'
 gem 'cancan'
 gem 'decent_exposure'
 gem 'haml'
