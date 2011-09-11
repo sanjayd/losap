@@ -1,3 +1,6 @@
+//= require jquery.cookie
+//= require_self
+
 $(function() {
   $('#accordion').accordion();
   $('#admintabs').tabs({cookie: {expires: 1}});
