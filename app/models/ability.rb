@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(admin)
-    can [:read, :create], Member
+    can :read, Member
 
     return if admin.nil?
     

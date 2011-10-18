@@ -4,19 +4,10 @@
 //= require_self
 
 $(function() {
-    $("#newmember").button();
     $("input.date").datepicker({maxDate: getFirstOfNextMonth(),
                                 dateFormat: 'yy-mm-dd'});
     memberNameAutocomplete();
     $("#standby_start_date").change(standbyStartDateSelect);
-    
-    $("#member_name").focusin(function() {
-	    $("#newmemberdiv").hide("blind");
-    });
-    
-    $("#member_name").focusout(function() {
-	    $("#newmemberdiv").show("blind");
-    });
     
     $('a.submit').live('click', function() {
       $(this).parent('form').submit();
