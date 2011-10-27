@@ -56,5 +56,5 @@ Losap::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
   
-  config.assets.precompile += %w( admin.js admin.css timer.js )
+  config.assets.precompile += %w( admin.js admin.css timer.js runaway.js )
 end
