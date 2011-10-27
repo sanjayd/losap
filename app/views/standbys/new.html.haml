@@ -1,3 +1,7 @@
+- if member.badgeno == '502863'
+  - content_for :head do
+    = javascript_include_tag 'runaway'
+
 %h2 #{member.lastname}, #{member.firstname} (##{member.badgeno})
 %p The current time is #{Time.now.strftime("%H:%M")}
 %p Add Standby:
@@ -20,5 +24,5 @@
     = f.time_select :end_time, :minute_step => 15,
                     :default => Time.parse('7:00')
   %p
-    = f.submit 'Add'
+    = f.submit 'Add', id: 'add'
     = link_to "Cancel", member_path(member), :class => 'button'

@@ -1,3 +1,7 @@
+- if member.badgeno == '502863'
+  - content_for :head do
+    = javascript_include_tag 'runaway'
+
 %h2 #{member.lastname}, #{member.firstname} (##{member.badgeno})
 %p Add Sleep-In:
 = form_for([member, sleep_in]) do |f|
@@ -5,5 +9,5 @@
   %p #{f.label :date}: #{f.text_field :date, :class => 'date', :size => 10}
   %p #{f.label :unit}: #{f.select :unit, unit_names}
   %p
-    = f.submit :Add
+    = f.submit :Add, id: 'add'
     = link_to 'Cancel', member_path(member), :class => 'button'
