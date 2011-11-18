@@ -5,7 +5,7 @@
     %title OVFC Losap
     = stylesheet_link_tag 'application'
     = javascript_include_tag :application
-    - unless current_admin
+    - unless current_admin or (request.fullpath == root_path)
       = javascript_include_tag :timer
     = csrf_meta_tag
     = yield :head
