@@ -13,7 +13,15 @@ class Report
   end
 
   def members
-    @members ||= Member.order('lastname asc').order('firstname asc').order('badgeno asc').all
+    return @members if @members
+    
+    if monthly?
+      @members = Member.order('badgeno asc').all
+    else
+      @members = Member.order('lastname asc').order('firstname asc').order('badgeno asc').all
+    end
+
+    @members
   end
 
   def sleep_ins
