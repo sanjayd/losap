@@ -13,7 +13,7 @@ class Report
   end
 
   def members
-    @members ||= Member.all
+    @members ||= Member.order('lastname asc').order('firstname asc').order('badgeno asc').all
   end
 
   def sleep_ins
