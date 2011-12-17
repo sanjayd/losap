@@ -56,6 +56,16 @@ class SleepIn < ActiveRecord::Base
     self.unit_type = UnitType.find_by_name(unit_name)
   end
 
+  def <=> (obj)
+    if obj.is_a?(SleepIn)
+      date <=> obj.date
+    elsif obj.is_a?(Standby)
+      -1 * (obj <=> self)
+    else
+      nil
+    end
+  end
+
   def self.find_undeleted_by_date(date)
     self.find_by_date(date,
                       :conditions => ["deleted = ?", false])

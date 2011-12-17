@@ -34,20 +34,7 @@ class Member < ActiveRecord::Base
       return nil
     end
 
-    ret = []
-    until sleep_ins.empty? and standbys.empty? do
-      if sleep_ins.empty?
-        ret << standbys.shift
-      elsif standbys.empty?
-        ret << sleep_ins.shift
-      elsif sleep_ins.first.date < standbys.first.date
-        ret << sleep_ins.shift
-      else
-        ret << standbys.shift
-      end
-    end
-
-    ret
+    (sleep_ins + standbys).sort
   end
   
   def hours(params={})

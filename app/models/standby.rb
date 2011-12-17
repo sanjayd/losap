@@ -91,6 +91,20 @@ class Standby < ActiveRecord::Base
     end
   end
 
+  def <=> (obj)
+    if obj.is_a?(Standby)
+      start_time <=> obj.start_time
+    elsif obj.is_a?(SleepIn)
+      if date == obj.date
+        -1
+      else
+        date <=> obj.date
+      end
+    else
+      nil
+    end
+  end
+
   def self.find_by_date(date)
     date = date.to_date
     
