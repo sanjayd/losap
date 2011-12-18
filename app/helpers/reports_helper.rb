@@ -16,4 +16,12 @@ module ReportsHelper
   def filter_sleep_ins(report, member)
     report.sleep_ins_for_member(member).find_all {|si| si.points > 0}
   end
+
+  def month_number(n)
+    Date.today.beginning_of_year + (n - 1).months
+  end
+  
+  def standby_time(time)
+    time.strftime('%H%M')
+  end
 end

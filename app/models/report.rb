@@ -47,6 +47,21 @@ class Report
   def standby_points(member)
     traverse_hash(standbys, member, :points)
   end
+
+  def sleep_ins_and_standbys_for_member(member, month)
+    unless @sleep_ins_and_standbys
+      @sleep_ins_and_standbys = members.inject({}) do |member_hash, member|
+        list = (sleep_ins_for_member(member) + standbys_for_member(member)).sort
+        months_hash = (1 .. 12).inject({}) do |hash, n|
+          hash.merge({(Date.today.beginning_of_year + (n - 1).months) => []})
+        end
+        list.each {|s| months_hash[s.date.beginning_of_month] << s}
+        member_hash.merge(member => months_hash)
+      end
+    end
+    
+    @sleep_ins_and_standbys[member][month]
+  end
   
   def hours(member)
     traverse_hash(sleep_ins, member, :hours) + traverse_hash(standbys, member, :hours)

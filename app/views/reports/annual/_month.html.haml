@@ -1,0 +1,9 @@
+%td<
+  %ul          
+    - report.sleep_ins_and_standbys_for_member(member, month_number(n)).each do |s|
+      %li<
+        = s.date.day.ordinalize + ":"
+        - if s.is_a?(SleepIn)
+          = s.unit + " Sleep-In"
+        - else
+          = "#{standby_time(s.start_time)} - #{standby_time(s.end_time)} Standby"
