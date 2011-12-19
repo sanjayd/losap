@@ -18,7 +18,7 @@ module ReportsHelper
   end
 
   def month_number(n)
-    Date.today.beginning_of_year + (n - 1).months
+    report.year + (n - 1).months
   end
   
   def standby_time(time)

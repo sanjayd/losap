@@ -53,7 +53,7 @@ class Report
       @sleep_ins_and_standbys = members.inject({}) do |member_hash, member|
         list = (sleep_ins_for_member(member) + standbys_for_member(member)).sort
         months_hash = (1 .. 12).inject({}) do |hash, n|
-          hash.merge({(Date.today.beginning_of_year + (n - 1).months) => []})
+          hash.merge({(year + (n - 1).months) => []})
         end
         list.each {|s| months_hash[s.date.beginning_of_month] << s}
         member_hash.merge(member => months_hash)
