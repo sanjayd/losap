@@ -5,7 +5,7 @@ $(function() {
   $('#accordion').accordion();
   $('#admintabs').tabs({cookie: {expires: 1}});
 
-  $('#reportform')
+  $('#monthly_report_form')
     .bind('ajax:beforeSend', function(request) {
       $('#reportpending').css('visibility', 'visible');
     })
