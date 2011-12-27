@@ -1,9 +1,7 @@
 #annual_totals
   %p
     Year-to-date:
-    =h member.sleep_in_points(:year => month)
-    Sleep-In Points,
-    =h member.standby_points(:year => month)
-    Standby Points,
-    =h member.hours(:year => month)
-    Hours
+    #{member.sleep_in_points(:year => month)} Sleep-In Points,
+    #{member.standby_points(:year => month)} Standby Points,
+    #{member.hours(:year => month)} Hours
+

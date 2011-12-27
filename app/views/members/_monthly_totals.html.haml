@@ -3,9 +3,7 @@
     -# THIS IS A HACK. FIGURE OUT WHY I NEED TO DO THIS AND FIX IT.
     - member.reload
     Month-to-date:
-    =h member.sleep_in_points(:month => month)
-    Sleep-In Points, 
-    =h member.standby_points(:month => month)
-    Standby Points, 
-    =h member.hours(:month => month)
-    Hours
+    #{member.sleep_in_points(:month => month)} Sleep-In Points,
+    #{member.standby_points(:month => month)} Standby Points,
+    #{member.hours(:month => month)} Hours
+
