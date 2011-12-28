@@ -28,8 +28,7 @@ module MembersHelper
   def render_sleep_ins_and_standbys(member, month)
     sleep_ins_and_standbys = member.sleep_ins_and_standbys(:month => month)
     if sleep_ins_and_standbys.empty?
-      content_tag 'tr', raw(
-        content_tag('td', 'No sleep-ins or standbys this month', :colspan => "3"))
+      content_tag 'tr', content_tag('td', 'No sleep-ins or standbys this month', :colspan => "3")
     else
       sleep_ins_and_standbys_helper(sleep_ins_and_standbys)
     end
