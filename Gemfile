@@ -23,6 +23,7 @@ end
 gem 'authlogic'
 gem 'cancan'
 gem 'decent_exposure'
+gem 'dynamic_form'
 gem 'haml'
 gem 'jquery-rails'
 gem 'yaml_db'
