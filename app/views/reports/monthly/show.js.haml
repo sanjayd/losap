@@ -2,7 +2,7 @@
   :plain
     $('#main').after('#{escape_javascript(render(partial: 'reports/monthly/report',\
                                                            locals: {report: report}))}');
-    $('#report').dialog({width: 450, 
+    $('#report').dialog({width: 700, 
                          title: '#{format_month(report.month) + " Monthly Report"}',
     		                 close: function(event, ui) {
     		                   $('#report').dialog('destroy');
