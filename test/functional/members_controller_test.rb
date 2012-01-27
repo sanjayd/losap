@@ -25,7 +25,6 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test "show" do
-    assert_raise(ActionController::RoutingError) {get :show}
     assert_raise(ActiveRecord::RecordNotFound) {get :show, :id => 7}
     get :show, :id => @one.id
     assert_response :success
@@ -62,7 +61,6 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test "edit" do
-    assert_raise(ActionController::RoutingError) {get :edit}
     assert_raise(ActiveRecord::RecordNotFound) {get :edit, :id => 7}
     get :edit, :id => @one.id
     assert_response :success
@@ -72,7 +70,6 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test "update" do
-    assert_raise(ActionController::RoutingError) {post :update}
     assert_raise(ActiveRecord::RecordNotFound) {post :update, :id => 7}
     member_count = Member.count
     post :update, {:id => @one.id,
@@ -88,7 +85,6 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test "destroy" do
-    assert_raise(ActionController::RoutingError) {post :destroy}
     assert_raise(ActiveRecord::RecordNotFound) {post :destroy, :id => 7}
     member_count = Member.count
     post :destroy, :id => @one.id

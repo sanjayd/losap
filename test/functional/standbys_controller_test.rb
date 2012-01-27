@@ -10,7 +10,6 @@ class StandbysControllerTest < ActionController::TestCase
   end
 
   test 'index' do
-    assert_raise(ActionController::RoutingError) {get :index}
     get :index, :member_id => @m1.id, :format => "xml"
     assert_response :success
     
@@ -33,7 +32,6 @@ class StandbysControllerTest < ActionController::TestCase
   end
 
   test 'new' do
-    assert_raise(ActionController::RoutingError) {get :new}
     get :new, :member_id => @m1.id
     assert_response :success
     assert_template('standbys/new')
@@ -45,11 +43,6 @@ class StandbysControllerTest < ActionController::TestCase
     :member_id => @m1.id
     assert_redirected_to(@m1)
     assert_equal('Saved Standby', flash[:notice])
-
-    assert_raise(ActionController::RoutingError) do
-      post :create, :standby => {:start_time => @one.start_time + 1.day,
-        :end_time => @one.end_time + 1.day}
-    end
   end
   
   test 'crate invalid' do
@@ -66,8 +59,7 @@ class StandbysControllerTest < ActionController::TestCase
   end                        
 
   test 'destroy' do
-    assert_raise(ActionController::RoutingError) {post :destroy}
-    assert_raise(ActionController::RoutingError) {post :destroy, :id => 7}
+    assert_raise(ActiveRecord::RecordNotFound) {post :destroy, :id => 7}
 
     @m1.standbys << @one
     s = Standby.new(:start_time => @one.start_time + 1.day,

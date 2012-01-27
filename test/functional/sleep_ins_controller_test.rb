@@ -12,7 +12,6 @@ class SleepInsControllerTest < ActionController::TestCase
   end
 
   test 'index' do
-    assert_raise(ActionController::RoutingError) {get :index}
     get :index, :member_id => @m1.id, :format => "xml"
     assert_response :success
     
@@ -33,7 +32,6 @@ class SleepInsControllerTest < ActionController::TestCase
   end
 
   test 'new' do
-    assert_raise(ActionController::RoutingError) {get :new}
     get :new, :member_id => @m1.id
     assert_response :success
     assert_template('sleep_ins/new')
@@ -45,11 +43,6 @@ class SleepInsControllerTest < ActionController::TestCase
                   :member_id => @m1.id
     assert_redirected_to(@m1)
     assert_equal('Saved Sleep-In', flash[:notice])
-
-    assert_raise(ActionController::RoutingError) do
-      post :create, :sleep_in => {:date => Date.today - 1.month + 1.day,
-                                  :unit => 'Truck'}
-    end
   end
   
   test 'create invalid' do
@@ -66,8 +59,7 @@ class SleepInsControllerTest < ActionController::TestCase
   end
 
   test 'destroy' do
-    assert_raise(ActionController::RoutingError) {post :destroy}
-    assert_raise(ActionController::RoutingError) {post :destroy, :id => 7}
+    assert_raise(ActiveRecord::RecordNotFound) {post :destroy, :id => 7}
     
     @m1.sleep_ins << @one
     @m1.sleep_ins << @two

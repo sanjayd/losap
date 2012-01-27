@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails', '3.2.1'
 
 group :development, :test do
   gem 'ruby-debug19', require: 'ruby-debug'
