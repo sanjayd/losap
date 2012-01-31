@@ -9,9 +9,16 @@
   UnitType.create(:name => s)
 end
 
-# Lock months in current year prior to current month
-(1 .. Date.today.month - 1).each do |month|
-  LockedMonth.create(:month => Date.parse("#{Date.today.year}-#{month}-1"))
+if Date.today.month == 1
+  # Lock all months in previous year
+  (1 .. 12).each do |month|
+    LockedMonth.create(:month => Date.parse("#{Date.today.year - 1}-#{month}-1"))
+  end
+else
+  # Lock months in current year prior to current month
+  (1 .. Date.today.month - 1).each do |month|
+    LockedMonth.create(:month => Date.parse("#{Date.today.year}-#{month}-1"))
+  end
 end
 
 # Add initial roles
