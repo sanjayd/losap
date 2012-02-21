@@ -39,7 +39,7 @@ class LockedMonthTest < ActiveSupport::TestCase
     
     assert_equal(3, LockedMonth.count)
 
-    pretend_now_is(Time.local(2009, 7, 4, 7, 0, 0)) do
+    Timecop.travel(Time.local(2009, 7, 4, 7, 0, 0)) do
       months = LockedMonth.locked_months
       assert_equal(m2, months[0])
       assert_equal(m3, months[1])
