@@ -1,6 +1,6 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui-1.8.custom.min
+//= require jquery-ui
 //= require_self
 
 $(function() {
@@ -50,32 +50,25 @@ function memberNameAutocomplete() {
     $.get($("#member_name").parents("form").attr("action"),
     {term: encodeURIComponent(request.term), format: 'json'},
 	  function(data) {
-	    members = $.map(data, function(e, i) {
-		    m = e.member;
-		    return {id: m.id,
-		      string: m.firstname + " " + m.lastname + " (#" + m.badgeno + ")"};
-	      });
-	    response($.map(members, function(e, i) {
-		    return e.string;
-		  }));
+      members = data
+      response($.map(members, function(e, i) {
+        m = e.member;
+        return {
+          value: m.id,
+          label: m.firstname + " " + m.lastname + " (#" + m.badgeno + ")"
+        }        
+      }));
 	  });
   }
 
   var select = function(event, ui) {
-    var item = ui.item.value;
-    var i;
-
-    for(i in members) {
-      var member = members[i];
-      if (member.string == item) {
-	      document.location = $("#member_name").parents("form").attr("action") + "/" + member.id;
-      }
-    }
+    document.location = $('#member_name').parents('form').attr('action') + '/' + ui.item.value;
+    return false;
   }
 
   var submit = function() {
     if ((members != null) && (members.length == 1)) {
-      document.location = $(this).attr("action") + "/" + members[0].id;
+      document.location = $(this).attr("action") + "/" + members[0].member.id;
     }
 
     return false;
