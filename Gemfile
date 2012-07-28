@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.7'
 
 group :development, :test do
   gem 'linecache19', '0.5.13'
@@ -29,7 +29,7 @@ gem 'cancan'
 gem 'decent_exposure'
 gem 'dynamic_form'
 gem 'haml'
-gem 'journey', '1.0.3'
+gem 'journey'
 gem 'jquery-rails'
 gem 'yaml_db'
 gem 'will_paginate'

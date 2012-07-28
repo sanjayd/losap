@@ -59,7 +59,7 @@ class SleepInsControllerTest < ActionController::TestCase
   end
 
   test 'destroy' do
-    assert_raise(ActiveRecord::RecordNotFound) {post :destroy, :id => 7}
+    assert_raise(ActiveRecord::RecordNotFound) {post :destroy, :id => 7, :member_id => @m1.id}
     
     @m1.sleep_ins << @one
     @m1.sleep_ins << @two

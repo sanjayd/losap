@@ -59,7 +59,7 @@ class StandbysControllerTest < ActionController::TestCase
   end                        
 
   test 'destroy' do
-    assert_raise(ActiveRecord::RecordNotFound) {post :destroy, :id => 7}
+    assert_raise(ActiveRecord::RecordNotFound) {post :destroy, :id => 7, :member_id => @m1.id}
 
     @m1.standbys << @one
     s = Standby.new(:start_time => @one.start_time + 1.day,
