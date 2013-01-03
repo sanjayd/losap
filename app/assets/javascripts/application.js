@@ -74,9 +74,15 @@ function memberNameAutocomplete() {
     return false;
   }
 
-  $("#member_name").autocomplete({source: callback,
-	select: select,
-	minLength: 3});	
+  $("#member_name").autocomplete({
+    source: callback,
+	  select: select,
+	  minLength: 3,
+	  messages: {
+	    noResults: '',
+	    results: function() {}
+	  }
+	});	
   $("#member_name").parents("form").submit(submit);
 }
 

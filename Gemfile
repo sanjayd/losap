@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.10'
 
 group :development, :test do
   gem 'linecache19', '0.5.13'
@@ -26,7 +26,7 @@ end
 
 gem 'authlogic'
 gem 'cancan'
-gem 'decent_exposure'
+gem 'decent_exposure', '<2.0'
 gem 'dynamic_form'
 gem 'haml'
 gem 'journey'
