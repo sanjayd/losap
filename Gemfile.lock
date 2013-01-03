@@ -57,6 +57,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.7.6)
     kgio (2.7.4)
+    libv8 (3.11.8.4)
     linecache19 (0.5.13)
       ruby_core_source (>= 0.1.4)
     mail (2.4.4)
@@ -146,6 +147,7 @@ DEPENDENCIES
   haml
   journey
   jquery-rails
+  libv8
   linecache19 (= 0.5.13)
   mysql2
   rails (= 3.2.10)
