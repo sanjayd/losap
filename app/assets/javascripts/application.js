@@ -9,7 +9,7 @@ $(function() {
     memberNameAutocomplete();
     $("#standby_start_date").change(standbyStartDateSelect);
     
-    $('a.submit').live('click', function() {
+    $('a.submit').on('click', function() {
       $(this).parent('form').submit();
       return false;
     });
