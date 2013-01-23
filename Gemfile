@@ -13,7 +13,7 @@ end
 
 group :production do
   gem 'mysql2'
-  gem 'therubyracer'
+  gem 'therubyracer', '>=0.11.1'
   gem 'libv8'
 end
 
@@ -33,4 +33,4 @@ gem 'haml'
 gem 'journey'
 gem 'jquery-rails'
 gem 'yaml_db'
-gem 'will_paginate', '>=0.11.1'
+gem 'will_paginate'
