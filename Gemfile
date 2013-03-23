@@ -3,9 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.12'
 
 group :development, :test do
-  gem 'linecache19', '0.5.13'
-  gem 'ruby-debug19', require: 'ruby-debug'
-  gem 'ruby-debug-base19', '0.11.26'
+  gem 'debugger'
   gem 'sqlite3'
   gem 'timecop'
   gem 'unicorn'
