@@ -10,7 +10,11 @@ class MembersController < ApplicationController
   end
 
   expose(:members) do
-    Member.all_like(URI.unescape(params[:term])) if params[:term]
+    if params[:term]
+      Member.all_like(URI.unescape(params[:term])) if params[:term]
+    elsif params[:page]
+      members = Member.order('lastname asc, firstname asc, badgeno asc').paginate(:page => params[:page])
+    end    
   end
 
   expose(:member)
@@ -18,6 +22,11 @@ class MembersController < ApplicationController
   def index
     respond_with(members) do |format|
       format.json {render json: members.to_json}
+      format.html do
+        if params[:page]
+          render partial: 'index'
+        end
+      end
     end
   end
 
@@ -48,6 +57,8 @@ class MembersController < ApplicationController
   def destroy
     member.destroy
     flash[:notice] = 'Member was successfully deleted.'
-    respond_with member, location: admin_console_path
+    respond_with member do |format|
+      format.json {render status: :ok, json: ''}
+    end
   end
 end

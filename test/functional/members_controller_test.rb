@@ -87,8 +87,8 @@ class MembersControllerTest < ActionController::TestCase
   test "destroy" do
     assert_raise(ActiveRecord::RecordNotFound) {post :destroy, :id => 7}
     member_count = Member.count
-    post :destroy, :id => @one.id
-    assert_redirected_to(admin_console_url)
+    post :destroy, :id => @one.id, format: :json
+    assert_response :success
     assert_equal(member_count - 1, Member.count)
     assert_raise(ActiveRecord::RecordNotFound) {@one.reload}
   end

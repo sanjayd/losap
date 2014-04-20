@@ -22,6 +22,23 @@ $(function() {
   })
     
   $("#unlock_month_form").submit(unlock_month_form);
+  
+  $('.data-delete').click(function(event) {
+    var deleteUrl = $(this).attr('href');
+    var page = $('.apple_pagination .current').text() || 1;
+    $.ajax({
+      url: deleteUrl,
+      method: 'delete',
+      dataType: 'json',
+      complete: function(response) {
+        $.get('/members?page=' + page, function(response) {
+          $('#tab-3').html(response);
+          $('#tab-3 .button').button();
+        });
+      }
+    })
+    return false;
+  });
 });
 
 function unlock_month_form() {
