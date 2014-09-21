@@ -23,7 +23,7 @@ $(function() {
     
   $("#unlock_month_form").submit(unlock_month_form);
   
-  $('.data-delete').click(function(event) {
+  $('#tab-3').on('click', '.data-delete', function(event) {
     var deleteUrl = $(this).attr('href');
     var page = $('.apple_pagination .current').text() || 1;
     $.ajax({
